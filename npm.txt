@@ -1,1 +1,3 @@
-anis 19/12/2020 :: npm i mongoose express jsonwebtoken bcryptjs concurrently nodemon dotenv
+anis 19/12/2020 :back: npm i mongoose express jsonwebtoken bcryptjs concurrently nodemon dotenv
+anis 20/12/2020 :back: npm i express-validator
+anis 22/12/2020 :front: npm i react-redux redux redux-thunk react-router-dom react-bootstrap axios
