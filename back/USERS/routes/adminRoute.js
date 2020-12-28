@@ -10,7 +10,7 @@ const authMiddleware = require("../../helpers/authMiddleware");
 
 router.get("/users", (req, res) => {
   Utilisateur.find({})
-    .populate("roles")
+    .populate("role")
     .then((users) => res.json(users))
     .catch((err) => console.log(err.message));
 });
@@ -30,7 +30,7 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) res.status(400).json({ errors: errors.array() });
     else {
-      const { password, login, roles } = req.body;
+      const { password, login, role } = req.body;
       Utilisateur.find({ login })
         .then((users) => {
           if (users.length) {
@@ -41,7 +41,7 @@ router.post(
             let newUser = new Utilisateur({
               login,
               password,
-              roles,
+              role,
             });
             bcrypt.genSalt(10, (err, salt) => {
               if (err) throw err;
@@ -87,7 +87,7 @@ router.put(
     ).isLength({ min: 6 }),
   ],
   (req, res) => {
-    const { login, password, roles } = req.body;
+    const { login, password, role } = req.body;
     bcrypt.genSalt(10, (err, salt) => {
       if (err) throw err;
       else {
@@ -97,7 +97,7 @@ router.put(
             Utilisateur.findByIdAndUpdate(req.params.id, {
               login,
               password: hash,
-              roles,
+              role,
             })
               .then((user) => res.status(200).json(user))
               .catch(() =>

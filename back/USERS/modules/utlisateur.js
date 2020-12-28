@@ -11,12 +11,10 @@ const utlisateurSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: "personnel",
   },
-  roles: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "role",
-    },
-  ],
+  role: {
+    type: mongoose.Types.ObjectId,
+    ref: "role",
+  },
 });
 
 module.exports = mongoose.model("utilisateur", utlisateurSchema);

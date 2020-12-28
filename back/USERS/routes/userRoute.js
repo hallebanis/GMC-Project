@@ -4,9 +4,10 @@ const Utilisateur = require("../modules/utlisateur");
 
 const router = express.Router();
 
-router.get("/:id", authMiddleware, (req, res) => {
-  Utilisateur.findById(req.params.id)
-    .populate("roles")
+router.get("/", authMiddleware, (req, res) => {
+  Utilisateur.findById(req.userId)
+    .populate("role")
+    .populate("personnelId")
     .then((user) => {
       res.status(200).json(user);
     })
@@ -14,3 +15,5 @@ router.get("/:id", authMiddleware, (req, res) => {
       res.status(400).json({ errors: [{ msg: "server error" }] });
     });
 });
+
+module.exports = router;
