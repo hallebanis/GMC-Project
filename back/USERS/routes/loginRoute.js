@@ -26,7 +26,8 @@ router.post(
     } else {
       const { login, password } = req.body;
       Utilisateur.findOne({ login })
-        .populate("roles")
+        .populate("role")
+        .populate("personnelId")
         .then((user) => {
           if (!user) {
             return res
@@ -46,7 +47,7 @@ router.post(
                   if (err) {
                     throw err;
                   } else {
-                    res.status(200).send({ token });
+                    res.status(200).send({ token, user: user });
                   }
                 });
               }
@@ -95,12 +96,12 @@ router.post(
               if (users.length) {
                 res
                   .status(403)
-                  .json({ errors: [{ msg: "Utilisateur existe déja" }] });
+                  .json({ errors: [{ msg: "Login déja utilisé" }] });
               } else {
                 let newUser = new Utilisateur({
                   login,
                   password,
-                  roles: ["5fdf57d200209128f8705454"],
+                  role: "5fdf57d200209128f8705454",
                   personnelId: pers._id,
                 });
                 bcrypt.genSalt(10, (err, salt) => {
@@ -112,7 +113,7 @@ router.post(
                         newUser.password = hash;
                         newUser
                           .save()
-                          .then(() => {
+                          .then((user) => {
                             let payload = {
                               userId: newUser._id,
                             };
@@ -124,6 +125,7 @@ router.post(
                                 else {
                                   res.status(200).json({
                                     token,
+                                    user,
                                   });
                                 }
                               }

@@ -1,6 +1,8 @@
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILED,
+  REGISTRATION_FAILED,
+  REGISTRATION_SUCCESS,
 } from "../../actions/authentification/types";
 let initSate = {
   token: localStorage.getItem("token"),
@@ -15,12 +17,24 @@ const authReducer = (state = initSate, action) => {
       return {
         ...state,
         token: action.payload.token,
+        user: action.payload.user,
         isAuth: true,
         errors: null,
       };
+    case REGISTRATION_SUCCESS:
+      localStorage.setItem("token", action.payload.token);
+      return {
+        ...state,
+        user: action.payload.user,
+        token: action.payload.token,
+        isAuth: true,
+        errors: null,
+      };
+    case REGISTRATION_FAILED:
     case LOGIN_FAILED:
       return {
         ...state,
+        user: null,
         isAuth: false,
         errors: action.payload,
       };

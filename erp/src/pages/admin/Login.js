@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../actions/authentification/authActions";
 
-const Login = () => {
+const Login = ({ history }) => {
   const [info, setInfo] = useState({
     login: "",
     password: "",
@@ -11,12 +11,29 @@ const Login = () => {
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
   };
+
+  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleLogin = (e) => {
     e.preventDefault();
     dispatch(loginAction(info));
   };
+
+  useEffect(() => {
+    if (auth.user) {
+      switch (auth.user.role.titre) {
+        case "user":
+          history.push(`/user-dashboard/${auth.user._id}`);
+          break;
+        case "admin":
+          history.push(`/admin-dashboard/${auth.user._id}`);
+          break;
+        default:
+          break;
+      }
+    }
+  }, [auth.user]);
 
   return (
     <Form className="container">
