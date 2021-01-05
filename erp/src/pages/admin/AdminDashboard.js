@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
 
 const AdminDashboard = () => {
   return (
     <div>
       <AdminDashboardSidebar />
-      <p>hello world</p>
+      <Link to="/admin-dashboard/users">User List</Link>
     </div>
   );
 };

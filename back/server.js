@@ -8,8 +8,6 @@ dbConnect();
 
 //middleware declaraltion
 app.use(express.json());
-// Grh routes 
-
 
 //admin User routes
 app.use("/", require("./USERS/routes/loginRoute"));
