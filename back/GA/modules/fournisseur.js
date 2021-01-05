@@ -1,16 +1,14 @@
-const mongoose = require('mongoose')
-const schema = mongoose.Schema
+const mongoose = require("mongoose");
+const schema = mongoose.Schema;
 
 const FournisseurSchema = new schema({
-    idFournisseur: { Number },
-    matricule: {
-        type: String,
-        required: true
-    },
-    numTel: { Number },
-    email: { String },
-    adresse: { String },
+  matricule: {
+    type: String,
+    required: true,
+  },
+  numTel: { type: String },
+  email: { type: String },
+  adresse: { type: String },
+});
 
-})
-
-module.exports = mongoose.model('Founisseur', FournisseurSchema)
+module.exports = mongoose.model("founisseur", FournisseurSchema);
