@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
-const BanqueSchema = new schema({
+const compteBanquaireSchema = new schema({
   RIB: {
     type: String,
     required: true,
@@ -15,4 +15,4 @@ const BanqueSchema = new schema({
     required: true,
   },
 });
-module.exports = mongoose.model("banque", BanqueSchema);
+module.exports = mongoose.model("compteBancaire", compteBanquaireSchema);

@@ -19,4 +19,4 @@ const CommandeSchema = new schema({
     ref: "fournisseur",
   },
 });
-module.exports = mongoose.model("Commande", CommandeSchema);
+module.exports = mongoose.model("commande", CommandeSchema);

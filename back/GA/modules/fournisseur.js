@@ -9,6 +9,7 @@ const FournisseurSchema = new schema({
   numTel: { type: String },
   email: { type: String },
   adresse: { type: String },
+  idCompteBancaire: { type: mongoose.Types.ObjectId, ref: "compteBancaire" },
 });
 
 module.exports = mongoose.model("founisseur", FournisseurSchema);

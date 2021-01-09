@@ -93,34 +93,49 @@ router.put(
   ],
   (req, res) => {
     const { id, login, password, role } = req.body;
-    bcrypt.genSalt(10, (err, salt) => {
-      if (err) throw err;
-      else {
-        bcrypt.hash(password, salt, (err, hash) => {
-          if (err) throw err;
-          else {
-            Utilisateur.findByIdAndUpdate(id, {
-              login,
-              password: hash,
-              role,
-            })
-              .populate("personnelId")
-              .populate("role")
-              .then((user) => res.status(200).json(user))
-              .catch(() =>
-                res.status(400).json({ errors: [{ msg: "erreur serveur" }] })
-              );
-          }
-        });
-      }
-    });
+    if (password) {
+      bcrypt.genSalt(10, (err, salt) => {
+        if (err) throw err;
+        else {
+          bcrypt.hash(password, salt, (err, hash) => {
+            if (err) throw err;
+            else {
+              Utilisateur.findByIdAndUpdate(id, {
+                login,
+                password: hash,
+                role,
+              })
+                .populate("personnelId")
+                .populate("role")
+                .then((user) => res.status(200).json(user))
+                .catch(() =>
+                  res.status(400).json({ errors: [{ msg: "erreur serveur" }] })
+                );
+            }
+          });
+        }
+      });
+    } else {
+      Utilisateur.findByIdAndUpdate(id, {
+        login,
+        role,
+      })
+        .populate("personnelId")
+        .populate("role")
+        .then((user) => res.status(200).json(user))
+        .catch(() =>
+          res.status(400).json({ errors: [{ msg: "erreur serveur" }] })
+        );
+    }
   }
 );
 
 router.delete("/deleteuser/:id", (req, res) => {
   Utilisateur.findOneAndDelete({ _id: req.params.id })
     .then((user) => res.status(200).json(user))
-    .catch(() => res.status(400).json({ errors: [{ msg: "erreur serveur" }] }));
+    .catch((err) =>
+      res.status(400).json({ errors: [{ msg: "erreur serveur" }] })
+    );
 });
 
 //gestion des roles
