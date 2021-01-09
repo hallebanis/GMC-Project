@@ -1,4 +1,8 @@
 import {
+  DELETE_USER_FAILED,
+  DELETE_USER_SUCCESS,
+  LOAD_ROLES_FAILED,
+  LOAD_ROLES_SUCCESS,
   LOAD_USERS_FAILED,
   LOAD_USERS_SUCCESS,
   MODIFY_USER_FAILED,
@@ -40,6 +44,25 @@ const usersReducer = (state = initState, action) => {
         }),
         errors: null,
       };
+    case LOAD_ROLES_SUCCESS:
+      return {
+        ...state,
+        errors: null,
+        roles: action.payload,
+      };
+    case LOAD_ROLES_FAILED:
+      return {
+        ...state,
+        roles: [],
+        errors: action.payload,
+      };
+    case DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        users: state.users.filter((elm) => elm._id !== action.payload._id),
+        errors: null,
+      };
+    case DELETE_USER_FAILED:
     case MODIFY_USER_FAILED:
       return {
         ...state,
