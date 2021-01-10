@@ -22,11 +22,6 @@ const AdminDashboardSidebar = ({ color, linkList }) => {
             </Nav.Item>
           ))}
         </>
-        /*  <Nav.Item>
-          <Nav.Link eventKey={`link-${i}`} id={i}>
-            <Link to={elm.l!!!ink}>{elm.title}</Link>
-          </Nav.Link>
-        </Nav.Item> */
       ))}
     </Nav>
   );
