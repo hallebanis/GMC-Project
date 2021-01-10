@@ -5,7 +5,7 @@ const personnelSchema = new mongoose.Schema({
   prenom: { type: String, required: true },
   adresse: { type: String, required: true },
   email: { type: String, required: true },
-  cin: { type: String, required: true },
+  CIN: { type: String, required: true },
   dateDeNaissance: { type: Date, required: true },
   lieuDeNaissance: { type: String, required: true },
   matricule: { type: String, required: true },
