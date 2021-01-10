@@ -21,7 +21,7 @@ const AdminDashboard = () => {
                 categorie: "Utilisateur",
                 elements: [
                   { title: "User List", link: "/admin-dashboard/users" },
-                  { title: "Add User", link: "#" },
+                  { title: "Add User", link: "/admin-dashboard/adduser" },
                   { title: "", link: "#" },
                 ],
               },

@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const newPersonnel = require("../modules/personnel");
+const personnel = require("../modules/personnel");
 
 router.post("/personnel", (req, res) => {
-  let newEmployee = new newPersonnel({
+  let newEmployee = new personnel({
     nom: req.body.nom,
     prenom: req.body.prenom,
     adresse: req.body.adresse,
@@ -20,16 +20,18 @@ router.post("/personnel", (req, res) => {
   newEmployee
     .save()
     .then((personnel) => res.status(200).json(personnel))
-    .catch((err) => res.status(400).json(err));
+    .catch((err) =>
+      res.status(400).json({ errors: [{ msg: "server ERROR" }] })
+    );
 });
 
 router.get("/personnel", (req, res) => {
-  newPersonnel.find((err, doc) => {
+  personnel.find((err, doc) => {
     if (err) {
-      console.log(err.msg);
+      res.status(400).json({ errors: [{ msg: "server ERROR" }] });
     }
     //console.log(doc);
-    res.send(doc);
+    res.status(200).json(doc);
   });
 });
 module.exports = router;

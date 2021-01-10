@@ -22,13 +22,6 @@ const AddUserForm = () => {
   return (
     <Form>
       <Form.Label>Choisit un Personnel</Form.Label>
-      <DropDownGen
-        itemList={[
-          { _id: 1, nom: "anis", prenom: "halleb" },
-          { _id: 2, nom: "mehdi", prenom: "halleb" },
-        ]}
-        onPersonnelSelect={handlePersonnelChange}
-      />
       <Badge pill variant="primary">
         {(personnel && `${personnel.nom} ${personnel.prenom}`) ||
           "aucun personnel selectionné"}

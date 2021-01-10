@@ -24,7 +24,6 @@ const UsersListPage = () => {
   };
   return (
     <div>
-      <MainNavBar />
       <Container fluid>
         <Row>
           <Col>
