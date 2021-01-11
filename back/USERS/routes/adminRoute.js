@@ -35,7 +35,7 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) res.status(400).json({ errors: errors.array() });
     else {
-      const { password, login, role } = req.body;
+      const { password, login, role, personnelId } = req.body;
       Utilisateur.find({ login })
         .then((users) => {
           if (users.length) {
@@ -47,6 +47,7 @@ router.post(
               login,
               password,
               role,
+              personnelId,
             });
             bcrypt.genSalt(10, (err, salt) => {
               if (err) throw err;
@@ -57,15 +58,9 @@ router.post(
                     newUser.password = hash;
                     newUser
                       .save()
-                      .then(() =>
-                        res.status(200).json({
-                          results: [{ msg: `utilisateur crée avec succées` }],
-                        })
-                      )
+                      .then((user) => res.status(200).json(user))
                       .catch((err) =>
-                        res
-                          .status(400)
-                          .json({ errors: [{ msg: "server error" }] })
+                        res.status(400).json({ errors: [{ msg: err }] })
                       );
                   }
                 });
@@ -73,9 +68,7 @@ router.post(
             });
           }
         })
-        .catch(() =>
-          res.status(400).json({ errors: [{ msg: "server error" }] })
-        );
+        .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
     }
   }
 );

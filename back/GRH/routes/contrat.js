@@ -57,3 +57,4 @@ router.put("/contrat/:id",authMiddleware, (req, res) => {
     .catch((err) => res.status.json({ errors: [{ msg: "server ERROR" }] }));
 });
 module.exports = router;
+

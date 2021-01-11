@@ -10,6 +10,7 @@ const RoleDropDown = ({
   setInfo,
   dropDownMsg,
   info,
+  onRoleChange,
 }) => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -23,6 +24,7 @@ const RoleDropDown = ({
     if (setRoleTitle) setRoleTitle(e.target.text);
     if (setInfo) setInfo({ ...info, role: e.target.id });
     setSelectedItem(e.target.text);
+    if (onRoleChange) onRoleChange(e.target.id);
   };
   return (
     <DropdownButton

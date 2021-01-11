@@ -23,6 +23,7 @@ const personnelSchema = new mongoose.Schema({
   pret: [{ type: mongoose.Types.ObjectId, ref: "pret" }],
   prime: [{ type: mongoose.Types.ObjectId, ref: "prime" }],
   assignPrime: [{ type: mongoose.Types.ObjectId, ref: "assignPrime" }],
+
 });
 
 module.exports = mongoose.model("personnel", personnelSchema);

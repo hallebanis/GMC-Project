@@ -1,40 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { loadRoles } from "../../actions/admin/usersActions";
 import { useDispatch } from "react-redux";
 import { loadPersonnel } from "../../actions/GRH/personnelActions";
 
-const RoleDropDown = ({
-  disableChange,
-  setRoleTitle,
-  setInfo,
-  dropDownMsg,
-  info,
-}) => {
+const PersonnelDropDown = ({ onPersonnelChange }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadPersonnel());
   }, []);
 
-  const [selectedItem, setSelectedItem] = useState(dropDownMsg);
+  const [selectedItem, setSelectedItem] = useState("choisit Personnel");
 
-  const rolesList = useSelector((state) => state.users);
-  const handleSelectItem = (e) => {
-    if (setRoleTitle) setRoleTitle(e.target.text);
-    if (setInfo) setInfo({ ...info, role: e.target.id });
+  const personnelList = useSelector((state) => state.personnel);
+
+  const handleSelect = (e) => {
     setSelectedItem(e.target.text);
+    onPersonnelChange(e.target.id);
   };
   return (
-    <DropdownButton
-      id="dropdown-basic-button"
-      title={selectedItem}
-      disabled={disableChange}
-    >
-      {rolesList.roles
-        ? rolesList.roles.map((elm) => (
-            <Dropdown.Item id={elm._id} onClick={handleSelectItem}>
-              {elm.titre}
+    <DropdownButton id="dropdown-basic-button" title={selectedItem}>
+      {personnelList.personnel
+        ? personnelList.personnel.map((elm) => (
+            <Dropdown.Item id={elm._id} onClick={handleSelect}>
+              {`${elm.nom} ${elm.prenom}`}
             </Dropdown.Item>
           ))
         : null}
@@ -42,4 +31,4 @@ const RoleDropDown = ({
   );
 };
 
-export default RoleDropDown;
+export default PersonnelDropDown;
