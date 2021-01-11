@@ -2,20 +2,36 @@ const express = require("express");
 const router = express.Router();
 const personnel = require("../modules/personnel");
 
-router.post("/personnel", (req, res) => {
+const authMiddleware = require("../../helpers/authMiddleware");
+
+router.post("/personnel",authMiddleware, (req, res) => {
+  const {
+    nom,
+    prenom,
+    adresse,
+    email,
+    CIN,
+    dateDeNaissance,
+    lieuDeNaissance,
+    matCnss,
+    matricule,
+    situationFamiliale,
+    nombreEnfants,
+    categorie,
+  } = req.body;
   let newEmployee = new personnel({
-    nom: req.body.nom,
-    prenom: req.body.prenom,
-    adresse: req.body.adresse,
-    email: req.body.email,
-    cin: req.body.cin,
-    dateDeNaissance: req.body.dateDeNaissance,
-    lieuDeNaissance: req.body.lieuDeNaissance,
-    matricule: req.body.matricule,
-    matCnss: req.body.matCnss,
-    situationFamiliale: req.body.situationFamiliale,
-    nombreEnfants: req.body.nombreEnfants,
-    categorie: req.body.categorie,
+    nom,
+    prenom,
+    adresse,
+    email,
+    CIN,
+    dateDeNaissance,
+    lieuDeNaissance,
+    matricule,
+    matCnss,
+    situationFamiliale,
+    nombreEnfants,
+    categorie,
   });
   newEmployee
     .save()
@@ -25,13 +41,69 @@ router.post("/personnel", (req, res) => {
     );
 });
 
-router.get("/personnel", (req, res) => {
+
+router.get("/personnel",authMiddleware, (req, res) => {
   personnel.find((err, doc) => {
     if (err) {
       res.status(400).json({ errors: [{ msg: "server ERROR" }] });
     }
-    //console.log(doc);
-    res.status(200).json(doc);
+    res.status(200).send(doc);
   });
+});
+
+router.delete("/personnel/:id",authMiddleware, (req, res) => {
+  const personnelId = req.params.id;
+  personnel
+    .findByIdAndDelete(personnelId)
+    .then((personnel) => res.status(200).json(personnel))
+    .catch((err) =>
+      res.status(400).json({ errors: [{ msg: "server ERROR" }] })
+    );
+});
+
+router.put("/personnel/:id" ,authMiddleware, (req, res)=>{
+  const perId = req.params.id
+  const {
+    nom,
+    prenom,
+    adresse,
+    email,
+    CIN,
+    dateDeNaissance,
+    lieuDeNaissance,
+    matCnss,
+    matricule,
+    situationFamiliale,
+    nombreEnfants,
+    categorie,
+  } = req.body;
+  let newEmployee = new personnel({
+    nom,
+    prenom,
+    adresse,
+    email,
+    CIN,
+    dateDeNaissance,
+    lieuDeNaissance,
+    matricule,
+    matCnss,
+    situationFamiliale,
+    nombreEnfants,
+    categorie,
+  });
+  personnel.findByIdAndUpdate(perId, {nom,
+    prenom,
+    adresse,
+    email,
+    CIN,
+    dateDeNaissance,
+    lieuDeNaissance,
+    matCnss,
+    matricule,
+    situationFamiliale,
+    nombreEnfants,
+    categorie})
+    .then((personnel) => res.status(200).json(personnel))
+    .catch((err) => res.status(400).json({ errors: [{ msg: "server ERROR" }] }));
 });
 module.exports = router;

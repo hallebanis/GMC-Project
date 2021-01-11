@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const newPret = require("../modules/pret");
+const authMiddleware = require('../../helpers/authMiddleware')
+
 
 router.post("/pret", (req, res) => {
-  let db = new Date(req.body.dateDebut);
-  let df = new Date(req.body.dateFin);
+  const { montantTotal, mensualite, dateDebut, dateFin } = req.body;
   let pretModel = new newPret({
-    montantTotal: req.body.montantTotal,
-    mensualite: req.body.mensualite,
-    dateDebut: db,
-    dateFin: df,
+    montantTotal,
+    mensualite,
+    dateDebut,
+    dateFin,
   });
   pretModel
     .save()
@@ -17,13 +18,12 @@ router.post("/pret", (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-router.get("/pret", (req, res) => {
+router.get("/pret",authMiddleware, (req, res) => {
   newPret.find((err, doc) => {
     if (err) {
-      console.log(err.msg);
-    }
-    console.log(doc);
-    res.send(doc);
+      res.status(400).json({ errors: [{ msg: "server ERROR" }] });    }
+   // console.log(doc);
+    res.status(200).send(doc);
   });
 });
 module.exports = router;
