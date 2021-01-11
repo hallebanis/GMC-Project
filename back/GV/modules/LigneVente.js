@@ -2,12 +2,11 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
 const LigneVenteSchema = new schema({
-
-  quantité: { type: number, required: true },
+  quantité: { type: Number, required: true },
   description: { type: String },
-  sousTotal: { type: number },
-  id_produit: { type: Schema.Types.ObjectId, ref: "Produit" },
+  sousTotal: { type: Number },
+  produitId: { type: mongoose.Types.ObjectId, ref: "produit" },
+  commandeId: { type: mongoose.Types.ObjectId, ref: "CommandeVente" },
 });
-
 
 module.exports = mongoose.model("ligneVente", LigneVenteSchema);

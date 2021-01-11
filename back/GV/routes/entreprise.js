@@ -4,11 +4,12 @@ const newEntreprise = require("../modules/Entreprise");
 
 //Route Create Entreprise
 router.post("/AddEntreprise", (req, res) => {
-    const { matricule, tel, email } = req.body;
+    const { matricule, tel, email,contactId } = req.body;
     let EntrepriseModel = new newEntreprise({
         matricule,
         tel,
-        email
+        email,
+        contactId
     });
     EntrepriseModel.save()
         .then((entreprise) => res.status(200).json(entreprise))

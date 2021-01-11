@@ -1,15 +1,13 @@
-const mongoose = require('mongoose')
-const schema = mongoose.Schema
+const mongoose = require("mongoose");
+const schema = mongoose.Schema;
 
 const CommandeVenteSchema = new schema({
-    date: { type: date, default : Date.now },
-    total: { type: number },
-    isValidate: { type: Boolean },
-    numero: {type : number},
-    id_client: { type: Schema.Types.ObjectId, ref: 'Client' },
-    id_ligneVente: {type: Schema.Types.ObjectId, ref: 'LigneVente'},
-    id_entreprise: {type: Schema.Types.ObjectId, ref: 'Entreprise'}
+  dateCommande: { type: Date },
+  total: { type: Number },
+  isValidate: { type: Boolean },
+  numero: Number,
+  clientId: { type: mongoose.Types.ObjectId, ref: "client" },
+  ligneVente: [{ type: mongoose.Types.ObjectId, ref: "LigneVente" }],
+});
 
-})
-
-module.exports = mongoose.model('commandeVente', CommandeVenteSchema)
+module.exports = mongoose.model("commandeVente", CommandeVenteSchema);

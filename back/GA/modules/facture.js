@@ -43,6 +43,10 @@ const FactureSchema = new schema({
     type: mongoose.Types.ObjectId,
     ref: "client",
   },
+  idCommand: {
+    type: mongoose.Types.ObjectId,
+    ref: "commandeAchat",
+  },
 });
 
 module.exports = mongoose.model("Facture", FactureSchema);

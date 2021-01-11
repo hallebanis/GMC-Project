@@ -4,14 +4,15 @@ const newClient = require('../modules/Client');
 
 //Route Create a client
 router.post("/AddClient", (req, res) => {
-    const { nom, prenom, adresse, civilité, email, tel } = req.body
+    const { nom, prenom, adresse, civilité, email, tel, commandes } = req.body
     let clientModel = new newClient({
         nom,
         prenom,
         adresse,
         civilité,
         email,
-        tel
+        tel,
+        commandes
     });
     clientModel
         .save()

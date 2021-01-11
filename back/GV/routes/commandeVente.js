@@ -4,15 +4,14 @@ const newCommVente = require('../modules/CommandeVente');
 
 //Route Create Commande Vente
 router.post("/AddCommandeVente", (req, res) => {
-    const { date, total, isValidate, numero, id_client, id_ligneVente, id_entreprise } = req.body
+    const { dateCommande, total, isValidate, numero, clientId,ligneVente } = req.body
     let CommandeVenteModel = new newCommVente({
-        date,
+        dateCommande,
         total,
         isValidate,
         numero,
-        id_client,
-        id_ligneVente,
-        id_entreprise
+        clientId,
+        ligneVente,
     });
     CommandeVenteModel
         .save()
@@ -28,20 +27,20 @@ router.get("/CommandesVente", (req, res) => {
 });
 
 //Route Update Commande Vente
-router.put('/updateCommVente/:id', (req,res) =>{
-    newCommVente.findByIdAndUpdate(req.params.id, {$set: {...req.body}},(err, data) =>{
-        if (err) {throw err}
+router.put('/updateCommVente/:id', (req, res) => {
+    newCommVente.findByIdAndUpdate(req.params.id, { $set: { ...req.body } }, (err, data) => {
+        if (err) { throw err }
         newCommVente.findById(req.params.id)
-        .then(client => res.json (client))
-        .catch(err => console.log(err.message))
+            .then(client => res.json(client))
+            .catch(err => console.log(err.message))
     })
 });
 
 //Route Delete Commande Vente
-router.delete('/deleteCommVente/:id' , (req,res) =>{
+router.delete('/deleteCommVente/:id', (req, res) => {
     newCommVente.findByIdAndDelete(req.params.id)
-    .then (() => res.json ({msg: 'Commande Vente Deleted'}))
-    .catch(err => console.log(err.message))
+        .then(() => res.json({ msg: 'Commande Vente Deleted' }))
+        .catch(err => console.log(err.message))
 
 });
 

@@ -4,9 +4,10 @@ const newReservation = require("../modules/Reservation");
 
 //Route Create Reservation
 router.post("/AddReservation", (req, res) => {
-    const { date } = req.body;
+    const { dateReservation,reservationId } = req.body;
     let ReservationModel = new newReservation({
-        date
+        dateReservation,
+        reservationId
     });
     ReservationModel.save()
         .then((Reservation) => res.status(200).json(Reservation))

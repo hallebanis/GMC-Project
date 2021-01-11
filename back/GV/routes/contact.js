@@ -4,14 +4,14 @@ const newContact = require("../modules/Contact");
 
 //Route Create Contact
 router.post("/AddContact", (req, res) => {
-    const { nom, prenom, fonction, email, tel, id_entreprise } = req.body;
+    const { nom, prenom, fonction, email, tel, entrepriseId } = req.body;
     let ContactModel = new newContact({
         nom,
         prenom,
         fonction,
         email,
         tel,
-        id_entreprise,
+        entrepriseId,
     });
     ContactModel.save()
         .then((contact) => res.status(200).json(contact))

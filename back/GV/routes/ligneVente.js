@@ -4,12 +4,13 @@ const newLigneVente = require("../modules/LigneVente");
 
 //Route Create Ligne Vente
 router.post("/AddLigneVente", (req, res) => {
-    const { quantité, description, sousTotal, id_produit } = req.body;
+    const { quantité, description, sousTotal, produitId, commandeId} = req.body;
     let LVenteModel = new newLigneVente({
         quantité,
         description,
         sousTotal,
-        id_produit
+        produitId,
+        commandeId
     });
     LVenteModel.save()
         .then((LVente) => res.status(200).json(LVente))

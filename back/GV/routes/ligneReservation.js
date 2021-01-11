@@ -4,10 +4,10 @@ const newLigneReservation = require("../modules/LigneReservation");
 
 //Route Create Ligne Reservation
 router.post("/AddLigneReservation", (req, res) => {
-    const { quantité, id_reservation } = req.body;
+    const { quantité, reservationId } = req.body;
     let LReservationModel = new newLigneReservation({
         quantité,
-        id_reservation
+        reservationId
     });
     LReservationModel.save()
         .then((LReserv) => res.status(200).json(LReserv))

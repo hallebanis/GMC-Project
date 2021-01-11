@@ -24,6 +24,18 @@ app.use("/api", require("./GRH/routes/contrat"));
 app.use("/api", require("./GRH/routes/pret"));
 app.use("/api", require("./GRH/routes/embauche"));
 app.use("/api", require("./GRH/routes/diplome"));
+app.use("/api", require("./GRH/routes/absence"));
+app.use("/api", require("./GRH/routes/avance"));
+app.use("/api", require("./GRH/routes/motifsAbsence"));
+app.use("/api", require("./GRH/routes/pointage"));
+app.use("/api", require("./GRH/routes/service"));
+app.use("/api", require("./GRH/routes/prime"));
+
+
+
+
+
+
 
 app.listen(PORT, (err) => {
   if (err) throw err;
