@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 const personnel = require("../modules/personnel");
 
 const authMiddleware = require("../../helpers/authMiddleware");
@@ -36,6 +37,7 @@ router.post("/personnel", authMiddleware, (req, res) => {
   newEmployee
     .save()
     .then((personnel) => res.status(200).json(personnel))
+
     .catch((err) =>
       res.status(400).json({ errors: [{ msg: "server ERROR" }] })
     );

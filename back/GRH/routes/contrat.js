@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const newContrat=require('../modules/contrat');
+
 const authMiddleware = require('../../helpers/authMiddleware')
 
 
@@ -18,6 +19,7 @@ router.post("/contrat", (req, res) => {
       .catch((err) => res.status(400).json(err));
   });
   
+
   router.get("/contrat",authMiddleware,(req, res) => {
     newContrat.find((err, doc) => {
       if (err) {

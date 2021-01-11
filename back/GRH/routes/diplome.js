@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const newDiplome = require("../modules/diplome");
+
 const authMiddleware = require('../../helpers/authMiddleware')
 
 
@@ -17,12 +18,14 @@ router.post("/diplome", (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+
 router.get("/diplome",authMiddleware, (req, res) => {
   newDiplome.find((err, doc) => {
     if (err) {
       res.status(400).json({ errors: [{ msg: "server ERROR" }] });    }
     // console.log(doc);
     res.status(200).send(doc);
+
   });
 });
 module.exports = router;

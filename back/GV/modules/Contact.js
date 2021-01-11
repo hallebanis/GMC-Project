@@ -10,3 +10,4 @@ const ContactSchema = new schema({
   id_entreprise: { type: Schema.Types.ObjectId, ref: "Entreprise" },
 });
 module.exports = mongoose.model("contact", ContactSchema);
+
