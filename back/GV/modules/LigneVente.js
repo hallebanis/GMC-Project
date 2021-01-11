@@ -4,7 +4,7 @@ const schema = mongoose.Schema
 const LigneVenteSchema = new schema({
     quantité: { type: number , required: true },
     description: { type: String },
-    sousTotal: { type: number },
+    sousTotal: { type: number, required: true },
     id_produit : [{ type: Schema.Types.ObjectId, ref: 'Produit'}]
 })
 
