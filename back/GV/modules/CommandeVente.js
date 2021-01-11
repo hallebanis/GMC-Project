@@ -6,9 +6,9 @@ const CommandeVenteSchema = new schema({
     total: { type: number },
     isValidate: { type: Boolean },
     numero: number,
-    id_client: [{ type: Schema.Types.ObjectId, ref: 'Client' }],
-    id_ligneVente: [{type: Schema.Types.ObjectId, ref: 'LigneVente'}],
-    id_entreprise: [{type: Schema.Types.ObjectId, ref: 'Entreprise'}]
+    id_client: { type: Schema.Types.ObjectId, ref: 'Client' },
+    id_ligneVente: {type: Schema.Types.ObjectId, ref: 'LigneVente'},
+    id_entreprise: {type: Schema.Types.ObjectId, ref: 'Entreprise'}
 })
 
 module.exports = mongoose.model('commandeVente', CommandeVenteSchema)

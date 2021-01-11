@@ -1,4 +1,6 @@
 import {
+  ADD_USER_FAILED,
+  ADD_USER_SUCCESS,
   DELETE_USER_FAILED,
   DELETE_USER_SUCCESS,
   LOAD_ROLES_FAILED,
@@ -62,11 +64,18 @@ const usersReducer = (state = initState, action) => {
         users: state.users.filter((elm) => elm._id !== action.payload._id),
         errors: null,
       };
+    case ADD_USER_FAILED:
     case DELETE_USER_FAILED:
     case MODIFY_USER_FAILED:
       return {
         ...state,
         errors: action.payload,
+      };
+    case ADD_USER_SUCCESS:
+      return {
+        ...state,
+        users: [...state.users, action.payload],
+        errors: null,
       };
     default:
       return state;
