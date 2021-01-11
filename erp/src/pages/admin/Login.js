@@ -27,7 +27,7 @@ const Login = ({ history }) => {
           history.push(`/user-dashboard/${auth.user._id}`);
           break;
         case "admin":
-          history.push(`/admin-dashboard/${auth.user._id}`);
+          history.push(`/admin-dashboard`);
           break;
         default:
           break;

@@ -8,11 +8,16 @@ const authMiddleware = require("../../helpers/authMiddleware");
 
 //gestion des users
 
-router.get("/users", (req, res) => {
+router.get("/users", authMiddleware, (req, res) => {
   Utilisateur.find({})
     .populate("role")
-    .then((users) => res.json(users))
-    .catch((err) => console.log(err.message));
+    .populate("personnelId")
+    .then((users) => {
+      res.json(users);
+    })
+    .catch((err) => {
+      res.json({ errors: [{ msg: "server error" }] });
+    });
 });
 
 router.post(
@@ -76,7 +81,7 @@ router.post(
 );
 
 router.put(
-  "/edituser/:id",
+  "/edituser",
   [
     body("login", "Entrez un login valide : +6 caractéres").isLength({
       min: 6,
@@ -87,33 +92,50 @@ router.put(
     ).isLength({ min: 6 }),
   ],
   (req, res) => {
-    const { login, password, role } = req.body;
-    bcrypt.genSalt(10, (err, salt) => {
-      if (err) throw err;
-      else {
-        bcrypt.hash(password, salt, (err, hash) => {
-          if (err) throw err;
-          else {
-            Utilisateur.findByIdAndUpdate(req.params.id, {
-              login,
-              password: hash,
-              role,
-            })
-              .then((user) => res.status(200).json(user))
-              .catch(() =>
-                res.status(400).json({ errors: [{ msg: "erreur serveur" }] })
-              );
-          }
-        });
-      }
-    });
+    const { id, login, password, role } = req.body;
+    if (password) {
+      bcrypt.genSalt(10, (err, salt) => {
+        if (err) throw err;
+        else {
+          bcrypt.hash(password, salt, (err, hash) => {
+            if (err) throw err;
+            else {
+              Utilisateur.findByIdAndUpdate(id, {
+                login,
+                password: hash,
+                role,
+              })
+                .populate("personnelId")
+                .populate("role")
+                .then((user) => res.status(200).json(user))
+                .catch(() =>
+                  res.status(400).json({ errors: [{ msg: "erreur serveur" }] })
+                );
+            }
+          });
+        }
+      });
+    } else {
+      Utilisateur.findByIdAndUpdate(id, {
+        login,
+        role,
+      })
+        .populate("personnelId")
+        .populate("role")
+        .then((user) => res.status(200).json(user))
+        .catch(() =>
+          res.status(400).json({ errors: [{ msg: "erreur serveur" }] })
+        );
+    }
   }
 );
 
 router.delete("/deleteuser/:id", (req, res) => {
   Utilisateur.findOneAndDelete({ _id: req.params.id })
     .then((user) => res.status(200).json(user))
-    .catch(() => res.status(400).json({ errors: [{ msg: "erreur serveur" }] }));
+    .catch((err) =>
+      res.status(400).json({ errors: [{ msg: "erreur serveur" }] })
+    );
 });
 
 //gestion des roles

@@ -2,14 +2,16 @@ const express = require('express')
 const router = express.Router();
 const newContrat=require('../modules/contrat');
 
+const authMiddleware = require('../../helpers/authMiddleware')
+
+
 router.post("/contrat", (req, res) => {
-    let db = new Date(req.body.dateDebut);
-    let df = new Date(req.body.dateFin);
+  const {dateFin,dateDebut, salaireDeBase,typeContrat}=req.body
     let contratModel = new newContrat({
-      dateDebut: db,
-      dateFin: df,
-      salaireDeBase: req.body.salaireDeBase,
-      typeContrat: req.body.typeContrat,
+      dateDebut,
+      dateFin,
+      salaireDeBase,
+      typeContrat
     });
     contratModel
       .save()
@@ -17,13 +19,13 @@ router.post("/contrat", (req, res) => {
       .catch((err) => res.status(400).json(err));
   });
   
-  router.get("/contrat", (req, res) => {
+
+  router.get("/contrat",authMiddleware,(req, res) => {
     newContrat.find((err, doc) => {
       if (err) {
-        console.log(err.msg);
-      }
+        res.status(400).json({ errors: [{ msg: "server ERROR" }] });      }
       // console.log(doc);
-      res.send(doc);
+      res.status(200).send(doc);
     });
   });
   module.exports = router;

@@ -4,13 +4,13 @@ import {
   REGISTRATION_FAILED,
   REGISTRATION_SUCCESS,
 } from "../../actions/authentification/types";
-let initSate = {
+let inState = {
   token: localStorage.getItem("token"),
   user: null,
   isAuth: false,
   errors: null,
 };
-const authReducer = (state = initSate, action) => {
+const authReducer = (state = inState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload.token);

@@ -1,58 +1,31 @@
 import React from "react";
-import Sidebar from "react-sidebar";
+import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 
-const mql = window.matchMedia(`(min-width: 800px)`);
+const AdminDashboardSidebar = ({ color, linkList }) => {
+  return (
+    <Nav
+      style={{ backgroundColor: color }}
+      defaultActiveKey="/home"
+      className="flex-column navSideBar"
+    >
+      {linkList.map((elm, i) => (
+        <>
+          <Nav.Item className="navTitle" id={i}>
+            {elm.categorie}
+          </Nav.Item>
+          {elm.elements.map((sElm, j) => (
+            <Nav.Item>
+              <Nav.Link eventKey={`link-${j}`} id={`se${j}`}>
+                <Link to={sElm.link}>{sElm.title}</Link>
+              </Nav.Link>
+            </Nav.Item>
+          ))}
+        </>
+      ))}
+    </Nav>
+  );
+};
 
-class AdminDashboardSidebar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sidebarDocked: mql.matches,
-      sidebarOpen: false,
-    };
-
-    this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
-    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
-  }
-
-  componentWillMount() {
-    mql.addListener(this.mediaQueryChanged);
-  }
-
-  componentWillUnmount() {
-    this.state.mql.removeListener(this.mediaQueryChanged);
-  }
-
-  onSetSidebarOpen(open) {
-    this.setState({ sidebarOpen: open });
-  }
-
-  mediaQueryChanged() {
-    this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
-  }
-
-  render() {
-    return (
-      <Sidebar
-        sidebar={
-          <div>
-            <div>
-              <Link to="/">Click here</Link>
-            </div>
-            <div>
-              <Link to="/">Click here</Link>
-            </div>
-          </div>
-        }
-        open={this.state.sidebarOpen}
-        docked={this.state.sidebarDocked}
-        onSetOpen={this.onSetSidebarOpen}
-      >
-        <b>Main content</b>
-      </Sidebar>
-    );
-  }
-}
 
 export default AdminDashboardSidebar;

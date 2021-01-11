@@ -2,11 +2,15 @@ const express = require("express");
 const router = express.Router();
 const newEmbauche = require("../modules/embauche")
 
+const authMiddleware = require('../../helpers/authMiddleware')
+
+
 router.post("/embauche", (req, res) => {
-  let db = new Date(req.body.dateEmbauche);
+  const {dateEmbauche,fonction}=req.body
   let embaucheModel = new newEmbauche({
-    dateEmbauche: db,
-    fonction: req.body.fonction,
+    dateEmbauche,
+    fonction
+
   });
   embaucheModel
     .save()
@@ -14,13 +18,14 @@ router.post("/embauche", (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-router.get("/embauche", (req, res) => {
+
+router.get("/embauche",authMiddleware, (req, res) => {
   newEmbauche.find((err, doc) => {
     if (err) {
-      console.log(err.msg);
-    }
+      res.status(400).json({ errors: [{ msg: "server ERROR" }] });    }
     //console.log(doc);
-    res.send(doc);
+    res.status(200).send(doc);
+
   });
 });
 module.exports = router;

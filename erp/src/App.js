@@ -5,6 +5,9 @@ import Register from "./pages/admin/Register";
 import Home from "./pages/Home";
 import UserDashboard from "./pages/user/UserDashboard";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import UsersListPage from "./pages/admin/UsersListPage";
+import UserDetailsPage from "./pages/admin/UserDetailsPage";
+import AddUser from "./pages/admin/AddUser";
 
 function App() {
   return (
@@ -14,7 +17,10 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/user-dashboard/:id" component={UserDashboard} />
-        <Route exect path="/admin-dashboard/:id" component={AdminDashboard} />
+        <Route exact path="/admin-dashboard" component={AdminDashboard} />
+        <Route exact path="/admin-dashboard/users" component={UsersListPage} />
+        <Route exact path="/admin-dashboard/adduser" component={AddUser} />
+        <Route exact path="/user/:id" component={UserDetailsPage} />
       </Switch>
     </Router>
   );
