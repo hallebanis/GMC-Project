@@ -1,5 +1,7 @@
 import axios from "axios";
 import {
+  ADD_USER_SUCCESS,
+  ADD_USER_FAILED,
   DELETE_USER_FAILED,
   DELETE_USER_SUCCESS,
   LOAD_ROLES_FAILED,
@@ -78,6 +80,24 @@ export const deleteUser = (id) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: DELETE_USER_FAILED,
+        payload: err.response.data.errors,
+      });
+    });
+};
+
+export const addUser = (user) => (dispatch) => {
+  tokenSet();
+  axios
+    .post("/admin/adduser", user)
+    .then((res) => {
+      dispatch({
+        type: ADD_USER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: ADD_USER_FAILED,
         payload: err.response.data.errors,
       });
     });

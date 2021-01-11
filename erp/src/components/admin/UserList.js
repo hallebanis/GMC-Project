@@ -14,6 +14,7 @@ const UserList = ({ userList }) => {
   };
   return (
     <Table striped bordered hover>
+      {console.log(userList)}
       <thead>
         <tr>
           <th>Id</th>

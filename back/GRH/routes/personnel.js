@@ -5,7 +5,7 @@ const personnel = require("../modules/personnel");
 
 const authMiddleware = require("../../helpers/authMiddleware");
 
-router.post("/personnel",authMiddleware, (req, res) => {
+router.post("/personnel", authMiddleware, (req, res) => {
   const {
     nom,
     prenom,
@@ -43,8 +43,7 @@ router.post("/personnel",authMiddleware, (req, res) => {
     );
 });
 
-
-router.get("/personnel",authMiddleware, (req, res) => {
+router.get("/personnel", authMiddleware, (req, res) => {
   personnel.find((err, doc) => {
     if (err) {
       res.status(400).json({ errors: [{ msg: "server ERROR" }] });
@@ -53,7 +52,7 @@ router.get("/personnel",authMiddleware, (req, res) => {
   });
 });
 
-router.delete("/personnel/:id",authMiddleware, (req, res) => {
+router.delete("/personnel/:id", authMiddleware, (req, res) => {
   const personnelId = req.params.id;
   personnel
     .findByIdAndDelete(personnelId)
@@ -63,8 +62,8 @@ router.delete("/personnel/:id",authMiddleware, (req, res) => {
     );
 });
 
-router.put("/personnel/:id" ,authMiddleware, (req, res)=>{
-  const perId = req.params.id
+router.put("/personnel/:id", authMiddleware, (req, res) => {
+  const perId = req.params.id;
   const {
     nom,
     prenom,
@@ -79,33 +78,24 @@ router.put("/personnel/:id" ,authMiddleware, (req, res)=>{
     nombreEnfants,
     categorie,
   } = req.body;
-  let newEmployee = new personnel({
-    nom,
-    prenom,
-    adresse,
-    email,
-    CIN,
-    dateDeNaissance,
-    lieuDeNaissance,
-    matricule,
-    matCnss,
-    situationFamiliale,
-    nombreEnfants,
-    categorie,
-  });
-  personnel.findByIdAndUpdate(perId, {nom,
-    prenom,
-    adresse,
-    email,
-    CIN,
-    dateDeNaissance,
-    lieuDeNaissance,
-    matCnss,
-    matricule,
-    situationFamiliale,
-    nombreEnfants,
-    categorie})
+  personnel
+    .findByIdAndUpdate(perId, {
+      nom,
+      prenom,
+      adresse,
+      email,
+      CIN,
+      dateDeNaissance,
+      lieuDeNaissance,
+      matCnss,
+      matricule,
+      situationFamiliale,
+      nombreEnfants,
+      categorie,
+    })
     .then((personnel) => res.status(200).json(personnel))
-    .catch((err) => res.status(400).json({ errors: [{ msg: "server ERROR" }] }));
+    .catch((err) =>
+      res.status(400).json({ errors: [{ msg: "server ERROR" }] })
+    );
 });
 module.exports = router;
