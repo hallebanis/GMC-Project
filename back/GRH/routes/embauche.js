@@ -5,7 +5,7 @@ const newEmbauche = require("../modules/embauche")
 const authMiddleware = require('../../helpers/authMiddleware')
 
 
-router.post("/embauche", (req, res) => {
+router.post("/embauche",authMiddleware, (req, res) => {
   const {dateEmbauche,fonction}=req.body
   let embaucheModel = new newEmbauche({
     dateEmbauche,
@@ -27,5 +27,15 @@ router.get("/embauche",authMiddleware, (req, res) => {
     res.status(200).send(doc);
 
   });
+});
+
+router.delete("/embauche/:id", (req, res) => {
+  const embaucheId = req.params.id;
+  newEmbauche
+    .findByIdAndDelete(embaucheId)
+    .then((embauche) => res.status(200).json(embauche))
+    .catch((err) =>
+      res.status(400).json({ errors: [{ msg: "server ERROR" }] })
+    );
 });
 module.exports = router;
