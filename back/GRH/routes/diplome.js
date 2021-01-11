@@ -4,7 +4,7 @@ const newDiplome = require("../modules/diplome");
 const authMiddleware = require('../../helpers/authMiddleware')
 
 
-router.post("/diplome", (req, res) => {
+router.post("/diplome", authMiddleware,(req, res) => {
   const {titre, anneesDeScolarite , ecole}= req.body
   let dipModel = new newDiplome({
     titre,
