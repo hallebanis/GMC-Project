@@ -5,7 +5,7 @@ import { loadRoles } from "../../actions/admin/usersActions";
 import { useDispatch } from "react-redux";
 import { loadPersonnel } from "../../actions/GRH/personnelActions";
 
-const RoleDropDown = ({
+const PersonnelDropDown = ({
   disableChange,
   setRoleTitle,
   setInfo,
@@ -42,4 +42,4 @@ const RoleDropDown = ({
   );
 };
 
-export default RoleDropDown;
+export default PersonnelDropDown;
