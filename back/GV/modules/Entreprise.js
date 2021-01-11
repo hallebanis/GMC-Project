@@ -1,10 +1,16 @@
-const mongoose = require('mongoose')
-const schema = mongoose.Schema
+const mongoose = require("mongoose");
+const schema = mongoose.Schema;
 
 const EntrepriseSchema = new schema({
-    matricule: { type: String ,required: true },
-    tel: { type: number ,required: true},
-    email: { type: email ,required: true},
-})
+  matricule: { type: String, required: true },
+  tel: { type: String, required: true },
+  email: { type: String, required: true },
+  contact: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "entreprise",
+    },
+  ],
+});
 
-module.exports = mongoose.model('entreprise', EntrepriseSchema)
+module.exports = mongoose.model("entreprise", EntrepriseSchema);
