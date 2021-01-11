@@ -1,8 +1,14 @@
-const mongoose = require('mongoose')
-const schema = mongoose.Schema
+const mongoose = require("mongoose");
+const schema = mongoose.Schema;
 
 const ReservationSchema = new schema({
-    date: { type: date , required: true , default: date.now},  
-})
+  dateReservation: { type: Date, required: true, default: date.now },
+  reservations: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "ligneReservation",
+    },
+  ],
+});
 
-module.exports = mongoose.model('reservation', ReservationSchema)
+module.exports = mongoose.model("reservation", ReservationSchema);
