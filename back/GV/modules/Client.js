@@ -6,8 +6,8 @@ const ClientSchema = new schema({
     prenom: { type: String , required: true},
     adresse: { type: String },
     civilité: {type: String },
-    email:{type: email, required: true} ,
-    tel:{type: Number} ,
+    email:{type: String, required: true} ,
+    tel:{type: String} ,
     
 })
 
