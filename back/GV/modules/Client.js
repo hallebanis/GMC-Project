@@ -11,7 +11,7 @@ const ClientSchema = new schema({
   commandes: [
     {
       type: mongoose.Types.ObjectId,
-      ref: "commandeVente",
+      ref: "CommandeVente",
     },
   ],
 });

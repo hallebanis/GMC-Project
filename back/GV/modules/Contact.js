@@ -9,4 +9,5 @@ const ContactSchema = new schema({
   tel: { type: String },
   entrepriseId: { type: Schema.Types.ObjectId, ref: "Entreprise" },
 });
+
 module.exports = mongoose.model("contact", ContactSchema);
