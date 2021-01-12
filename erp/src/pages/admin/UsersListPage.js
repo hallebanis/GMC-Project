@@ -10,7 +10,7 @@ import MainNavBar from "../../components/admin/MainNavBar";
 import { Col, Container, Row } from "react-bootstrap";
 import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
 
-const UsersListPage = () => {
+const UsersListPage = ({ history }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUsers());
@@ -24,6 +24,7 @@ const UsersListPage = () => {
   };
   return (
     <div>
+      {console.log(users)}
       <Container fluid>
         <Row>
           <Col>
@@ -40,8 +41,16 @@ const UsersListPage = () => {
                   categorie: "Utilisateur",
                   elements: [
                     { title: "User List", link: "/admin-dashboard/users" },
-                    { title: "Add User", link: "#" },
-                    { title: "", link: "#" },
+                    { title: "Add User", link: "/admin-dashboard/adduser" },
+                  ],
+                },
+                {
+                  categorie: "Roles",
+                  elements: [
+                    {
+                      title: "Role List",
+                      link: "/admin-dashboard/roles",
+                    },
                   ],
                 },
               ]}
@@ -67,6 +76,7 @@ const UsersListPage = () => {
       </Form>
       <Button onClick={handleReset}>Reset</Button>
       <UserList
+        history={history}
         userList={
           users
             ? users.users.filter((elm) =>

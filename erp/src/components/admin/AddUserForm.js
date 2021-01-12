@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { Button, Form, Badge, InputGroup, FormControl } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  InputGroup,
+  FormControl,
+  Container,
+} from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { addUser } from "../../actions/admin/usersActions";
+import { addUser, loadUsers } from "../../actions/admin/usersActions";
 import PersonnelDropDown from "../GRH/PersonnelDropDown";
 import RoleDropDown from "./RoleDropDown";
 
@@ -9,6 +15,7 @@ const AddUserForm = ({ history }) => {
   const [disableChange, setDisableChange] = useState(true);
   const [disableSave, setDisableSave] = useState(true);
   const [showPassword, setShowPassword] = useState("password");
+  const [statu, setStatu] = useState("");
   const [info, setInfo] = useState({
     login: "",
     password: "",
@@ -54,65 +61,72 @@ const AddUserForm = ({ history }) => {
     history.goBack();
   };
   const dispatch = useDispatch();
+
   const handleSave = () => {
     dispatch(addUser(info));
+    setStatu("Utilisateur Ajouté Avec Succées");
+    dispatch(loadUsers());
+    history.push("/admin-dashboard/users");
   };
   return (
-    <Form>
-      <Form.Group>
-        <PersonnelDropDown
-          onPersonnelChange={handlePersonnelSelect}
-          dropDownMsg="choisit un personnel"
-        />
-        <Form.Label htmlFor="login" srOnly>
-          Login
-        </Form.Label>
-        <Form.Control
-          id="login"
-          type="text"
-          placeholder="Login"
-          value={info.login}
-          onChange={handleChange}
-          disabled={disableChange}
-        />
-        <Form.Label htmlFor="password" srOnly>
-          Password
-        </Form.Label>
-        <InputGroup>
-          <FormControl
-            disabled={disableChange}
-            id="password"
-            placeholder="Password"
-            type={showPassword}
-            value={info.password}
-            onChange={handleChange}
+    <Container>
+      <Form>
+        <Form.Group>
+          <PersonnelDropDown
+            onPersonnelChange={handlePersonnelSelect}
+            dropDownMsg="choisit un personnel"
           />
-          <InputGroup.Prepend>
-            <InputGroup.Text
-              onMouseDown={() => setShowPassword("text")}
-              onMouseUp={() => setShowPassword("password")}
-            >
-              show
-            </InputGroup.Text>
-          </InputGroup.Prepend>
-        </InputGroup>
-        <RoleDropDown
-          onRoleChange={handleRoleChange}
-          dropDownMsg="select a role"
-          disableChange={disableChange}
-        />
-        <Button
-          type="submit"
-          disabled={disableSave}
-          onClick={() => handleSave(info)}
-        >
-          Créer
-        </Button>
-        <Button type="reset" onClick={handleCancel}>
-          Annuler
-        </Button>
-      </Form.Group>
-    </Form>
+          <Form.Label htmlFor="login" srOnly>
+            Login
+          </Form.Label>
+          <Form.Control
+            id="login"
+            type="text"
+            placeholder="Login"
+            value={info.login}
+            onChange={handleChange}
+            disabled={disableChange}
+          />
+          <Form.Label htmlFor="password" srOnly>
+            Password
+          </Form.Label>
+          <InputGroup>
+            <FormControl
+              disabled={disableChange}
+              id="password"
+              placeholder="Password"
+              type={showPassword}
+              value={info.password}
+              onChange={handleChange}
+            />
+            <InputGroup.Prepend>
+              <InputGroup.Text
+                onMouseDown={() => setShowPassword("text")}
+                onMouseUp={() => setShowPassword("password")}
+              >
+                show
+              </InputGroup.Text>
+            </InputGroup.Prepend>
+          </InputGroup>
+          <RoleDropDown
+            onRoleChange={handleRoleChange}
+            dropDownMsg="select a role"
+            disableChange={disableChange}
+          />
+          <Button
+            type="submit"
+            disabled={disableSave}
+            onClick={() => handleSave(info)}
+          >
+            Créer
+          </Button>
+          <Button type="reset" onClick={handleCancel}>
+            Annuler
+          </Button>
+        </Form.Group>
+      </Form>
+      <h3 className="successMessage">{statu ? statu : null}</h3>
+    </Container>
   );
 };
 
