@@ -22,7 +22,15 @@ const AdminDashboard = () => {
                 elements: [
                   { title: "User List", link: "/admin-dashboard/users" },
                   { title: "Add User", link: "/admin-dashboard/adduser" },
-                  { title: "", link: "#" },
+                ],
+              },
+              {
+                categorie: "Roles",
+                elements: [
+                  {
+                    title: "Role List",
+                    link: "/admin-dashboard/roles",
+                  },
                 ],
               },
             ]}
