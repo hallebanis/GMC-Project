@@ -120,7 +120,7 @@ export const AddPersonnelForm = () => {
 
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>
-              Date de naissance : <Select name="dateDeNaissance"  onClick={()=>console.log(value)}/>
+              Date de naissance : <Select name="dateDeNaissance"   /* onClick={()=>console.log(value)} */ />
             </Form.Label>
           </Form.Group>
         </Form.Row>
