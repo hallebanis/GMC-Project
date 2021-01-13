@@ -3,9 +3,11 @@ import { tokenSet } from "../../helpers/tokenSet";
 import {
   LOAD_PERSONNEL_SUCCESS,
   LOAD_PERSONNEL_FAILED,
+
   ADD_PERSONNEL_FAILED,
   ADD_PERSONNEL_SUCCESS,
 } from "./types";
+
 
 export const loadPersonnel = () => (dispatch) => {
   tokenSet();
@@ -25,20 +27,21 @@ export const loadPersonnel = () => (dispatch) => {
     });
 };
 
-export const addPersonnel = (info) => (dispatch) => {
+export const addPersonnel = (personnel) => (dispatch) => {
   tokenSet();
   axios
-    .post("/api/personnel", info)
-    .then((res) =>
+    .post("/personnel", personnel)
+    .then((res) => {
       dispatch({
         type: ADD_PERSONNEL_SUCCESS,
         payload: res.data,
-      })
-    )
-    .catch((err) =>
+      });
+    })
+    .catch((err) => {
       dispatch({
         type: ADD_PERSONNEL_FAILED,
         payload: err.response.data.errors,
-      })
-    );
+      });
+    });
+
 };
