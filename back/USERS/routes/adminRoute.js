@@ -184,7 +184,7 @@ router.post("/addrole", (req, res) => {
 
 router.put("/roles/edit/", authMiddleware, (req, res) => {
   const { id, titre } = req.body;
-  Role.findByIdAndUpdate(id, { titre })
+  Role.findByIdAndUpdate(id, { titre: titre })
     .then(() => {
       Role.findById(id)
         .then((role) => {

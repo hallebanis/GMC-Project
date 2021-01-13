@@ -14,6 +14,8 @@ import {
   DELETE_ROLE_SUCCESS,
   MODIFY_ROLE_SUCCESS,
   MODIFY_ROLE_FAILED,
+  ADD_ROLE_SUCCESS,
+  ADD_ROLE_FAILED,
 } from "./types";
 import { tokenSet } from "../../helpers/tokenSet";
 
@@ -139,6 +141,23 @@ export const modifyRole = (info) => (dispatch) => {
       dispatch({
         type: MODIFY_ROLE_FAILED,
         payload: err.response.data.errors,
+      });
+    });
+};
+export const addRole = (info) => (dispatch) => {
+  tokenSet();
+  axios
+    .post("/admin/addrole", info)
+    .then((res) => {
+      dispatch({
+        type: ADD_ROLE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: ADD_ROLE_FAILED,
+        payload: err.response.data,
       });
     });
 };

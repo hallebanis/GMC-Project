@@ -3,11 +3,9 @@ import { tokenSet } from "../../helpers/tokenSet";
 import {
   LOAD_PERSONNEL_SUCCESS,
   LOAD_PERSONNEL_FAILED,
-
   ADD_PERSONNEL_FAILED,
   ADD_PERSONNEL_SUCCESS,
 } from "./types";
-
 
 export const loadPersonnel = () => (dispatch) => {
   tokenSet();
@@ -43,5 +41,4 @@ export const addPersonnel = (personnel) => (dispatch) => {
         payload: err.response.data.errors,
       });
     });
-
 };
