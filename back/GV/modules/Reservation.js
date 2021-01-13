@@ -3,10 +3,10 @@ const schema = mongoose.Schema;
 
 const ReservationSchema = new schema({
   dateReservation: { type: Date, required: true, default: date.now },
-  reservations: [
+  reservationId: [
     {
       type: mongoose.Types.ObjectId,
-      ref: "ligneReservation",
+      ref: "LigneReservation",
     },
   ],
 });

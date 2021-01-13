@@ -10,6 +10,10 @@ import {
   LOAD_USERS_SUCCESS,
   MODIFY_USER_FAILED,
   MODIFY_USER_SUCCESS,
+  DELETE_ROLE_FAILED,
+  DELETE_ROLE_SUCCESS,
+  MODIFY_ROLE_SUCCESS,
+  MODIFY_ROLE_FAILED,
 } from "./types";
 import { tokenSet } from "../../helpers/tokenSet";
 
@@ -98,6 +102,42 @@ export const addUser = (user) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: ADD_USER_FAILED,
+        payload: err.response.data.errors,
+      });
+    });
+};
+
+export const deleteRole = (id) => (dispatch) => {
+  tokenSet();
+  axios
+    .delete(`/admin/roles/delete/${id}`)
+    .then((res) => {
+      dispatch({
+        type: DELETE_ROLE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: DELETE_ROLE_FAILED,
+        payload: err.response.data.errors,
+      });
+    });
+};
+
+export const modifyRole = (info) => (dispatch) => {
+  tokenSet();
+  axios
+    .put("/admin/roles/edit/", info)
+    .then((res) => {
+      dispatch({
+        type: MODIFY_ROLE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: MODIFY_ROLE_FAILED,
         payload: err.response.data.errors,
       });
     });

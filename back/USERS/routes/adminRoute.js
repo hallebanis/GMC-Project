@@ -98,9 +98,17 @@ router.put(
                 password: hash,
                 role,
               })
-                .populate("personnelId")
-                .populate("role")
-                .then((user) => res.status(200).json(user))
+                .then(() => {
+                  Utilisateur.findById(id)
+                    .populate("personnelId")
+                    .populate("role")
+                    .then((user) => res.status(200).json(user))
+                    .catch((err) =>
+                      res
+                        .status(400)
+                        .json({ errors: [{ msg: "erreur serveur" }] })
+                    );
+                })
                 .catch(() =>
                   res.status(400).json({ errors: [{ msg: "erreur serveur" }] })
                 );
@@ -115,7 +123,15 @@ router.put(
       })
         .populate("personnelId")
         .populate("role")
-        .then((user) => res.status(200).json(user))
+        .then(() => {
+          Utilisateur.findById(id)
+            .populate("personnelId")
+            .populate("role")
+            .then((user) => res.status(200).json(user))
+            .catch((err) =>
+              res.status(400).json({ errors: [{ msg: "erreur serveur" }] })
+            );
+        })
         .catch(() =>
           res.status(400).json({ errors: [{ msg: "erreur serveur" }] })
         );
@@ -166,17 +182,37 @@ router.post("/addrole", (req, res) => {
     .catch((err) => res.status(500).json({ errors: [{ msg: err.message }] }));
 });
 
-router.put("/roles/edit/:id", authMiddleware, (req, res) => {
-  const titre = req.body;
-  Role.findByIdAndUpdate(req.params.id, { titre })
-    .then((role) => res.status(200).json(role))
+router.put("/roles/edit/", authMiddleware, (req, res) => {
+  const { id, titre } = req.body;
+  Role.findByIdAndUpdate(id, { titre })
+    .then(() => {
+      Role.findById(id)
+        .then((role) => {
+          res.status(200).json(role);
+        })
+        .catch((err) =>
+          res.status(400).json({ errors: [{ msg: "server error" }] })
+        );
+    })
     .catch(() => res.status(400).json({ errors: [{ msg: "server error" }] }));
 });
 
 router.delete("/roles/delete/:id", authMiddleware, (req, res) => {
   Role.findByIdAndDelete(req.params.id)
-    .then((role) => res.status(200).json(role))
-    .catch(() => res.status(400).json({ errors: [{ msg: "server error" }] }));
+    .then((role) => {
+      Utilisateur.deleteMany({ role: role._id })
+        .then(() => {
+          res.status(200).json(role);
+        })
+        .catch((err) =>
+          res
+            .status(400)
+            .json({ errors: [{ msg: "deleting users failed..." }] })
+        );
+    })
+    .catch(() =>
+      res.status(400).json({ errors: [{ msg: "deleting role failed..." }] })
+    );
 });
 
 module.exports = router;

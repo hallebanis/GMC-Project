@@ -4,17 +4,17 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteUser } from "../../actions/admin/usersActions";
 
-const UserList = ({ userList }) => {
+const UserList = ({ userList, history }) => {
   const dispatch = useDispatch();
   const handleDelete = (id) => {
     let conf = window.confirm("Are you sure to delete");
     if (conf) {
       dispatch(deleteUser(id));
+      history.push("/admin-dashboard/users");
     }
   };
   return (
     <Table striped bordered hover>
-      {console.log(userList)}
       <thead>
         <tr>
           <th>Id</th>
@@ -26,21 +26,21 @@ const UserList = ({ userList }) => {
       </thead>
       <tbody>
         {userList &&
-          userList.map((elm) => (
-            <tr>
-              <td>
+          userList.map((elm, i) => (
+            <tr id={i}>
+              <td id={`${elm._id}${i}`}>
                 <Link to={`/user/${elm._id}`}>{elm._id}</Link>
               </td>
-              <td>
+              <td id={`${elm.personnelId.nom}${i}`}>
                 <Link to={`/user/${elm._id}`}>{elm.personnelId.nom}</Link>
               </td>
-              <td>
+              <td id={`${elm.personnelId.prenom}${i}`}>
                 <Link to={`/user/${elm._id}`}>{elm.personnelId.prenom}</Link>
               </td>
-              <td>
+              <td id={`${elm.login}${i}`}>
                 <Link to={`/user/${elm._id}`}>{elm.login}</Link>
               </td>
-              <td>
+              <td id={`${elm.role.titre}${i}`}>
                 <Link to={`/user/${elm._id}`}>{elm.role.titre}</Link>
               </td>
               <Button

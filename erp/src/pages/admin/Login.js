@@ -29,6 +29,11 @@ const Login = ({ history }) => {
         case "admin":
           history.push(`/admin-dashboard`);
           break;
+        case "resVente":
+          history.push("/ga-dashboard");
+          break;
+        case "resAchat":
+          history.push("/gv-dashboard");
         default:
           break;
       }

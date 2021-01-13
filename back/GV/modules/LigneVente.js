@@ -6,6 +6,7 @@ const LigneVenteSchema = new schema({
   description: { type: String },
   sousTotal: { type: Number },
   produitId: { type: mongoose.Types.ObjectId, ref: "produit" },
-  commandeId: { type: mongoose.Types.ObjectId, ref: "commandeVente" },
+  commandeId: { type: mongoose.Types.ObjectId, ref: "CommandeVente" },
 });
+
 module.exports = mongoose.model("ligneVente", LigneVenteSchema);

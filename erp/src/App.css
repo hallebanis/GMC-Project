@@ -7,3 +7,6 @@
 .navSideBar {
   height: 90vh;
 }
+.successMessage {
+  color: forestgreen;
+}
