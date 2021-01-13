@@ -98,9 +98,17 @@ router.put(
                 password: hash,
                 role,
               })
-                .populate("personnelId")
-                .populate("role")
-                .then((user) => res.status(200).json(user))
+                .then(() => {
+                  Utilisateur.findById(id)
+                    .populate("personnelId")
+                    .populate("role")
+                    .then((user) => res.status(200).json(user))
+                    .catch((err) =>
+                      res
+                        .status(400)
+                        .json({ errors: [{ msg: "erreur serveur" }] })
+                    );
+                })
                 .catch(() =>
                   res.status(400).json({ errors: [{ msg: "erreur serveur" }] })
                 );
@@ -115,7 +123,15 @@ router.put(
       })
         .populate("personnelId")
         .populate("role")
-        .then((user) => res.status(200).json(user))
+        .then(() => {
+          Utilisateur.findById(id)
+            .populate("personnelId")
+            .populate("role")
+            .then((user) => res.status(200).json(user))
+            .catch((err) =>
+              res.status(400).json({ errors: [{ msg: "erreur serveur" }] })
+            );
+        })
         .catch(() =>
           res.status(400).json({ errors: [{ msg: "erreur serveur" }] })
         );
@@ -169,7 +185,15 @@ router.post("/addrole", (req, res) => {
 router.put("/roles/edit/", authMiddleware, (req, res) => {
   const { id, titre } = req.body;
   Role.findByIdAndUpdate(id, { titre })
-    .then((role) => res.status(200).json(role))
+    .then(() => {
+      Role.findById(id)
+        .then((role) => {
+          res.status(200).json(role);
+        })
+        .catch((err) =>
+          res.status(400).json({ errors: [{ msg: "server error" }] })
+        );
+    })
     .catch(() => res.status(400).json({ errors: [{ msg: "server error" }] }));
 });
 
