@@ -9,6 +9,9 @@ import UsersListPage from "./pages/admin/UsersListPage";
 import UserDetailsPage from "./pages/admin/UserDetailsPage";
 import AddUser from "./pages/admin/AddUser";
 import RolePage from "./pages/admin/RolePage";
+import GRHDashboard from "./pages/GRH/GRHDashboard";
+import GaDashboard from "./pages/GA/GaDashboard";
+import GvDashboard from "./pages/GV/GvDashboard";
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
         <Route exact path="/admin-dashboard/adduser" component={AddUser} />
         <Route exact path="/user/:id" component={UserDetailsPage} />
         <Route exact path="/admin-dashboard/roles" component={RolePage} />
+        <Route exact path="/grh-dashboard" component={GRHDashboard} />
+        <Route exact path="/ga-dashboard" component={GaDashboard} />
+        <Route exact path="/gv-dashboard" component={GvDashboard} />
       </Switch>
     </Router>
   );
