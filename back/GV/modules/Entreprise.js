@@ -8,7 +8,7 @@ const EntrepriseSchema = new schema({
   contactId: [
     {
       type: mongoose.Types.ObjectId,
-      ref: "Entreprise",
+      ref: "contact",
     },
   ],
 });
