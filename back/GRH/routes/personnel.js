@@ -92,7 +92,16 @@ router.put("/personnel/:id", authMiddleware, (req, res) => {
       nombreEnfants,
       categorie,
     })
-    .then((personnel) => res.status(200).json(personnel))
+    .then(() => {
+      personnel
+        .findById(perId)
+        .then((personnel) => {
+          res.status(200).json(personnel);
+        })
+        .catch((err) =>
+          res.status(400).json({ errors: [{ msg: "server ERROR" }] })
+        );
+    })
     .catch((err) =>
       res.status(400).json({ errors: [{ msg: "server ERROR" }] })
     );
