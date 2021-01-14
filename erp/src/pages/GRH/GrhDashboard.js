@@ -21,6 +21,10 @@ export const GrhDashboard = () => {
                     title: "Add Personnel",
                     link: "/grh-dashboard/addpersonnel",
                   },
+                  {
+                    title:"personnel list",
+                    link : "/grh-dashboard/listpersonnel"
+                  }
                 ],
               },
             ]}
