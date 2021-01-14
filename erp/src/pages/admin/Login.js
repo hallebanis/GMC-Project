@@ -34,6 +34,10 @@ const Login = ({ history }) => {
           break;
         case "resAchat":
           history.push("/gv-dashboard");
+          break;
+        case "GRH":
+          history.push("/grh-dashboard");
+          break;
         default:
           break;
       }
