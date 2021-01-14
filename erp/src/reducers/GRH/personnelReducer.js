@@ -2,7 +2,7 @@ import {
   LOAD_PERSONNEL_SUCCESS,
   LOAD_PERSONNEL_FAILED,
   ADD_PERSONNEL_SUCCESS,
-  ADD_PERSONNEL_FAILED
+  ADD_PERSONNEL_FAILED,
 } from "../../actions/GRH/types";
 
 const initState = {
