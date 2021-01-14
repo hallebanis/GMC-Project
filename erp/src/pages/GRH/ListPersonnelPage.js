@@ -37,20 +37,7 @@ export const ListPersonnelPage = () => {
           />
         </Col>
         <Col>
-          <Table striped bordered hover size="sm">
-            <thead >
-              <tr>
-                <th id="">ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Matricule</th>
-              </tr>
-            </thead>
-            <tbody>
-            <ListPersonnel list={personnel.personnel} />
-            </tbody>
-          </Table>
-         
+          <ListPersonnel list={personnel} />
         </Col>
       </Row>
     </Container>
