@@ -3,14 +3,14 @@ import { useDispatch } from "react-redux";
 import { loadPersonnel } from "../../actions/GRH/personnelActions";
 import { AddPersonnelForm } from "../../components/GRH/AddPersonnelForm";
 
-const AddPersonnelPage = () => {
+const AddPersonnelPage = ({history}) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadPersonnel());
   }, []);
   return (
     <div>
-      <AddPersonnelForm />
+      <AddPersonnelForm history={history}/>
     </div>
   );
 };
