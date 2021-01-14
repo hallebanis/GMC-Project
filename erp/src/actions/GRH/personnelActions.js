@@ -5,6 +5,10 @@ import {
   LOAD_PERSONNEL_FAILED,
   ADD_PERSONNEL_FAILED,
   ADD_PERSONNEL_SUCCESS,
+  EDIT_PERSONNEL_SUCCESS,
+  EDIT_PERSONNEL_FAILED,
+  DELETE_PERSONNEL_SUCCESS,
+  DELETE_PERSONNEL_FAILED,
 } from "./types";
 
 export const loadPersonnel = () => (dispatch) => {
@@ -38,6 +42,41 @@ export const addPersonnel = (personnel) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: ADD_PERSONNEL_FAILED,
+        payload: err.response.data.errors,
+      });
+    });
+};
+export const editPersonnel = (personnel) => (dispatch) => {
+  tokenSet();
+  axios
+    .put("/api/personnel", personnel)
+    .then((res) => {
+      dispatch({
+        type: EDIT_PERSONNEL_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: EDIT_PERSONNEL_FAILED,
+        payload: err.response.data.errors,
+      });
+    });
+};
+
+export const deletePersonnel = (personnel) => (dispatch) => {
+  tokenSet();
+  axios
+    .delete("/api/personnel", personnel)
+    .then((res) => {
+      dispatch({
+        type: DELETE_PERSONNEL_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: DELETE_PERSONNEL_FAILED,
         payload: err.response.data.errors,
       });
     });
