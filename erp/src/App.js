@@ -12,6 +12,7 @@ import RolePage from "./pages/admin/RolePage";
 import GaDashboard from "./pages/GA/GaDashboard";
 import GvDashboard from "./pages/GV/GvDashboard";
 import GrhDashboard from "./pages/GRH/GrhDashboard";
+import AddPersonnelPage from "./pages/GRH/AddPersonnelPage";
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
         <Route exact path="/grh-dashboard" component={GrhDashboard} />
         <Route exact path="/ga-dashboard" component={GaDashboard} />
         <Route exact path="/gv-dashboard" component={GvDashboard} />
+        <Route
+          exact
+          path="/grh-dashboard/addpersonnel"
+          component={AddPersonnelPage}
+        />
       </Switch>
     </Router>
   );
