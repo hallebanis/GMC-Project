@@ -4,7 +4,8 @@ import { Form, Button, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import { Select } from "./DatePicker";
 import { addPersonnel } from "../../actions/GRH/personnelActions";
 
-export const AddPersonnelForm = () => {
+export const AddPersonnelForm = ({history}) => {
+  const [disableSave, setDisableSave] = useState(true)
   const [selectedItem, setSelectedItem] = useState("choisit une categorie");
   const [info, setInfo] = useState({
     nom: "",
@@ -28,8 +29,8 @@ export const AddPersonnelForm = () => {
     setInfo({ ...info, categorie: e.target.text });
   };
   const handleSave = () => {
-    console.log(info);
     dispatch(addPersonnel(info));
+    history.push("/grh-dashboard")
   };
   const handleDateChange = (d) => {
     setInfo({ ...info, dateDeNaissance: d });
@@ -152,7 +153,7 @@ export const AddPersonnelForm = () => {
           </Form.Group>
         </Form.Row>
 
-        <Button variant="primary" onClick={handleSave}>
+        <Button variant="primary"  disabled={disableSave} onClick={handleSave}>
           Submit
         </Button>
       </Form>
