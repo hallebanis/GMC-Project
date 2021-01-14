@@ -7,11 +7,11 @@ const ClientSchema = new schema({
   adresse: { type: String },
   civilité: { type: String },
   email: { type: String, required: true },
-  tel: { type: Number },
-  commandes: [
+  tel: { type: String },
+  commandesID: [
     {
       type: mongoose.Types.ObjectId,
-      ref: "CommandeVente",
+      ref: "commandeVente",
     },
   ],
 });
