@@ -28,7 +28,7 @@ export const loadPersonnel = () => (dispatch) => {
 export const addPersonnel = (personnel) => (dispatch) => {
   tokenSet();
   axios
-    .post("/personnel", personnel)
+    .post("/api/personnel", personnel)
     .then((res) => {
       dispatch({
         type: ADD_PERSONNEL_SUCCESS,
