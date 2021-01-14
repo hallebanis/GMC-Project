@@ -32,8 +32,8 @@ export const GrhDashboard = () => {
         </Col>
         <Col></Col>
       </Row>
-      <ContratForm />
-    </Container>
+{/*       <ContratForm />
+ */}    </Container>
   );
 };
 export default GrhDashboard;
