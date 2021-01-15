@@ -1,13 +1,22 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { Container, Row, Col } from "react-bootstrap";
+import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
+import MainNavBar from "../../components/admin/MainNavBar";
 
 const UserDashboard = () => {
-  const auth = useSelector((state) => state.auth);
-
   return (
-    <div>
-      <p>This is {auth.user ? "connected" : "user"} Dashboard</p>
-    </div>
+    <Container fluid>
+      <Row>
+        <Col>
+          <MainNavBar />
+        </Col>
+      </Row>
+      <Row>
+        <Col md="auto">
+          <AdminDashboardSidebar />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

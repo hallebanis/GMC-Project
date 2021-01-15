@@ -38,7 +38,7 @@ export const AddPersonnelForm = ({ history }) => {
   };
   return (
     <div>
-      <Form className ="form">
+      <Form className="form">
         <Form.Row>
           <Form.Group as={Col} controlId="formGridNom">
             <Form.Label>Nom</Form.Label>
@@ -157,8 +157,15 @@ export const AddPersonnelForm = ({ history }) => {
         <Button
           variant="primary"
           /*  disabled={disableSave} */ onClick={handleSave}
-        > <Link to="/grh-dashboard/addpersonnel/contrat" style={{color:"white"}}>Next</Link>
-          
+        >
+          {" "}
+          <Link
+            to="/grh-dashboard/addpersonnel/contrat"
+            style={{ color: "white" }}
+          >
+            Next
+          </Link>
+         
         </Button>
       </Form>
     </div>

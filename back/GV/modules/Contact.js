@@ -7,7 +7,7 @@ const ContactSchema = new schema({
   fonction: { type: String },
   email: { type: String },
   tel: { type: String },
-  entrepriseId: { type: Schema.Types.ObjectId, ref: "Entreprise" },
+  entrepriseId: { type: mongoose.Types.ObjectId, ref: "entreprise" },
 });
 
 module.exports = mongoose.model("contact", ContactSchema);
