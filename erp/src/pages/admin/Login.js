@@ -30,10 +30,10 @@ const Login = ({ history }) => {
           history.push(`/admin-dashboard`);
           break;
         case "resVente":
-          history.push("/ga-dashboard");
+          history.push("/gv-dashboard");
           break;
         case "resAchat":
-          history.push("/gv-dashboard");
+          history.push("/ga-dashboard");
           break;
         case "GRH":
           history.push("/grh-dashboard");
