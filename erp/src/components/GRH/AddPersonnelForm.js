@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Form, Button, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import { Select } from "./DatePicker";
 import { addPersonnel } from "../../actions/GRH/personnelActions";
+import { Link } from "react-router-dom";
 
 export const AddPersonnelForm = ({ history }) => {
   const [disableSave, setDisableSave] = useState(true);
@@ -37,7 +38,7 @@ export const AddPersonnelForm = ({ history }) => {
   };
   return (
     <div>
-      <Form className ="form">
+      <Form className="form">
         <Form.Row>
           <Form.Group as={Col} controlId="formGridNom">
             <Form.Label>Nom</Form.Label>
@@ -153,14 +154,18 @@ export const AddPersonnelForm = ({ history }) => {
           </Form.Group>
         </Form.Row>
 
-
         <Button
           variant="primary"
           /*  disabled={disableSave} */ onClick={handleSave}
         >
-
-
-          Submit
+          {" "}
+          <Link
+            to="/grh-dashboard/addpersonnel/contrat"
+            style={{ color: "white" }}
+          >
+            Next
+          </Link>
+         
         </Button>
       </Form>
     </div>
