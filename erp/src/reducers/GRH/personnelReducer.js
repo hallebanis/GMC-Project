@@ -18,6 +18,7 @@ import {
 } from "../../actions/GRH/types";
 
 const initState = {
+  contrat: [],
   personnel: [],
   errors: null,
 };
@@ -105,9 +106,7 @@ const personnelReducer = (state = initState, action) => {
     case DELETE_CONTRAT_SUCCESS:
       return {
         ...state,
-        contrat: state.contrat.filter(
-          (el) => el._id !== action.payload._id
-        ),
+        contrat: state.contrat.filter((el) => el._id !== action.payload._id),
         errors: null,
       };
     case DELETE_CONTRAT_FAILED:

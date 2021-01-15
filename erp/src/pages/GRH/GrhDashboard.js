@@ -19,11 +19,20 @@ export const GrhDashboard = () => {
                 elements: [
                   {
                     title: "Add Personnel",
-                    link : "/grh-dashboard/addpersonnel",
+                    link: "/grh-dashboard/addpersonnel",
                   },
                   {
                     title: "personnel list",
                     link: "/grh-dashboard/listpersonnel",
+                  },
+                ],
+              },
+              {
+                categorie: "Contrat",
+                elements: [
+                  {
+                    title: "Add Contrat",
+                    link: "/grh-dashboard/contrat",
                   },
                 ],
               },

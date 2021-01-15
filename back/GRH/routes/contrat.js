@@ -3,7 +3,7 @@ const router = express.Router();
 const newContrat = require("../modules/contrat");
 const authMiddleware = require("../../helpers/authMiddleware");
 
-router.post("/contrat",authMiddleware, (req, res) => {
+router.post("/contrat", authMiddleware, (req, res) => {
   const { dateFin, dateDebut, salaireDeBase, typeContrat } = req.body;
   let contratModel = new newContrat({
     dateDebut,
@@ -14,10 +14,10 @@ router.post("/contrat",authMiddleware, (req, res) => {
   contratModel
     .save()
     .then((contrat) => res.status(200).json(contrat))
-    .catch((err) => res.status(400).json(err));
+    .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 
-router.get("/contrat", authMiddleware,(req, res) => {
+router.get("/contrat", authMiddleware, (req, res) => {
   newContrat.find((err, doc) => {
     if (err) {
       res.status(400).json({ errors: [{ msg: "server ERROR" }] });
@@ -27,7 +27,7 @@ router.get("/contrat", authMiddleware,(req, res) => {
   });
 });
 
-router.delete("/contrat/:id",authMiddleware, (req, res) => {
+router.delete("/contrat/:id", authMiddleware, (req, res) => {
   const contId = req.params.id;
   newContrat
     .findByIdAndDelete(contId)
@@ -37,7 +37,7 @@ router.delete("/contrat/:id",authMiddleware, (req, res) => {
     );
 });
 
-router.put("/contrat/:id",authMiddleware, (req, res) => {
+router.put("/contrat/:id", authMiddleware, (req, res) => {
   const contratId = req.params.id;
   const { dateDebut, dateFin, salaireDeBase, typeContrat } = req.body;
   let contratModel = new newContrat({
@@ -68,4 +68,3 @@ router.put("/contrat/:id",authMiddleware, (req, res) => {
     );
 });
 module.exports = router;
-
