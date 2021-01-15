@@ -1,4 +1,6 @@
 import {
+  ADD_ROLE_FAILED,
+  ADD_ROLE_SUCCESS,
   ADD_USER_FAILED,
   ADD_USER_SUCCESS,
   DELETE_ROLE_FAILED,
@@ -16,14 +18,7 @@ import {
 } from "../../actions/admin/types";
 
 let initState = {
-  users: [
-    {
-      login: "",
-      password: "",
-      personnelId: {},
-      role: {},
-    },
-  ],
+  users: [],
   errors: null,
 };
 
@@ -68,6 +63,7 @@ const usersReducer = (state = initState, action) => {
         users: state.users.filter((elm) => elm._id !== action.payload._id),
         errors: null,
       };
+    case ADD_ROLE_FAILED:
     case MODIFY_ROLE_FAILED:
     case DELETE_ROLE_FAILED:
     case ADD_USER_FAILED:
@@ -99,6 +95,11 @@ const usersReducer = (state = initState, action) => {
           }
           return elm;
         }),
+      };
+    case ADD_ROLE_SUCCESS:
+      return {
+        ...state,
+        roles: [...state.roles, action.payload],
       };
     default:
       return state;

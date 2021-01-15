@@ -9,6 +9,11 @@ import UsersListPage from "./pages/admin/UsersListPage";
 import UserDetailsPage from "./pages/admin/UserDetailsPage";
 import AddUser from "./pages/admin/AddUser";
 import RolePage from "./pages/admin/RolePage";
+import GaDashboard from "./pages/GA/GaDashboard";
+import GvDashboard from "./pages/GV/GvDashboard";
+import GrhDashboard from "./pages/GRH/GrhDashboard";
+import AddPersonnelPage from "./pages/GRH/AddPersonnelPage";
+import { ListPersonnelPage } from "./pages/GRH/ListPersonnelPage";
 
 function App() {
   return (
@@ -23,6 +28,16 @@ function App() {
         <Route exact path="/admin-dashboard/adduser" component={AddUser} />
         <Route exact path="/user/:id" component={UserDetailsPage} />
         <Route exact path="/admin-dashboard/roles" component={RolePage} />
+        <Route exact path="/grh-dashboard" component={GrhDashboard} />
+        <Route exact path="/ga-dashboard" component={GaDashboard} />
+        <Route exact path="/gv-dashboard" component={GvDashboard} />
+        <Route exact path="/grh-dashboard/listpersonnel" component={ListPersonnelPage} />
+
+        <Route
+          exact
+          path="/grh-dashboard/addpersonnel"
+          component={AddPersonnelPage}
+        />
       </Switch>
     </Router>
   );

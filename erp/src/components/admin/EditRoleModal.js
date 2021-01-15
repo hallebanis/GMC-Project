@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, FormControl, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { modifyUser } from "../../actions/admin/usersActions";
+import { modifyRole, modifyUser } from "../../actions/admin/usersActions";
 
 const EditRoleModal = ({ role, info, setInfo }) => {
   const [show, setShow] = useState(false);
@@ -12,12 +12,12 @@ const EditRoleModal = ({ role, info, setInfo }) => {
     setInfo({ id: "", titre: "" });
   };
   const handleSave = () => {
-    dispatch(modifyUser(info));
+    dispatch(modifyRole(info));
     handleClose();
   };
   const handleShow = () => {
     setShow(true);
-    setInfo(role);
+    setInfo({ id: role._id, titre: role.titre });
   };
   const handleChange = (e) => {
     setInfo({ ...info, titre: e.target.value });

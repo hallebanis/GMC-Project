@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
 import { modifyUser } from "../../actions/admin/usersActions";
 import RoleDropDown from "./RoleDropDown";
 import { useDispatch } from "react-redux";
@@ -51,11 +52,11 @@ const User = ({ user, changeMaid }) => {
     if (e.target.value === "") setInfo({ ...info, password: "******" });
   };
   return (
-    <Form className="input-group">
-      <label>{`ID : ${user._id}`}</label>
-      <label>{`Nom & Prenom : ${user.personnelId.nom} ${user.personnelId.prenom}`}</label>
+    <Form>
+      <h5>{`ID : ${user._id}`}</h5>
+      <h5>{`Nom & Prenom : ${user.personnelId.nom} ${user.personnelId.prenom}`}</h5>
       <label>Login:</label>
-      <input
+      <FormControl
         className="form-control"
         type="text"
         id="txtLogin"
@@ -63,9 +64,9 @@ const User = ({ user, changeMaid }) => {
         value={info.login}
         disabled={!enableChanges}
         onChange={handleInfoChange}
-      ></input>
+      ></FormControl>
       <label>Password:</label>
-      <input
+      <FormControl
         className="form-control"
         type="password"
         id="txtPassword"
@@ -77,14 +78,17 @@ const User = ({ user, changeMaid }) => {
           setInfo({ ...info, password: "" });
         }}
         onBlur={handlePasswordFocusOut}
-      ></input>
-      <RoleDropDown
-        info={info}
-        dropDownMsg={roleTitle ? roleTitle : "aucun"}
-        setRoleTitle={setRoleTitle}
-        setInfo={setInfo}
-        disableChange={!enableChanges}
-      />
+      ></FormControl>
+      <Form.Group>
+        <RoleDropDown
+          info={info}
+          dropDownMsg={roleTitle ? roleTitle : "aucun"}
+          setRoleTitle={setRoleTitle}
+          setInfo={setInfo}
+          disableChange={!enableChanges}
+        />
+      </Form.Group>
+
       <Button
         name="changeButton"
         hidden={enableChanges}

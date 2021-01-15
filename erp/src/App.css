@@ -10,3 +10,6 @@
 .successMessage {
   color: forestgreen;
 }
+.warningMessage {
+  color: darkgoldenrod;
+}

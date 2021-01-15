@@ -29,6 +29,15 @@ const Login = ({ history }) => {
         case "admin":
           history.push(`/admin-dashboard`);
           break;
+        case "resVente":
+          history.push("/ga-dashboard");
+          break;
+        case "resAchat":
+          history.push("/gv-dashboard");
+          break;
+        case "GRH":
+          history.push("/grh-dashboard");
+          break;
         default:
           break;
       }
@@ -62,6 +71,9 @@ const Login = ({ history }) => {
       <Button variant="primary" type="submit" onClick={handleLogin}>
         Submit
       </Button>
+      {auth.errors
+        ? auth.errors.map((el) => <h3 className="errorTitle">{el.msg}</h3>)
+        : null}
     </Form>
   );
 };

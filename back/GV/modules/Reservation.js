@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
 const ReservationSchema = new schema({
-  dateReservation: { type: Date, required: true, default: date.now },
+  dateReservation: { type: Date, required: true, default: Date.now },
   reservationId: [
     {
       type: mongoose.Types.ObjectId,
-      ref: "LigneReservation",
+      ref: "ligneReservation",
     },
   ],
 });
