@@ -5,7 +5,7 @@ const ClientSchema = new schema({
   nom: { type: String, required: true },
   prenom: { type: String, required: true },
   adresse: { type: String },
-  civilité: { type: String },
+  civilite: { type: String },
   email: { type: String, required: true },
   tel: { type: String },
   commandesID: [
