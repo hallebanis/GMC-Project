@@ -154,18 +154,10 @@ export const AddPersonnelForm = ({ history }) => {
           </Form.Group>
         </Form.Row>
 
-        <Button
-          variant="primary"
-          /*  disabled={disableSave} */ onClick={handleSave}
-        >
-          {" "}
-          <Link
-            to="/grh-dashboard/addpersonnel/contrat"
-            style={{ color: "white" }}
-          >
+        <Button variant="primary">
+          <Link to="/grh-dashboard/contrat" style={{ color: "white" }}>
             Next
           </Link>
-         
         </Button>
       </Form>
     </div>
