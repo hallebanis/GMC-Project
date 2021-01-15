@@ -18,14 +18,7 @@ import {
 } from "../../actions/admin/types";
 
 let initState = {
-  users: [
-    {
-      login: "",
-      password: "",
-      personnelId: {},
-      role: {},
-    },
-  ],
+  users: [],
   errors: null,
 };
 
