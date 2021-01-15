@@ -4,7 +4,7 @@ const schema = mongoose.Schema;
 const CommandeSchema = new schema({
   date: {
     type: Date,
-    default: date.now,
+    default: Date.now,
     required: true,
   },
   total: { type: Number },
