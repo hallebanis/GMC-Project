@@ -14,19 +14,14 @@ export const ContratForm = () => {
           <Form.Label>
             date Debut : <Select name="dateDebut" />
           </Form.Label>
-          <Form.Control
-            onChange={handleChange}
-            name="dateDebut"
-            type="text"
-            placeholder=""
-          />
+          
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
           <Form.Label>
             date Fin : <Select name="dateFin" />
           </Form.Label>
-          <Form.Control onChange={handleChange} type="text" placeholder="" />
+          
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Label>salaire de base</Form.Label>

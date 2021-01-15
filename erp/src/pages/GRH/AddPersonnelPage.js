@@ -4,33 +4,32 @@ import { loadPersonnel } from "../../actions/GRH/personnelActions";
 import { AddPersonnelForm } from "../../components/GRH/AddPersonnelForm";
 import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
 
-
-const AddPersonnelPage = ({history}) => {
+const AddPersonnelPage = ({ history }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadPersonnel());
   }, []);
   return (
     <div>
-       <AdminDashboardSidebar
-            color="blue"
-            linkList={[
+      <AdminDashboardSidebar
+        color="blue"
+        linkList={[
+          {
+            categorie: "Personnel",
+            elements: [
               {
-                categorie: "Personnel",
-                elements: [
-                  {
-                    title: "Add Personnel",
-                    link: "/grh-dashboard/addpersonnel",
-                  },
-                  {
-                    title:"personnel list",
-                    link : "/grh-dashboard/listpersonnel"
-                  }
-                ],
+                title: "Add Personnel",
+                link: "/grh-dashboard/addpersonnel",
               },
-            ]}
-          />
-      <AddPersonnelForm history={history}/>
+              {
+                title: "personnel list",
+                link: "/grh-dashboard/listpersonnel",
+              },
+            ],
+          },
+        ]}
+      />
+      <AddPersonnelForm history={history} />
     </div>
   );
 };

@@ -21,7 +21,9 @@ export const DiplomeForm = () => {
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Label>années de scolarité : <Select name="anneesDeScolarite"/></Form.Label>
+          <Form.Label>
+            années de scolarité : <Select name="anneesDeScolarite" />
+          </Form.Label>
           <Form.Control
             onChange={handleChange}
             type="text"
