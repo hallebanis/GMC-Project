@@ -19,12 +19,12 @@ export const GrhDashboard = () => {
                 elements: [
                   {
                     title: "Add Personnel",
-                    link: "/grh-dashboard/addpersonnel",
+                    link : "/grh-dashboard/addpersonnel",
                   },
                   {
-                    title:"personnel list",
-                    link : "/grh-dashboard/listpersonnel"
-                  }
+                    title: "personnel list",
+                    link: "/grh-dashboard/listpersonnel",
+                  },
                 ],
               },
             ]}
@@ -32,8 +32,9 @@ export const GrhDashboard = () => {
         </Col>
         <Col></Col>
       </Row>
-{/*       <ContratForm />
- */}    </Container>
+      {/*       <ContratForm />
+       */}{" "}
+    </Container>
   );
 };
 export default GrhDashboard;

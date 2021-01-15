@@ -3,6 +3,10 @@ import {
   LOAD_PERSONNEL_FAILED,
   ADD_PERSONNEL_SUCCESS,
   ADD_PERSONNEL_FAILED,
+  DELETE_PERSONNEL_SUCCESS,
+  DELETE_PERSONNEL_FAILED,
+  EDIT_PERSONNEL_SUCCESS,
+  EDIT_PERSONNEL_FAILED
 } from "../../actions/GRH/types";
 
 const initState = {
@@ -36,6 +40,36 @@ const personnelReducer = (state = initState, action) => {
         personnel: state.personnel,
         errors: action.payload,
       };
+    case DELETE_PERSONNEL_SUCCESS:
+      return {
+        ...state,
+        personnel: state.personnel.filter(
+          (el) => el._id !== action.payload._id
+        ),
+        errors: null,
+      };
+    case DELETE_PERSONNEL_FAILED:
+      return {
+        ...state,
+        personnel: state.personnel,
+        errors: action.payload,
+      };
+     case EDIT_PERSONNEL_SUCCESS:
+      return {
+        ...state,
+        personnel: state.personnel.map((el) =>{
+          if (el._id===action.payload){
+            return action.payload
+          }
+          return el
+        } ),
+      }; 
+      case EDIT_PERSONNEL_FAILED:
+        return {
+          ...state,
+          personnel: state.personnel,
+          errors:action.payload
+        }
     default:
       return state;
   }

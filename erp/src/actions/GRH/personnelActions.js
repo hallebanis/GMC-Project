@@ -49,13 +49,14 @@ export const addPersonnel = (personnel) => (dispatch) => {
 export const editPersonnel = (personnel) => (dispatch) => {
   tokenSet();
   axios
-    .put("/api/personnel", personnel)
+    .put(`/api/personnel`, personnel)
     .then((res) => {
       dispatch({
         type: EDIT_PERSONNEL_SUCCESS,
         payload: res.data,
       });
     })
+   
     .catch((err) => {
       dispatch({
         type: EDIT_PERSONNEL_FAILED,
@@ -64,10 +65,10 @@ export const editPersonnel = (personnel) => (dispatch) => {
     });
 };
 
-export const deletePersonnel = (personnel) => (dispatch) => {
+export const deletePersonnel = (id) => (dispatch) => {
   tokenSet();
   axios
-    .delete("/api/personnel", personnel)
+    .delete("/api/personnel/"+ id)
     .then((res) => {
       dispatch({
         type: DELETE_PERSONNEL_SUCCESS,

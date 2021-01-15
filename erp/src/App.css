@@ -5,11 +5,14 @@
   color: white;
 }
 .navSideBar {
-  height: 90vh;
+  height: 20vh;
 }
 .successMessage {
   color: forestgreen;
 }
 .warningMessage {
   color: darkgoldenrod;
+}
+.form {
+  border: 8px solid black;
 }
