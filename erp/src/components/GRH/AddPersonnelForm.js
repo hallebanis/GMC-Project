@@ -31,7 +31,6 @@ export const AddPersonnelForm = ({ history }) => {
   };
   const handleSave = () => {
     dispatch(addPersonnel(info));
-    history.push("/grh-dashboard");
   };
   const handleDateChange = (d) => {
     setInfo({ ...info, dateDeNaissance: d });
@@ -154,18 +153,8 @@ export const AddPersonnelForm = ({ history }) => {
           </Form.Group>
         </Form.Row>
 
-        <Button
-          variant="primary"
-          /*  disabled={disableSave} */ onClick={handleSave}
-        >
-          {" "}
-          <Link
-            to="/grh-dashboard/addpersonnel/contrat"
-            style={{ color: "white" }}
-          >
-            Next
-          </Link>
-         
+        <Button variant="primary" onClick={handleSave}>
+          Save
         </Button>
       </Form>
     </div>
