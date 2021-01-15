@@ -43,11 +43,7 @@ function App() {
           path="/grh-dashboard/addpersonnel"
           component={AddPersonnelPage}
         />
-        <Route
-          exact
-          path="/grh-dashboard/addpersonnel/contrat"
-          component={ContratForm}
-        />
+        <Route exact path="/grh-dashboard/contrat" component={ContratForm} />
 
         <Route
           exact
