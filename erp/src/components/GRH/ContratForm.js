@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addContrat } from "../../actions/GRH/personnelActions";
 import { Select } from "./DatePicker";
+import PersonnelDropDown from "./PersonnelDropDown";
 
 export const ContratForm = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,9 @@ export const ContratForm = () => {
     typeContrat: "",
     idPersonnel: "600092b033fc101f446d97ad",
   });
+  const handleSelect=(id)=>{
+    setInfo({...info ,idPersonnel:id})
+  }
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
   };
@@ -22,12 +26,13 @@ export const ContratForm = () => {
   const handleDate = (a) => {
     setInfo({ ...info, dateFin: a });
   };
-  const handleSave = () => {
-    dispatch(addContrat(info));
+  const handleSave = () => { console.log(typeof(info.dateDebut))
+   /*  dispatch(addContrat(info)); */
   };
   return (
-    <div>
-      <Form>
+  
+      <Form> 
+        <PersonnelDropDown onPersonnelChange={handleSelect}> </PersonnelDropDown>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>
             date Debut :{" "}
@@ -65,6 +70,7 @@ export const ContratForm = () => {
           Submit
         </Button>
       </Form>
-    </div>
+     
+    
   );
 };

@@ -38,10 +38,13 @@ function App() {
         <Route exact path="/gv-dashboard" component={GvDashboard} />
         <Route exact path="/personnel/:id" component={PersonnelDetailsPage} />
 
+
+
         <Route exact path="/grh-dashboard/addpersonnel" component={AddPersonnelPage} />
         <Route exact path="/grh-dashboard/addpersonnel/contrat" component={ContratForm} />
         <Route exact path="/grh-dashboard/listpersonnel" component={ListPersonnelPage}/>
  
+
         <Route exact path="/gv-dashboard/addclient" component={AddClient} />
 
         
