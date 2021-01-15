@@ -37,7 +37,18 @@ router.put("/pointage/:id",authMiddleware, (req, res) => {
   let pointageModel = new newPointage({ date});
   newPointage
     .findByIdAndUpdate(pointId, { date})
-    .then((pointage) => res.status(200).json(pointage))
-    .catch((err) => res.status.json({ errors: [{ msg: "server ERROR" }] }));
+    .then(() => {
+      newPointage
+        .findById(pointId)
+        .then((pointage) => {
+          res.status(200).json(pointage);
+        })
+        .catch((err) =>
+          res.status(400).json({ errors: [{ msg: "server ERROR" }] })
+        );
+    })
+    .catch((err) =>
+      res.status(400).json({ errors: [{ msg: "server ERROR" }] })
+    );
 });
 module.exports = router;

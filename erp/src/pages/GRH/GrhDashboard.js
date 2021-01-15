@@ -19,7 +19,7 @@ export const GrhDashboard = () => {
                 elements: [
                   {
                     title: "Add Personnel",
-                    link: "/grh-dashboard/addpersonnel",
+                    link : "/grh-dashboard/addpersonnel",
                   },
                   {
                     title: "personnel list",

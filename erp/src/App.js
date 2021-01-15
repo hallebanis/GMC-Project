@@ -13,7 +13,12 @@ import GaDashboard from "./pages/GA/GaDashboard";
 import GvDashboard from "./pages/GV/GvDashboard";
 import GrhDashboard from "./pages/GRH/GrhDashboard";
 import AddPersonnelPage from "./pages/GRH/AddPersonnelPage";
+import { PersonnelDetailsPage } from "./pages/GRH/PersonnelDetailsPage";
 import { ListPersonnelPage } from "./pages/GRH/ListPersonnelPage";
+
+import { ContratForm } from "./components/GRH/ContratForm";
+
+import AddClient from "./pages/GV/AddClient";
 
 function App() {
   return (
@@ -31,13 +36,21 @@ function App() {
         <Route exact path="/grh-dashboard" component={GrhDashboard} />
         <Route exact path="/ga-dashboard" component={GaDashboard} />
         <Route exact path="/gv-dashboard" component={GvDashboard} />
-        <Route exact path="/grh-dashboard/listpersonnel" component={ListPersonnelPage} />
 
+        <Route exact path="/personnel/:id" component={PersonnelDetailsPage} />
         <Route
           exact
           path="/grh-dashboard/addpersonnel"
           component={AddPersonnelPage}
         />
+        <Route exact path="/grh-dashboard/contrat" component={ContratForm} />
+
+        <Route
+          exact
+          path="/grh-dashboard/listpersonnel"
+          component={ListPersonnelPage}
+        />
+        <Route exact path="/gv-dashboard/addclient" component={AddClient} />
       </Switch>
     </Router>
   );

@@ -3,7 +3,7 @@ const router = express.Router();
 const newAbsence = require("../modules/absence");
 const authMiddleware = require("../../helpers/authMiddleware");
 
-router.post("/absence", authMiddleware,(req, res) => {
+router.post("/absence", authMiddleware ,(req, res) => {
   const { dateDepart, dateReprise } = req.body;
   let absenceModel = new newAbsence({ dateDepart, dateReprise });
   absenceModel
@@ -37,7 +37,19 @@ router.put("/absence/:id",authMiddleware, (req, res) => {
   let absenceModel = new newAbsence({ dateDepart, dateReprise });
   newAbsence
     .findByIdAndUpdate(abId, { dateDepart, dateReprise })
-    .then((absence) => res.status(200).json(absence))
-    .catch((err) => res.status.json({ errors: [{ msg: "server ERROR" }] }));
+    .then(() => {
+      newAbsence
+        .findById(abId)
+        .then((absence) => {
+          res.status(200).json(absence);
+        })
+        .catch((err) =>
+          res.status(400).json({ errors: [{ msg: "server ERROR" }] })
+        );
+    })
+    .catch((err) =>
+      res.status(400).json({ errors: [{ msg: "server ERROR" }] })
+    );
 });
 module.exports = router;
+ 

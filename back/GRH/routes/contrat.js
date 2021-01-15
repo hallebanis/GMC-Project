@@ -53,8 +53,19 @@ router.put("/contrat/:id",authMiddleware, (req, res) => {
       salaireDeBase,
       typeContrat,
     })
-    .then((contrat) => res.status(200).json(contrat))
-    .catch((err) => res.status.json({ errors: [{ msg: "server ERROR" }] }));
+    .then(() => {
+      newContrat
+        .findById(contratId)
+        .then((contrat) => {
+          res.status(200).json(contrat);
+        })
+        .catch((err) =>
+          res.status(400).json({ errors: [{ msg: "server ERROR" }] })
+        );
+    })
+    .catch((err) =>
+      res.status(400).json({ errors: [{ msg: "server ERROR" }] })
+    );
 });
 module.exports = router;
 

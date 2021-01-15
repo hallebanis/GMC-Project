@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const GvDashboard = () => {
   return (
     <div>
-      <h1> gestion vente Dashboard</h1>
+      <Link to="gv-dashboard/addclient">Add Client</Link>
     </div>
   );
 };

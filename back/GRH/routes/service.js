@@ -37,7 +37,18 @@ router.put("/service/:id",authMiddleware, (req, res) => {
   let serviceModel = new newService({ nom,responsable } );
   newService
     .findByIdAndUpdate(serId, { nom,responsable})
-    .then((service) => res.status(200).json(service))
-    .catch((err) => res.status.json({ errors: [{ msg: "server ERROR" }] }));
+    .then(() => {
+      newService
+        .findById(serId)
+        .then((service) => {
+          res.status(200).json(service);
+        })
+        .catch((err) =>
+          res.status(400).json({ errors: [{ msg: "server ERROR" }] })
+        );
+    })
+    .catch((err) =>
+      res.status(400).json({ errors: [{ msg: "server ERROR" }] })
+    );
 });
 module.exports = router;
