@@ -30,7 +30,7 @@ const AddPersonnelPage = ({ history }) => {
         ]}
       />
       <AddPersonnelForm history={history} />
-    </div>
+  </div>
   );
 };
 
