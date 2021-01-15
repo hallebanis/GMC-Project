@@ -42,7 +42,6 @@ router.delete('/deleteClient/:id' , (req,res) =>{
     newClient.findByIdAndDelete(req.params.id)
     .then (() => res.json ({msg: 'Client Deleted'}))
     .catch(err => console.log(err.message))
-
 });
 
 module.exports = router;
