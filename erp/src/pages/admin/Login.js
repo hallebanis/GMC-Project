@@ -71,6 +71,9 @@ const Login = ({ history }) => {
       <Button variant="primary" type="submit" onClick={handleLogin}>
         Submit
       </Button>
+      {auth.errors
+        ? auth.errors.map((el) => <h3 className="errorTitle">{el.msg}</h3>)
+        : null}
     </Form>
   );
 };

@@ -25,7 +25,7 @@ const UserList = ({ userList, history }) => {
         </tr>
       </thead>
       <tbody>
-        {userList &&
+        {userList.length > 0 &&
           userList.map((elm, i) => (
             <tr id={i}>
               <td id={`${elm._id}${i}`}>
