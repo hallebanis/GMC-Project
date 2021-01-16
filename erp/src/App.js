@@ -23,7 +23,6 @@ import AdminPrivateRoute from "./routes/authentification/AdminPrivateRoute";
 
 import { AddServicePage } from "./pages/GRH/AddServicePage";
 
-
 function App() {
   return (
     <Router>
@@ -59,8 +58,11 @@ function App() {
         />
 
         <Route exact path="/gv-dashboard/addclient" component={AddClient} />
-        <Route exact path="/grh-dashboard/AddService" component={AddServicePage} />
-
+        <Route
+          exact
+          path="/grh-dashboard/AddService"
+          component={AddServicePage}
+        />
       </Switch>
     </Router>
   );

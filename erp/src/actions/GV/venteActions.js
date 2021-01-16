@@ -29,9 +29,9 @@ export const addClient = (client) => (dispatch) => {
 };
 
 //Get Client Action
-export const getClient = (client) => (dispatch) => {
+export const getClient = () => (dispatch) => {
   axios
-    .post("/api/clients", client)
+    .get("/api/clients")
     .then((res) =>
       dispatch({
         type: GET_CLIENT_SUCCESS,
@@ -49,7 +49,7 @@ export const getClient = (client) => (dispatch) => {
 //Update Client Action
 export const updateClient = (client) => (dispatch) => {
   axios
-    .post("/api/updateClient/:id", client)
+    .put("/api/updateClient/", client)
     .then((res) =>
       dispatch({
         type: UPDATE_CLIENT_SUCCESS,
@@ -65,9 +65,9 @@ export const updateClient = (client) => (dispatch) => {
 };
 
 //Delete Client Action
-export const deleteClient = (client) => (dispatch) => {
+export const deleteClient = (id) => (dispatch) => {
   axios
-    .post("/api/deleteClient/:id", client)
+    .delete(`/api/deleteClient/${id}`)
     .then((res) =>
       dispatch({
         type: DELETE_CLIENT_SUCCESS,

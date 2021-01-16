@@ -49,4 +49,4 @@ const FactureSchema = new schema({
   },
 });
 
-module.exports = mongoose.model("Facture", FactureSchema);
+module.exports = mongoose.model("facture", FactureSchema);

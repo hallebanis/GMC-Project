@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
-const ProduitSchema = new schema({
+const ProduitAchatSchema = new schema({
   reference: {
     type: String,
     required: true,
@@ -29,4 +29,4 @@ const ProduitSchema = new schema({
     ref: "tva",
   },
 });
-module.exports = mongoose.model("Produit", ProduitSchema);
+module.exports = mongoose.model("produit", ProduitAchatSchema);

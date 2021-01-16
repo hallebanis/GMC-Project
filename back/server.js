@@ -49,7 +49,8 @@ app.use("/api", require("./GA/routes/compteBancaireRoute"));
 app.use("/api", require("./GA/routes/factureRoute"));
 app.use("/api", require("./GA/routes/fournisseurRoute"));
 app.use("/api", require("./GA/routes/ligneAchatRoute"));
-//app.use("/api", require("./GA/routes/lReservation"));
+//app.use("/api", require("./GA/routes/ligneReservationRoute"));
+//app.use("/api", require("./GA/routes/produitRoute"));
 //GV Routes
 app.use("/api", require("./GV/routes/client"));
 app.use("/api", require("./GV/routes/commandeVente"));

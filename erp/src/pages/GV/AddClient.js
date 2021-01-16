@@ -1,11 +1,11 @@
 import React from "react";
 import AddClientForm from "../../components/GV/AddClientForm";
 
-const AddClient = () => {
+const AddClient = ({ history }) => {
   return (
     <div>
       <h1>addclient</h1>
-      <AddClientForm />
+      <AddClientForm history={history} />
     </div>
   );
 };

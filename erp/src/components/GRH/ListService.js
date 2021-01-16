@@ -8,10 +8,9 @@ export const ListService = () => {
     dispatch(loadService());
   }, []);
   const personnel = useSelector((state) => state.personnel);
-  const [test, setTest] = useState(personnel.service);
 
   /*     const {service}=personnel;
-   */ const dispatch = useDispatch();
+   */
 
   return (
     <div>

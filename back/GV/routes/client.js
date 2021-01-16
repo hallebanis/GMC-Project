@@ -5,7 +5,7 @@ const newClient = require("../modules/Client");
 //Route Create a client
 //path: http://localhost:5000/api/AddClient
 router.post("/AddClient", (req, res) => {
-  const { nom, prenom, adresse, civilite, email, tel, commandesID } = req.body;
+  const { nom, prenom, adresse, civilite, email, tel } = req.body;
   let clientModel = new newClient({
     nom,
     prenom,
@@ -13,7 +13,6 @@ router.post("/AddClient", (req, res) => {
     civilite,
     email,
     tel,
-    commandesID,
   });
   clientModel
     .save()
@@ -32,10 +31,11 @@ router.get("/clients", (req, res) => {
 
 //Route Update Client
 //path: http://localhost:5000/api/updateClient/:id
-router.put("/updateClient/:id", (req, res) => {
+router.put("/updateClient/", (req, res) => {
+  const { id, nom, prenom, adresse, civilite, email, tel } = req.body;
   newClient.findByIdAndUpdate(
-    req.params.id,
-    { $set: { ...req.body } },
+    id,
+    { nom, prenom, adresse, civilite, email, tel },
     (err, data) => {
       if (err) {
         throw err;
