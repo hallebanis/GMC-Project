@@ -3,6 +3,7 @@ import {
   LOGIN_FAILED,
   REGISTRATION_FAILED,
   REGISTRATION_SUCCESS,
+  LOGOUT,
 } from "../../actions/authentification/types";
 let inState = {
   token: localStorage.getItem("token"),
@@ -37,6 +38,11 @@ const authReducer = (state = inState, action) => {
         user: null,
         isAuth: false,
         errors: action.payload,
+      };
+    case LOGOUT:
+      localStorage.removeItem("token");
+      return {
+        auth: { isAuth: false, user: null, errors: null },
       };
     default:
       return state;

@@ -16,7 +16,7 @@ export const ContratForm = () => {
     dateFin: "",
     salaireDeBase: "",
     typeContrat: "",
-    idPersonnel: "600092b033fc101f446d97ad",
+    idPersonnel: "",
   });
   const handleSelect = (id) => {
     setInfo({ ...info, idPersonnel: id });
