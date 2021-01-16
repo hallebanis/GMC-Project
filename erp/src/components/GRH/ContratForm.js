@@ -5,7 +5,6 @@ import { addContrat, loadContrat } from "../../actions/GRH/personnelActions";
 import { ListService } from "../../pages/GRH/ListService";
 import { Select } from "./DatePicker";
 import PersonnelDropDown from "./PersonnelDropDown";
-import { ServiceForm } from "./ServiceForm";
 
 export const ContratForm = () => {
   const dispatch = useDispatch();
