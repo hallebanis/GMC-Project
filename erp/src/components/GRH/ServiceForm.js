@@ -1,3 +1,4 @@
+import { MDBInput } from "mdbreact";
 import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
@@ -23,20 +24,19 @@ export const ServiceForm = () => {
     dispatch(addService(info));
   };
   return (
-    <div>
+    <div >
       <Form>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            onChange={handleChange}
-            name="nom"
-            type="text"
-            placeholder=""
-          />
-        </Form.Group>
+        <MDBInput
+          onChange={handleChange}
+          name="nom"
+          type="textarea"
+          label="Name"
+          rows="2"
+          icon="pencil-alt"
+        />
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Label>Responsable</Form.Label>
+          <Form.Label>Responsable</Form.Label> 
           <PersonnelDropDown
             onPersonnelChange={handleResponsableChange}
           ></PersonnelDropDown>
@@ -46,7 +46,6 @@ export const ServiceForm = () => {
           Submit
         </Button>
       </Form>
-      
     </div>
   );
 };

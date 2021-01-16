@@ -200,9 +200,9 @@ export const loadService = ()=>(dispatch)=>{
   })
 };
 
-export const editService = (service)=>(dispatch)=>{
+export const editService = (service,id)=>(dispatch)=>{
   tokenSet();
-  axios.put("/api/service" , service).then((res)=>{
+  axios.put("/api/service/"+id , service).then((res)=>{
     dispatch({
       type:EDIT_SERVICE_SUCCESS,
       payload :res.data,

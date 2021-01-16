@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../res/css/part.css";
 
-const Home = () => {
+ const Home = () => {
   return (
     <div className="home-main container .container-s .container-lg .container-md .container-sm .container-xsm">
       <div className="row">
@@ -26,4 +26,5 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home; 
+ 
