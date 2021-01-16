@@ -6,7 +6,7 @@ import {
   GET_CLIENT_FAILED,
   GET_CLIENT_SUCCESS,
   UPDATE_CLIENT_FAILED,
-  UPDATE_CLIENT_SUCCESS
+  UPDATE_CLIENT_SUCCESS,
 } from "../../actions/GV/types";
 
 const initState = {
@@ -42,25 +42,23 @@ const venteReducer = (state = initState, action) => {
     case UPDATE_CLIENT_SUCCESS:
       return {
         ...state,
-        
       };
     case UPDATE_CLIENT_FAILED:
-      return{
+      return {
         ...state,
         client: state.client,
         errors: action.payload,
       };
-      case DELETE_CLIENT_SUCCESS:
-        return{
-          ...state,
-          
-        };
-      case DELETE_CLIENT_FAILED:
-        return{
-          ...state,
-          client: state.client,
-          errors: action.payload,
-        }
+    case DELETE_CLIENT_SUCCESS:
+      return {
+        ...state,
+      };
+    case DELETE_CLIENT_FAILED:
+      return {
+        ...state,
+        client: state.client,
+        errors: action.payload,
+      };
     default:
       return state;
   }

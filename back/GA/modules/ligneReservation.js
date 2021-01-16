@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
-const LigneReservationSchema = new schema({
+const LigneReservationAchatSchema = new schema({
   quantite: {
     type: Number,
     default: 0,
@@ -15,4 +15,7 @@ const LigneReservationSchema = new schema({
     ref: "reservation",
   },
 });
-module.exports = mongoose.model("ligneReservation", LigneReservationSchema);
+module.exports = mongoose.model(
+  "ligneReservation",
+  LigneReservationAchatSchema
+);
