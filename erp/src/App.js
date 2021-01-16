@@ -19,6 +19,7 @@ import { ListPersonnelPage } from "./pages/GRH/ListPersonnelPage";
 import { ContratForm } from "./components/GRH/ContratForm";
 
 import AddClient from "./pages/GV/AddClient";
+import { AddServicePage } from "./pages/GRH/AddServicePage";
 
 function App() {
   return (
@@ -51,6 +52,8 @@ function App() {
         />
 
         <Route exact path="/gv-dashboard/addclient" component={AddClient} />
+        <Route exact path="/grh-dashboard/AddService" component={AddServicePage} />
+
       </Switch>
     </Router>
   );

@@ -5,7 +5,7 @@ import { Select } from "./DatePicker";
 import { addPersonnel } from "../../actions/GRH/personnelActions";
 import { Link } from "react-router-dom";
 
-export const AddPersonnelForm = ({ history }) => {
+export const AddPersonnelForm = () => {
   const [disableSave, setDisableSave] = useState(true);
   const [selectedItem, setSelectedItem] = useState("choisit une categorie");
   const [info, setInfo] = useState({

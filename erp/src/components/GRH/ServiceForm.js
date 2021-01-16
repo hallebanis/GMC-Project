@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { addService, loadService } from "../../actions/GRH/personnelActions";
+import PersonnelDropDown from "./PersonnelDropDown";
 
 export const ServiceForm = () => {
-  const [info, setInfo] = useState();
+  const dispatch = useDispatch();
+  const [info, setInfo] = useState({
+    nom: "",
+    responsable: "",
+  });
+  useEffect(() => {
+    dispatch(loadService());
+  }, []);
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
+  };
+  const handleResponsableChange = (id) => {
+    setInfo({ ...info, responsable: id });
+  };
+  const handleSave = () => {
+    dispatch(addService(info));
   };
   return (
     <div>
@@ -21,15 +37,12 @@ export const ServiceForm = () => {
 
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Responsable</Form.Label>
-          <Form.Control
-            onChange={handleChange}
-            name="responsable"
-            type="text"
-            placeholder="Password"
-          />
+          <PersonnelDropDown
+            onPersonnelChange={handleResponsableChange}
+          ></PersonnelDropDown>
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" /* type="submit" */ onClick={handleSave}>
           Submit
         </Button>
       </Form>
