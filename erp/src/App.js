@@ -32,11 +32,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/user-dashboard/:id" component={UserDashboard} />
-        <AdminPrivateRoute
-          exact
-          path="/admin-dashboard"
-          component={AdminDashboard}
-        />
+        <Route exact path="/admin-dashboard" component={AdminDashboard} />
         <Route exact path="/admin-dashboard/users" component={UsersListPage} />
         <Route exact path="/admin-dashboard/adduser" component={AddUser} />
         <Route exact path="/user/:id" component={UserDetailsPage} />
