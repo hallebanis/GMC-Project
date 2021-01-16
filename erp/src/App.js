@@ -19,7 +19,10 @@ import { ListPersonnelPage } from "./pages/GRH/ListPersonnelPage";
 import { ContratForm } from "./components/GRH/ContratForm";
 
 import AddClient from "./pages/GV/AddClient";
+import AdminPrivateRoute from "./routes/authentification/AdminPrivateRoute";
+
 import { AddServicePage } from "./pages/GRH/AddServicePage";
+
 
 function App() {
   return (
@@ -29,7 +32,11 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/user-dashboard/:id" component={UserDashboard} />
-        <Route exact path="/admin-dashboard" component={AdminDashboard} />
+        <AdminPrivateRoute
+          exact
+          path="/admin-dashboard"
+          component={AdminDashboard}
+        />
         <Route exact path="/admin-dashboard/users" component={UsersListPage} />
         <Route exact path="/admin-dashboard/adduser" component={AddUser} />
         <Route exact path="/user/:id" component={UserDetailsPage} />
