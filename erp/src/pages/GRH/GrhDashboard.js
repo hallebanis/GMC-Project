@@ -42,9 +42,14 @@ export const GrhDashboard = () => {
                   {
                     title:"Add Service",
                     link : "/grh-dashboard/AddService"
+                  },
+                  {
+                   title:"List Service",
+                   link :"/grh-dashboard/ListService"
                   }
                 ]
-              }
+              },
+              
             ]}
           />
         </Col>

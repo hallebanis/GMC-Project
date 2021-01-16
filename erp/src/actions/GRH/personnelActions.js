@@ -217,7 +217,7 @@ export const editService = (service)=>(dispatch)=>{
 
 export const deleteService=(id)=>(dispatch)=>{
   tokenSet();
-  axios.delete("/api/service"+id).then((res)=>{
+  axios.delete("/api/service/"+id).then((res)=>{
     dispatch({
       type:DELETE_SERVICE_SUCCESS,
       payload :res.data

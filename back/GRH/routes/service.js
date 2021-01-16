@@ -12,13 +12,11 @@ router.post("/service",authMiddleware,(req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 router.get("/service",authMiddleware,(req, res) => {
-    newService.find((err, doc) => {
-    if (err) {
-      res.status(400).json({ errors: [{ msg: "server ERROR" }] });
-    }
-    // console.log(doc);
-    res.status(200).send(doc);
-  });
+    newService.find().populate("responsable").then((service)=>{
+      res.status(200).json(service)
+    }).catch((err)=>{
+      res.status(400).json({errors: [{msg: err}]})
+    })
 });
 
 router.delete("/service/:id",authMiddleware,(req, res) => {
