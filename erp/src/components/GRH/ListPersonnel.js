@@ -1,7 +1,7 @@
 import React from "react";
-import { Button, Table } from "react-bootstrap";
+import { Button, Navbar, Table } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import {deletePersonnel} from "../../actions/GRH/personnelActions";
+import { deletePersonnel } from "../../actions/GRH/personnelActions";
 import { Link } from "react-router-dom";
 
 export const ListPersonnel = ({ list }) => {
@@ -9,9 +9,12 @@ export const ListPersonnel = ({ list }) => {
   const handleDelete = (id) => {
     dispatch(deletePersonnel(id));
   };
-  
+
   return (
     <>
+    <Navbar bg="dark" variant="dark">
+        <Navbar.Brand href="#home">List Of Personnel</Navbar.Brand>
+      </Navbar>
       <Table hover striped bordered>
         <thead>
           <th>Id</th>
@@ -25,10 +28,15 @@ export const ListPersonnel = ({ list }) => {
               <tr id={i}>
                 <td id={elm._id}>{elm._id}</td>
                 <td id={`1-${i}`}>{`${elm.nom} ${elm.prenom}`}</td>
-                <td id={`2-${i}`}>{`${elm.matricule}`}</td>
+                <td id={`1-${i}`}>{`${elm.matricule}`}</td>
                 <td>
-                  <Button variant="primary" >
-                    <Link style={{color : "white"}} to={`/personnel/${elm._id}`}>Edit</Link>
+                  <Button variant="primary">
+                    <Link
+                      style={{ color: "white" }}
+                      to={`/personnel/${elm._id}`}
+                    >
+                      Edit
+                    </Link>
                   </Button>
                   <Button
                     variant="danger"
