@@ -17,6 +17,14 @@ import {
   EDIT_CONTRAT_FAILED,
   DELETE_CONTRAT_SUCCESS,
   DELETE_CONTRAT_FAILED,
+  DELETE_SERVICE_FAILED,
+  DELETE_SERVICE_SUCCESS,
+  EDIT_SERVICE_FAILED,
+  EDIT_SERVICE_SUCCESS,
+  LOAD_SERVICE_FAILED,
+  LOAD_SERVICE_SUCCESS,
+  ADD_SERVICE_FAILED,
+  ADD_SERVICE_SUCCESS,
 } from "./types";
 
 export const loadPersonnel = () => (dispatch) => {
@@ -90,7 +98,7 @@ export const deletePersonnel = (id) => (dispatch) => {
       });
     });
 };
-// INFORMATION ABOUT CONTRAT
+// ACTION OF CONTRAT
 export const addContrat = (contrat) => (dispatch) => {
   tokenSet();
   axios
@@ -161,3 +169,64 @@ export const editContrat = (contrat) => (dispatch) => {
       });
     });
 };
+// ACTIONS OF SERVICE
+export const addService = (service)=>(dispatch)=> {
+  tokenSet ();
+  axios.post("/api/service",service).then((res)=>{
+    dispatch({
+      type : ADD_SERVICE_SUCCESS,
+      payload : res.data
+    })
+  }).catch ((err)=>{
+    dispatch(({
+      type : ADD_SERVICE_FAILED,
+      payload:err.response.data.errors
+    }))
+  })
+};
+
+export const loadService = ()=>(dispatch)=>{
+  tokenSet();
+  axios.get("/api/service").then((res)=>{
+    dispatch(({
+      type: LOAD_SERVICE_SUCCESS,
+      payload : res.data,
+    }))
+  }).catch ((err)=>{
+    dispatch(({
+      type : LOAD_SERVICE_FAILED,
+      payload:err.response.data.errors,
+    }))
+  })
+};
+
+export const editService = (service)=>(dispatch)=>{
+  tokenSet();
+  axios.put("/api/service" , service).then((res)=>{
+    dispatch({
+      type:EDIT_SERVICE_SUCCESS,
+      payload :res.data,
+    })
+  }).catch((err)=>{
+    dispatch(({
+      type: EDIT_SERVICE_FAILED,
+      payload:err.response.data.errors
+    }))
+  })
+};
+
+export const deleteService=(id)=>(dispatch)=>{
+  tokenSet();
+  axios.delete("/api/service"+id).then((res)=>{
+    dispatch({
+      type:DELETE_SERVICE_SUCCESS,
+      payload :res.data
+    })
+  }).catch((err)=>{
+    dispatch({
+      type: DELETE_SERVICE_FAILED,
+      payload:err.response.data.errors
+    })
+    
+  })
+}

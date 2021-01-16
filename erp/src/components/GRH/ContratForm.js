@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addContrat, loadContrat } from "../../actions/GRH/personnelActions";
+import { ListService } from "../../pages/GRH/ListService";
 import { Select } from "./DatePicker";
 import PersonnelDropDown from "./PersonnelDropDown";
+import { ServiceForm } from "./ServiceForm";
 
 export const ContratForm = () => {
   const dispatch = useDispatch();
@@ -68,7 +70,7 @@ export const ContratForm = () => {
           placeholder=""
         />
       </Form.Group>
-
+      <ListService/>
       <Button variant="primary" onClick={handleSave}>
         Submit
       </Button>
