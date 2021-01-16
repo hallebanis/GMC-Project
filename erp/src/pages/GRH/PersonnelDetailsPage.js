@@ -9,21 +9,19 @@ export const PersonnelDetailsPage = ({ match }) => {
   const personnel = useSelector((state) => state.personnel);
   let details = personnel.personnel.filter((el) => el._id == match.params.id);
   const [info, setInfo] = useState({
-    id:details[0]._id,
-    nom : details[0].nom,
-    prenom:details[0].prenom ,
-    CIN : details[0].CIN,
-    email:details[0].email,
-    adresse:details[0].adresse,
-    lieuDeNaissance:details[0].lieuDeNaissance,
-    matCnss:details[0].matCnss,
-    nombreEnfants:+details[0].nombreEnfants,
-    situationFamiliale:details[0].situationFamiliale,
-    categorie:details[0].categorie,
-    matricule:details[0].matricule,
-    dateDeNaissance:new Date(details[0].dateDeNaissance)
-
-
+    id: details[0]._id,
+    nom: details[0].nom,
+    prenom: details[0].prenom,
+    CIN: details[0].CIN,
+    email: details[0].email,
+    adresse: details[0].adresse,
+    lieuDeNaissance: details[0].lieuDeNaissance,
+    matCnss: details[0].matCnss,
+    nombreEnfants: +details[0].nombreEnfants,
+    situationFamiliale: details[0].situationFamiliale,
+    categorie: details[0].categorie,
+    matricule: details[0].matricule,
+    dateDeNaissance: new Date(details[0].dateDeNaissance),
   });
   const [selectedItem, setSelectedItem] = useState("choisir une categorie");
 

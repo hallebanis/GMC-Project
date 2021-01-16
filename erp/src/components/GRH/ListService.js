@@ -1,23 +1,55 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Button, Navbar, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { loadService } from "../../actions/GRH/personnelActions";
+import { Link } from "react-router-dom";
+import { deleteService, loadService } from "../../actions/GRH/personnelActions";
+
 
 export const ListService = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadService());
   }, []);
-  const personnel = useSelector((state) => state.personnel);
-  const [test, setTest] = useState(personnel.service);
-
-  /*     const {service}=personnel;
-   */ const dispatch = useDispatch();
-
+   const personnel = useSelector((state) => state.personnel);
+  const { service } = personnel;
+  const handleDelete = (id) => {
+    dispatch(deleteService(id));
+  };
   return (
     <div>
-      {console.log(personnel)}
-      {/*            { service.map((el=><div>{el.nom}</div>))}
-       */}{" "}
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand href="#home">List Of Services</Navbar.Brand>
+      </Navbar>
+      <Table hover striped bordered>
+        <thead>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Responsable</th>
+          <th>Actions</th>
+        </thead>
+        <tbody>
+          {service.map((el, i) => (
+            <tr id={i}>
+              <td id={el._id}>{el._id}</td>
+              <td id={`1-${i}`}>{el.nom}</td>
+              <td
+                id={`1-${i}`}
+              >{`${el.responsable.nom} ${el.responsable.prenom}`}</td>
+              <td>
+                <Button variant="primary">
+                  <Link to={`/editService/${el._id}`} style={{ color: "white" }}>Edit</Link>
+                </Button>
+                <Button variant="danger" onClick={() => handleDelete(el._id)}>
+                  Delete
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+      
     </div>
+    
   );
 };
+ 

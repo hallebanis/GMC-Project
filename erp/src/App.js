@@ -20,6 +20,8 @@ import { ContratForm } from "./components/GRH/ContratForm";
 
 import AddClient from "./pages/GV/AddClient";
 import { AddServicePage } from "./pages/GRH/AddServicePage";
+import { ListService } from "./components/GRH/ListService";
+import FullPageIntroWithFixedTransparentNavbar, { ServiceDetailsPage } from "./pages/GRH/ServiceDetailsPage";
 
 function App() {
   return (
@@ -53,6 +55,9 @@ function App() {
 
         <Route exact path="/gv-dashboard/addclient" component={AddClient} />
         <Route exact path="/grh-dashboard/AddService" component={AddServicePage} />
+        <Route exact path="/grh-dashboard/ListService" component={ListService} />
+        <Route exact path="/grh-dashboard/ListService/editService/:id" component={ServiceDetailsPage} />
+
 
       </Switch>
     </Router>
