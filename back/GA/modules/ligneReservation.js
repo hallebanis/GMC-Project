@@ -16,6 +16,6 @@ const LigneReservationAchatSchema = new schema({
   },
 });
 module.exports = mongoose.model(
-  "ligneReservation",
+  "ligneReservationAchat",
   LigneReservationAchatSchema
 );
