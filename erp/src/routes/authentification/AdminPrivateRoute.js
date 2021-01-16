@@ -8,11 +8,7 @@ const AdminPrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        !auth.isAuth && auth.user.role.titre !== "admin" ? (
-          <Redirect to="/login" />
-        ) : (
-          <component {...props} />
-        )
+        !auth.isAuth ? <Redirect to="/login" /> : <component {...props} />
       }
     />
   );
