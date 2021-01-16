@@ -22,6 +22,7 @@ import AddClient from "./pages/GV/AddClient";
 import AdminPrivateRoute from "./routes/authentification/AdminPrivateRoute";
 
 import { AddServicePage } from "./pages/GRH/AddServicePage";
+import DemandeCongePage from "./pages/user/DemandeCongePage";
 
 function App() {
   return (
@@ -62,6 +63,11 @@ function App() {
           exact
           path="/grh-dashboard/AddService"
           component={AddServicePage}
+        />
+        <Route
+          exact
+          path={`/user-dashboard/:id/demande/conge`}
+          component={DemandeCongePage}
         />
       </Switch>
     </Router>
