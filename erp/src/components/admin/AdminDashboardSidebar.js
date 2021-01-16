@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const AdminDashboardSidebar = ({ color, linkList }) => {
   return (
     <Nav
-      style={{ backgroundColor: color || "white" }}
+      style={{ backgroundColor: color || "rgb(52,58,64)" }}
       defaultActiveKey="/home"
       className="flex-column navSideBar"
     >
