@@ -36,13 +36,22 @@ export const GrhDashboard = () => {
                   },
                 ],
               },
+              {
+                categorie : "Service",
+                elements :[
+                  {
+                    title:"Add Service",
+                    link : "/grh-dashboard/AddService"
+                  }
+                ]
+              }
             ]}
           />
         </Col>
         <Col></Col>
       </Row>
-      {/*       <ContratForm />
-       */}{" "}
+      
+     
     </Container>
   );
 };
