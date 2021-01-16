@@ -3,6 +3,7 @@ import {
   LOGIN_FAILED,
   REGISTRATION_SUCCESS,
   REGISTRATION_FAILED,
+  LOGOUT,
 } from "./types";
 import axios from "axios";
 
@@ -38,4 +39,10 @@ export const registerAction = (info) => (dispatch) => {
         payload: err.response.data.errors,
       });
     });
+};
+
+export const logoutUser = () => (dispatch) => {
+  dispatch({
+    type: LOGOUT,
+  });
 };

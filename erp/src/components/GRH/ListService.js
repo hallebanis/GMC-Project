@@ -10,11 +10,13 @@ export const ListService = () => {
   useEffect(() => {
     dispatch(loadService());
   }, []);
+
    const personnel = useSelector((state) => state.personnel);
   const { service } = personnel;
   const handleDelete = (id) => {
     dispatch(deleteService(id));
   };
+
   return (
     <div>
       <Navbar bg="dark" variant="dark">
