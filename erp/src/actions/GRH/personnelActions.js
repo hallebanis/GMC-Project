@@ -25,6 +25,12 @@ import {
   LOAD_SERVICE_SUCCESS,
   ADD_SERVICE_FAILED,
   ADD_SERVICE_SUCCESS,
+  DELETE_EMBAUCHE_FAILED,
+  DELETE_EMBAUCHE_SUCCESS,
+  LOAD_EMBAUCHE_FAILED,
+  LOAD_EMBAUCHE_SUCCESS,
+  ADD_EMBAUCHE_FAILED,
+  ADD_EMBAUCHE_SUCCESS,
 } from "./types";
 
 export const loadPersonnel = () => (dispatch) => {
@@ -170,63 +176,124 @@ export const editContrat = (contrat) => (dispatch) => {
     });
 };
 // ACTIONS OF SERVICE
-export const addService = (service)=>(dispatch)=> {
-  tokenSet ();
-  axios.post("/api/service",service).then((res)=>{
-    dispatch({
-      type : ADD_SERVICE_SUCCESS,
-      payload : res.data
+export const addService = (service) => (dispatch) => {
+  tokenSet();
+  axios
+    .post("/api/service", service)
+    .then((res) => {
+      dispatch({
+        type: ADD_SERVICE_SUCCESS,
+        payload: res.data,
+      });
     })
-  }).catch ((err)=>{
-    dispatch(({
-      type : ADD_SERVICE_FAILED,
-      payload:err.response.data.errors
-    }))
-  })
+    .catch((err) => {
+      dispatch({
+        type: ADD_SERVICE_FAILED,
+        payload: err.response.data.errors,
+      });
+    });
 };
 
-export const loadService = ()=>(dispatch)=>{
+export const loadService = () => (dispatch) => {
   tokenSet();
-  axios.get("/api/service").then((res)=>{
-    dispatch(({
-      type: LOAD_SERVICE_SUCCESS,
-      payload : res.data,
-    }))
-  }).catch ((err)=>{
-    dispatch(({
-      type : LOAD_SERVICE_FAILED,
-      payload:err.response.data.errors,
-    }))
-  })
+  axios
+    .get("/api/service")
+    .then((res) => {
+      dispatch({
+        type: LOAD_SERVICE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: LOAD_SERVICE_FAILED,
+        payload: err.response.data.errors,
+      });
+    });
 };
 
-export const editService = (service,id)=>(dispatch)=>{
+export const editService = (service, id) => (dispatch) => {
   tokenSet();
-  axios.put("/api/service/"+id , service).then((res)=>{
+  axios
+    .put("/api/service/" + id, service)
+    .then((res) => {
+      dispatch({
+        type: EDIT_SERVICE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: EDIT_SERVICE_FAILED,
+        payload: err.response.data.errors,
+      });
+    });
+};
+
+export const deleteService = (id) => (dispatch) => {
+  tokenSet();
+  axios
+    .delete("/api/service/" + id)
+    .then((res) => {
+      dispatch({
+        type: DELETE_SERVICE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: DELETE_SERVICE_FAILED,
+        payload: err.response.data.errors,
+      });
+    });
+};
+
+export const addEmbauche = (embauche) => (dispatch) => {
+  tokenSet();
+  axios
+    .post("/api/embauche/", embauche)
+    .then((res) => {
+      dispatch({
+        type: ADD_EMBAUCHE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: ADD_EMBAUCHE_FAILED,
+        payload: err.response.data.errors,
+      });
+    });
+};
+
+
+export const loadEmbauche = ()=>(dispatch)=>{
+  tokenSet();
+  axios.get("/api/embauche").then((res)=>{
     dispatch({
-      type:EDIT_SERVICE_SUCCESS,
-      payload :res.data,
+      type:LOAD_EMBAUCHE_SUCCESS,
+      payload:res.data
     })
   }).catch((err)=>{
-    dispatch(({
-      type: EDIT_SERVICE_FAILED,
-      payload:err.response.data.errors
-    }))
-  })
-};
-
-export const deleteService=(id)=>(dispatch)=>{
-  tokenSet();
-  axios.delete("/api/service/"+id).then((res)=>{
     dispatch({
-      type:DELETE_SERVICE_SUCCESS,
-      payload :res.data
+      type:LOAD_EMBAUCHE_FAILED,
+      payload:err.response.data.errors
+    })
+  })
+}
+
+
+export const deleteEmbauche = (id)=>(dispatch)=>{
+  tokenSet();
+  axios.delete("/api/embauche/"+id).then((res)=>{
+    dispatch({
+      type : DELETE_EMBAUCHE_SUCCESS,
+      payload:res.data
     })
   }).catch((err)=>{
     dispatch({
-      type: DELETE_SERVICE_FAILED,
+      type:DELETE_EMBAUCHE_FAILED,
       payload:err.response.data.errors
     })
-    
   })
 }
