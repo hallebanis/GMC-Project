@@ -21,8 +21,8 @@ const UserDashboard = () => {
                 categorie: "Demandes",
                 elements: [
                   {
-                    title: "congé",
-                    link: `/user-dashboard/${auth.user._id}/demande/conge`,
+                    title: "Nouvelle Demande",
+                    link: `/user-dashboard/${auth.user._id}/demande/new`,
                   },
                 ],
               },

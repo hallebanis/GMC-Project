@@ -8,7 +8,7 @@ import {
   MDBModalFooter,
 } from "mdbreact";
 
-class ModalPage extends Component {
+class ServiceModal extends Component {
   state = {
     modal8: false,
     modal9: false,
@@ -79,4 +79,4 @@ class ModalPage extends Component {
   }
 }
 
-export default ModalPage;
+export default ServiceModal;
