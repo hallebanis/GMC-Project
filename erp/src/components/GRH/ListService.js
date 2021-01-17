@@ -3,7 +3,7 @@ import { Button, Navbar, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteService, loadService } from "../../actions/GRH/personnelActions";
-
+import ServiceModal from "./ServiceModal";
 
 export const ListService = () => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export const ListService = () => {
     dispatch(loadService());
   }, []);
 
-   const personnel = useSelector((state) => state.personnel);
+  const personnel = useSelector((state) => state.personnel);
   const { service } = personnel;
   const handleDelete = (id) => {
     dispatch(deleteService(id));
@@ -38,9 +38,7 @@ export const ListService = () => {
                 id={`1-${i}`}
               >{`${el.responsable.nom} ${el.responsable.prenom}`}</td>
               <td>
-                <Button variant="primary">
-                  <Link to={`/editService/${el._id}`} style={{ color: "white" }}>Edit</Link>
-                </Button>
+                <ServiceModal />
                 <Button variant="danger" onClick={() => handleDelete(el._id)}>
                   Delete
                 </Button>
@@ -49,9 +47,6 @@ export const ListService = () => {
           ))}
         </tbody>
       </Table>
-      
     </div>
-    
   );
 };
- 
