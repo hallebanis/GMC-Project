@@ -2,8 +2,7 @@
 const dbConnect = require("./helpers/dbconnection");
 const express = require("express");
 const PORT = process.env.PORT || 5000;
-const mongoose =require ('mongoose');
-
+const mongoose = require("mongoose");
 
 const app = express();
 dbConnect();
@@ -29,7 +28,7 @@ app.use("/api", require("./GRH/routes/avance"));
 app.use("/api", require("./GRH/routes/motifsAbsence"));
 app.use("/api", require("./GRH/routes/pointage"));
 app.use("/api", require("./GRH/routes/service"));
-app.use("/api", require("./GRH/routes/prime"));
+//app.use("/api", require("./GRH/routes/prime"));
 app.use("/api", require("./GRH/routes/assignPrime"));
 
 //ga Routes
@@ -58,4 +57,4 @@ app.listen(PORT, (err) => {
   if (err) throw err;
   console.log(`server listening on http://localhost:${PORT}`);
 });
-mongoose.set('useFindAndModify', false);
+mongoose.set("useFindAndModify", false);
