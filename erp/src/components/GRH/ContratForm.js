@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { addContrat, loadContrat } from "../../actions/GRH/personnelActions";
+import {
+  addContrat,
+  loadContrat,
+  loadPersonnel,
+} from "../../actions/GRH/personnelActions";
 import { ListService } from "../../components/GRH/ListService";
 import { Select } from "./DatePicker";
 import PersonnelDropDown from "./PersonnelDropDown";
@@ -33,6 +37,7 @@ export const ContratForm = () => {
   };
   const handleSave = () => {
     dispatch(addContrat(info));
+    dispatch(loadPersonnel());
   };
   return (
     <Form>
@@ -72,7 +77,6 @@ export const ContratForm = () => {
       <Button variant="primary" onClick={handleSave}>
         Submit
       </Button>
-     
     </Form>
   );
 };
