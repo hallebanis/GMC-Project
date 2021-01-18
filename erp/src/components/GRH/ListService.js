@@ -38,12 +38,15 @@ export const ListService = () => {
                 id={`1-${i}`}
               >{`${el.responsable.nom} ${el.responsable.prenom}`}</td>
               <td>
-
                 <Button variant="primary">
-                  <Link to={`/grh-dashboard/ListService/editService/${el._id}`} style={{ color: "white" }}>Edit</Link>
+                  <Link
+                    to={`/grh-dashboard/ListService/editService/${el._id}`}
+                    style={{ color: "white" }}
+                  >
+                    Edit
+                  </Link>
                 </Button>
 
- 
                 <Button variant="danger" onClick={() => handleDelete(el._id)}>
                   Delete
                 </Button>
