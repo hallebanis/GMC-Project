@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadPersonnelById } from "../../actions/authentification/authActions";
 import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
 import MainNavBar from "../../components/admin/MainNavBar";
+import PersonnelInfo from "../../components/user/PersonnelInfo";
 
 const UserDashboard = () => {
   const auth = useSelector((state) => state.auth);
@@ -34,6 +35,9 @@ const UserDashboard = () => {
               },
             ]}
           />
+        </Col>
+        <Col>
+          <PersonnelInfo />
         </Col>
       </Row>
     </Container>
