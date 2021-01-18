@@ -15,13 +15,16 @@ import GrhDashboard from "./pages/GRH/GrhDashboard";
 import AddPersonnelPage from "./pages/GRH/AddPersonnelPage";
 import { PersonnelDetailsPage } from "./pages/GRH/PersonnelDetailsPage";
 import { ListPersonnelPage } from "./pages/GRH/ListPersonnelPage";
-
 import { ContratForm } from "./components/GRH/ContratForm";
-
 import AddClient from "./pages/GV/AddClient";
+import AdminPrivateRoute from "./routes/authentification/AdminPrivateRoute";
 import { AddServicePage } from "./pages/GRH/AddServicePage";
 import { ListService } from "./components/GRH/ListService";
-import FullPageIntroWithFixedTransparentNavbar, { ServiceDetailsPage } from "./pages/GRH/ServiceDetailsPage";
+import FullPageIntroWithFixedTransparentNavbar, {
+  ServiceDetailsPage,
+} from "./pages/GRH/ServiceDetailsPage";
+import DemandeCongePage from "./pages/user/DemandeCongePage";
+import Demande from "./pages/user/DemandeCongePage";
 
 function App() {
   return (
@@ -40,7 +43,6 @@ function App() {
         <Route exact path="/ga-dashboard" component={GaDashboard} />
         <Route exact path="/gv-dashboard" component={GvDashboard} />
         <Route exact path="/personnel/:id" component={PersonnelDetailsPage} />
-
         <Route
           exact
           path="/grh-dashboard/addpersonnel"
@@ -52,13 +54,27 @@ function App() {
           path="/grh-dashboard/listpersonnel"
           component={ListPersonnelPage}
         />
-
         <Route exact path="/gv-dashboard/addclient" component={AddClient} />
-        <Route exact path="/grh-dashboard/AddService" component={AddServicePage} />
-        <Route exact path="/grh-dashboard/ListService" component={ListService} />
-        <Route exact path="/grh-dashboard/ListService/editService/:id" component={ServiceDetailsPage} />
-
-
+        <Route
+          exact
+          path="/grh-dashboard/AddService"
+          component={AddServicePage}
+        />
+        <Route
+          exact
+          path="/grh-dashboard/ListService"
+          component={ListService}
+        />
+        <Route
+          exact
+          path="/grh-dashboard/ListService/editService/:id"
+          component={ServiceDetailsPage}
+        />
+        <Route
+          exact
+          path={`/user-dashboard/:id/demande/new`}
+          component={Demande}
+        />
       </Switch>
     </Router>
   );

@@ -65,7 +65,7 @@ router.post(
       min: 8,
       max: 8,
     }),
-    body("matricule", "Verifiez le matricule").isLength({ min: 10, max: 10 }),
+    body("matricule", "Verifiez le matricule").isLength({ min: 5, max: 20 }),
     body("login", "Entrez un login valide : +6 caractéres").isLength({
       min: 6,
     }),
@@ -123,10 +123,20 @@ router.post(
                               (err, token) => {
                                 if (err) throw err;
                                 else {
-                                  res.status(200).json({
-                                    token,
-                                    user,
-                                  });
+                                  Utilisateur.findById(user._id)
+                                    .populate("personnelId")
+                                    .populate("role")
+                                    .then((user) => {
+                                      res.status(200).json({
+                                        token,
+                                        user,
+                                      });
+                                    })
+                                    .catch((err) => {
+                                      res
+                                        .status(400)
+                                        .json({ errors: [{ msg: err }] });
+                                    });
                                 }
                               }
                             );

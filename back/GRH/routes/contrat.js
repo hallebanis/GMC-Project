@@ -13,7 +13,9 @@ router.post("/contrat", authMiddleware, (req, res) => {
   });
   contratModel
     .save()
-    .then((contrat) => res.status(200).json(contrat))
+    .then((contrat) => {
+      res.status(200).json(contrat);
+    })
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 
