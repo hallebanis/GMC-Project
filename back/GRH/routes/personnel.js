@@ -5,7 +5,7 @@ const personnel = require("../modules/personnel");
 
 const authMiddleware = require("../../helpers/authMiddleware");
 
-router.post("/personnel",authMiddleware, (req, res) => {
+router.post("/personnel", authMiddleware, (req, res) => {
   const {
     nom,
     prenom,
@@ -42,16 +42,27 @@ router.post("/personnel",authMiddleware, (req, res) => {
     );
 });
 
-router.get("/personnel",authMiddleware, (req, res) => {
-  personnel.find((err, doc) => {
-    if (err) {
-      res.status(400).json({ errors: [{ msg: "server ERROR" }] });
-    }
-    res.status(200).send(doc);
-  });
+router.get("/personnel", authMiddleware, (req, res) => {
+  personnel
+    .find()
+    .populate("demande")
+    .populate("abscense")
+    .populate("avance")
+    .populate("contrat")
+    .populate("diplome")
+    .populate("embauche")
+    .populate("pointage")
+    .populate("pret")
+    .populate("assignPrime")
+    .then((personnels) => {
+      res.status(200).json(personnels);
+    })
+    .catch((err) => {
+      res.status(400).json({ errors: [{ msg: err }] });
+    });
 });
 
-router.delete("/personnel/:id", authMiddleware,(req, res) => {
+router.delete("/personnel/:id", authMiddleware, (req, res) => {
   const personnelId = req.params.id;
   personnel
     .findByIdAndDelete(personnelId)
@@ -61,7 +72,7 @@ router.delete("/personnel/:id", authMiddleware,(req, res) => {
     );
 });
 
-router.put("/personnel",authMiddleware, (req, res) => {
+router.put("/personnel", authMiddleware, (req, res) => {
   const perId = req.body.id;
   const {
     nom,
@@ -87,7 +98,7 @@ router.put("/personnel",authMiddleware, (req, res) => {
       dateDeNaissance,
       lieuDeNaissance,
       matCnss,
-      matricule:nom+'/'+CIN,
+      matricule: nom + "/" + CIN,
       situationFamiliale,
       nombreEnfants,
       categorie,

@@ -10,24 +10,24 @@ router.post("/contrat", authMiddleware, (req, res) => {
     dateDebut,
     salaireDeBase,
     typeContrat,
-    personnelId,
+    idPersonnel,
   } = req.body;
   let contratModel = new newContrat({
     dateDebut,
     dateFin,
     salaireDeBase,
     typeContrat,
-    personnelId,
+    idPersonnel,
   });
   contratModel
     .save()
     .then((contr) => {
-      Personnel.findByIdAndUpdate(personnelId, {
+      Personnel.findByIdAndUpdate(idPersonnel, {
         $push: { contrat: contr._id },
       })
         .then(() => {})
-        .then(() => {});
-      res.status(200).json(contrat);
+        .catch(() => {});
+      res.status(200).json(contr);
     })
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
