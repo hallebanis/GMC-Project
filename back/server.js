@@ -28,6 +28,7 @@ app.use("/api", require("./GRH/routes/motifsAbsence"));
 app.use("/api", require("./GRH/routes/pointage"));
 app.use("/api", require("./GRH/routes/service"));
 app.use("/api", require("./GRH/routes/prime"));
+app.use("/api", require("./GRH/routes/assignPrime"));
 
 //ga Routes
 app.use("/api", require("./GA/routes/categorieRoute"));

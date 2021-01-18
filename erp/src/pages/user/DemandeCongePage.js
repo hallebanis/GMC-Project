@@ -5,7 +5,7 @@ import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar"
 import DemandeForm from "../../components/admin/DemandeForm";
 import MainNavBar from "../../components/admin/MainNavBar";
 
-const Demande = () => {
+const Demande = ({ history, match }) => {
   return (
     <Container fluid>
       <Row>
@@ -14,11 +14,11 @@ const Demande = () => {
         </Col>
       </Row>
       <Row>
-        <Col md={2}>
+        <Col sm={2} md={2} lg={2}>
           <AdminDashboardSidebar />
         </Col>
-        <Col>
-          <DemandeForm />
+        <Col style={{ alignItems: "center" }}>
+          <DemandeForm history={history} match={match} />
         </Col>
       </Row>
     </Container>

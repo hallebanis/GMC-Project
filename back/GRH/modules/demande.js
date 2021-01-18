@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const demande = new mongoose.Schema({
+const demandeSchema = new mongoose.Schema({
   sujet: { type: String, required: true, enum: ["congé", "avance", "autre"] },
   etat: { type: String, enum: ["lu", "en attente", "envoyée", "acceptée"] },
   description: { type: String, required: true },
@@ -10,4 +10,4 @@ const demande = new mongoose.Schema({
   personnelId: { type: mongoose.Types.ObjectId, ref: "personnel" },
 });
 
-module.exports = mongoose.model("demande", demande);
+module.exports = mongoose.model("demande", demandeSchema);
