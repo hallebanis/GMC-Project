@@ -266,34 +266,38 @@ export const addEmbauche = (embauche) => (dispatch) => {
     });
 };
 
-
-export const loadEmbauche = ()=>(dispatch)=>{
+export const loadEmbauche = () => (dispatch) => {
   tokenSet();
-  axios.get("/api/embauche").then((res)=>{
-    dispatch({
-      type:LOAD_EMBAUCHE_SUCCESS,
-      payload:res.data
+  axios
+    .get("/api/embauche")
+    .then((res) => {
+      dispatch({
+        type: LOAD_EMBAUCHE_SUCCESS,
+        payload: res.data,
+      });
     })
-  }).catch((err)=>{
-    dispatch({
-      type:LOAD_EMBAUCHE_FAILED,
-      payload:err.response.data.errors
-    })
-  })
-}
+    .catch((err) => {
+      dispatch({
+        type: LOAD_EMBAUCHE_FAILED,
+        payload: err.response.data.errors,
+      });
+    });
+};
 
-
-export const deleteEmbauche = (id)=>(dispatch)=>{
+export const deleteEmbauche = (id) => (dispatch) => {
   tokenSet();
-  axios.delete("/api/embauche/"+id).then((res)=>{
-    dispatch({
-      type : DELETE_EMBAUCHE_SUCCESS,
-      payload:res.data
+  axios
+    .delete("/api/embauche/" + id)
+    .then((res) => {
+      dispatch({
+        type: DELETE_EMBAUCHE_SUCCESS,
+        payload: res.data,
+      });
     })
-  }).catch((err)=>{
-    dispatch({
-      type:DELETE_EMBAUCHE_FAILED,
-      payload:err.response.data.errors
-    })
-  })
-}
+    .catch((err) => {
+      dispatch({
+        type: DELETE_EMBAUCHE_FAILED,
+        payload: err.response.data.errors,
+      });
+    });
+};
