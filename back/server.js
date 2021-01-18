@@ -2,6 +2,8 @@
 const dbConnect = require("./helpers/dbconnection");
 const express = require("express");
 const PORT = process.env.PORT || 5000;
+const mongoose =require ('mongoose');
+
 
 const app = express();
 dbConnect();
@@ -56,3 +58,4 @@ app.listen(PORT, (err) => {
   if (err) throw err;
   console.log(`server listening on http://localhost:${PORT}`);
 });
+mongoose.set('useFindAndModify', false);

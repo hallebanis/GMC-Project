@@ -23,12 +23,19 @@ import {
   ADD_SERVICE_SUCCESS,
   LOAD_SERVICE_FAILED,
   LOAD_SERVICE_SUCCESS,
+  ADD_EMBAUCHE_FAILED,
+  LOAD_EMBAUCHE_SUCCESS,
+  DELETE_EMBAUCHE_SUCCESS,
+  DELETE_EMBAUCHE_FAILED,
+  LOAD_EMBAUCHE_FAILED,
+  ADD_EMBAUCHE_SUCCESS,
 } from "../../actions/GRH/types";
 
 const initState = {
   service: [],
   contrat: [],
   personnel: [],
+  embauche : [],
   errors: null,
 };
 
@@ -193,6 +200,42 @@ const personnelReducer = (state = initState, action) => {
         ...state,
         service: state.service,
         errors: action.payload,
+      };
+    case ADD_EMBAUCHE_SUCCESS:
+      return {
+        ...state,
+        embauche: [...state.embauche, action.payload],
+        errors: null,
+      };
+    case ADD_EMBAUCHE_FAILED:
+      return {
+        ...state,
+        embauche: state.embauche,
+        errors: action.payload,
+      };
+    case LOAD_EMBAUCHE_SUCCESS:
+      return {
+        ...state,
+        embauche: action.payload,
+        errors: null,
+      };
+    case LOAD_EMBAUCHE_FAILED:
+      return {
+        ...state,
+        embauche: state.embauche,
+        errors: action.payload,
+      };
+    case DELETE_EMBAUCHE_SUCCESS:
+      return {
+        ...state,
+        embauche: state.embauche.filter((el) => el._id !== action.payload._id),
+        errors: null,
+      };
+    case DELETE_EMBAUCHE_FAILED:
+      return {
+        ...state,
+        embauche: state.embauche,
+        erros: action.payload,
       };
     default:
       return state;

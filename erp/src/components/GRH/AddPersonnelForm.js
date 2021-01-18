@@ -4,8 +4,11 @@ import { Form, Button, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import { Select } from "./DatePicker";
 import { addPersonnel } from "../../actions/GRH/personnelActions";
 import { Link } from "react-router-dom";
+import useStyles from "./styles";
+import { Paper, TextField, Typography } from "@material-ui/core";
 
 export const AddPersonnelForm = () => {
+  const classes = useStyles();
   const [disableSave, setDisableSave] = useState(true);
   const [selectedItem, setSelectedItem] = useState("choisit une categorie");
   const [info, setInfo] = useState({
@@ -36,127 +39,114 @@ export const AddPersonnelForm = () => {
     setInfo({ ...info, dateDeNaissance: d });
   };
   return (
-    <div>
-      <Form className="form">
-        <Form.Row>
-          <Form.Group as={Col} controlId="formGridNom">
-            <Form.Label>Nom</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              name="nom"
-              type="text"
-              placeholder="Enter le Nom"
-            />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridPrenom">
-            <Form.Label>Prenom</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              name="prenom"
-              type="text"
-              placeholder="Entrer le Prenom"
-            />
-          </Form.Group>
-        </Form.Row>
-
-        <Form.Row>
-          <Form.Group as={Col} controlId="formGridCIN">
-            <Form.Label>CIN</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              name="CIN"
-              type="text"
-              placeholder="Entrer votre CIN"
-            />
-          </Form.Group>
-          <Form.Group as={Col} controlId="formGridEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              name="email"
-              type="email"
-              placeholder="entrer email"
-            />
-          </Form.Group>
-        </Form.Row>
-        <Form.Row>
-          <Form.Group as={Col} controlId="formGridAddress">
-            <Form.Label>Adresse</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              name="adresse"
-              type="text"
-              placeholder="Enter votre addresse"
-            />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridPassword">
-            <Form.Label>Lieu de naissance</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              name="lieuDeNaissance"
-              type="text"
-              placeholder="Entrer lieu de naissance"
-            />
-          </Form.Group>
-        </Form.Row>
-        <Form.Row>
-          <Form.Group as={Col} controlId="formGridEmail">
-            <Form.Label>Matricule Cnss </Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              name="matCnss"
-              type="text"
-              placeholder="Enter matricule cnss"
-            />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridPassword">
-            <Form.Label>Nombre d'enfants</Form.Label>
-            <Form.Control
-              onChange={(e) =>
-                setInfo({ ...info, [e.target.name]: +e.target.value })
-              }
-              name="nombreEnfants"
-              type="text"
-              placeholder="entrer le nombre d'enfants"
-            />
-          </Form.Group>
-        </Form.Row>
-        <Form.Row>
-          <Form.Group as={Col} controlId="formGridEmail">
-            <Form.Label>Situation familiale</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              name="situationFamiliale"
-              type="texte"
-              placeholder="Enter votre situation familiale"
-            />
-          </Form.Group>
-        </Form.Row>
-        <Form.Row>
-          <Form.Group as={Col} controlId="formGridEmail">
-            <Form.Label>Categorie</Form.Label>
-            <DropdownButton id="dropdown-basic-button" title={selectedItem}>
-              <Dropdown.Item onClick={handleSelectItem}>A</Dropdown.Item>
-              <Dropdown.Item onClick={handleSelectItem}>B</Dropdown.Item>
-              <Dropdown.Item onClick={handleSelectItem}>C</Dropdown.Item>
-            </DropdownButton>
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridPassword">
-            <Form.Label>
-              Date de naissance :
-              <Select name="dateDeNaissance" onDateChange={handleDateChange} />
-            </Form.Label>
-          </Form.Group>
-        </Form.Row>
-
-        <Button variant="primary" onClick={handleSave}>
+    <Paper className={classes.paper}>
+      <form
+        autoComplete="off"
+        noValidate
+        className={`${classes.root} ${classes.form}`}
+      >
+        <Typography variant="h6">Personnel Form</Typography>
+        <TextField
+          name="nom"
+          type="text"
+          variant="outlined"
+          label="nom"
+          fullWidth
+          onChange={handleChange}
+        />
+        <TextField
+          name="prenom"
+          type="text"
+          variant="outlined"
+          label="prenom"
+          fullWidth
+          onChange={handleChange}
+        />
+        <TextField
+          name="adresse"
+          onChange={handleChange}
+          type="text"
+          variant="outlined"
+          label="adresse"
+          fullWidth
+        />
+        <TextField
+          name="email"
+          type="email"
+          variant="outlined"
+          label="email"
+          fullWidth
+          onChange={handleChange}
+        />
+        <TextField
+          name="CIN"
+          type="text"
+          variant="outlined"
+          label="CIN"
+          fullWidth
+          onChange={handleChange}
+        />
+        <Form.Group as={Col} controlId="formGridPassword">
+          <Form.Label>
+            Date de naissance :
+            <Select name="dateDeNaissance" onDateChange={handleDateChange} />
+          </Form.Label>
+        </Form.Group>
+        <TextField
+          name="lieuDeNaissance"
+          type="text"
+          variant="outlined"
+          label="Lieu de naissance"
+          fullWidth
+          onChange={handleChange}
+        />
+        <TextField
+          name="matCnss"
+          onChange={handleChange}
+          type="text"
+          variant="outlined"
+          label="Matricule cnss"
+          fullWidth
+        />
+        <TextField
+          name="situationFamiliale"
+          type="text"
+          variant="outlined"
+          label="Situation familiale"
+          fullWidth
+          multiline
+          rows={4}
+          onChange={handleChange}
+        />
+        <TextField
+          name="nombreEnfants"
+          type="text"
+          variant="outlined"
+          label="Nombre d'enfants"
+          fullWidth
+          onChange={(e) =>
+            setInfo({ ...info, [e.target.name]: +e.target.value })
+          }
+        />
+        <Form.Group as={Col} controlId="formGridEmail">
+          <DropdownButton id="dropdown-basic-button" title={selectedItem}>
+            <Dropdown.Item onClick={handleSelectItem}>A</Dropdown.Item>
+            <Dropdown.Item onClick={handleSelectItem}>B</Dropdown.Item>
+            <Dropdown.Item onClick={handleSelectItem}>C</Dropdown.Item>
+          </DropdownButton>
+        </Form.Group>
+        <Button
+          className={classes.buttonSubmit}
+          variant="contained"
+          color="primary"
+          size="large"
+          type="submit"
+          fullWidth
+          onClick={handleSave}
+        >
           Save
         </Button>
-      </Form>
-    </div>
+      </form>
+    </Paper>
   );
 };
