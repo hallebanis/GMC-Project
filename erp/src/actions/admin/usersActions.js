@@ -16,6 +16,8 @@ import {
   MODIFY_ROLE_FAILED,
   ADD_ROLE_SUCCESS,
   ADD_ROLE_FAILED,
+  ADD_DEMANDE_SUCCESS,
+  ADD_DEMANDE_FAILED,
 } from "./types";
 import { tokenSet } from "../../helpers/tokenSet";
 
@@ -160,4 +162,22 @@ export const addRole = (info) => (dispatch) => {
         payload: err.response.data,
       });
     });
+};
+
+export const addDemande = (info) => (dispatch) => {
+  tokenSet();
+  axios
+    .post("/user/demande", info)
+    .then((res) =>
+      dispatch({
+        type: ADD_DEMANDE_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: ADD_DEMANDE_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
 };

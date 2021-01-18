@@ -1,4 +1,11 @@
 import {
+  ADD_DEMANDE_FAILED,
+  ADD_DEMANDE_SUCCESS,
+  ADD_ROLE_SUCCESS,
+  LOAD_PERSONNEL_ID_FAILED,
+  LOAD_PERSONNEL_ID_SUCCESS,
+} from "../../actions/admin/types";
+import {
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   REGISTRATION_FAILED,
@@ -43,6 +50,27 @@ const authReducer = (state = inState, action) => {
       localStorage.removeItem("token");
       return {
         auth: { isAuth: false, user: null, errors: null },
+      };
+    case ADD_DEMANDE_SUCCESS:
+      return {
+        ...state,
+        errors: null,
+        user: {
+          ...state.user,
+          personnelId: action.payload,
+        },
+      };
+    case LOAD_PERSONNEL_ID_SUCCESS:
+      return {
+        ...state,
+        errors: null,
+        user: { ...state.user, personnelId: action.payload },
+      };
+    case LOAD_PERSONNEL_ID_FAILED:
+    case ADD_DEMANDE_FAILED:
+      return {
+        ...state,
+        errors: action.payload,
       };
     default:
       return state;
