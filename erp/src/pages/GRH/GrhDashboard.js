@@ -46,10 +46,25 @@ export const GrhDashboard = () => {
                   {
                    title:"List Service",
                    link :"/grh-dashboard/ListService"
-                  },
+                  }]},
+                  {
+                    categorie : "Avance",
+                    elements : [
+                      {
+                        title:"Add Avance",
+                        link:"/grh-dashboard/AddAvance"
+                      },
+                      {
+                        title:"List Avance",
+                        link:"/grh-dashboard/ListAvance"
+                      }
+                    ]
+                  }
+                  
+                  
                 
-                ]
-              },
+                
+              
               
             ]}
           />
