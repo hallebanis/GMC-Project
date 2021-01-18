@@ -55,7 +55,6 @@ router.get("/loadpersonnel/:id", authMiddleware, (req, res) => {
     .populate("diplome")
     .populate("embauche")
     .populate("pointage")
-    .populate("prime")
     .populate("pret")
     .populate("assignPrime")
     .then((pers) => {
