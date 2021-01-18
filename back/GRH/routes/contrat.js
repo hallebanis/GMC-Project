@@ -2,18 +2,31 @@ const express = require("express");
 const router = express.Router();
 const newContrat = require("../modules/contrat");
 const authMiddleware = require("../../helpers/authMiddleware");
+const Personnel = require("../modules/personnel");
 
 router.post("/contrat", authMiddleware, (req, res) => {
-  const { dateFin, dateDebut, salaireDeBase, typeContrat } = req.body;
+  const {
+    dateFin,
+    dateDebut,
+    salaireDeBase,
+    typeContrat,
+    personnelId,
+  } = req.body;
   let contratModel = new newContrat({
     dateDebut,
     dateFin,
     salaireDeBase,
     typeContrat,
+    personnelId,
   });
   contratModel
     .save()
-    .then((contrat) => {
+    .then((contr) => {
+      Personnel.findByIdAndUpdate(personnelId, {
+        $push: { contrat: contr._id },
+      })
+        .then(() => {})
+        .then(() => {});
       res.status(200).json(contrat);
     })
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
