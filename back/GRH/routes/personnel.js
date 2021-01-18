@@ -66,7 +66,9 @@ router.delete("/personnel/:id", authMiddleware, (req, res) => {
   const personnelId = req.params.id;
   personnel
     .findByIdAndDelete(personnelId)
-    .then((personnel) => res.status(200).json(personnel))
+    .then((personnel) => {
+      res.status(200).json(personnel);
+    })
     .catch((err) =>
       res.status(400).json({ errors: [{ msg: "server ERROR" }] })
     );
