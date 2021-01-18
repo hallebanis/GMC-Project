@@ -216,10 +216,10 @@ export const loadService = () => (dispatch) => {
     });
 };
 
-export const editService = (service, id) => (dispatch) => {
+export const editService = (service) => (dispatch) => {
   tokenSet();
   axios
-    .put("/api/service/" + id, service)
+    .put("/api/service", service)
     .then((res) => {
       dispatch({
         type: EDIT_SERVICE_SUCCESS,

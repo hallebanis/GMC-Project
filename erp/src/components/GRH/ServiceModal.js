@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import {
   MDBContainer,
   MDBBtn,
@@ -6,77 +6,69 @@ import {
   MDBModalBody,
   MDBModalHeader,
   MDBModalFooter,
+  MDBInput,
 } from "mdbreact";
+import PersonnelDropDown from "./PersonnelDropDown";
+import { useDispatch } from "react-redux";
+import { editService, loadPersonnel } from "../../actions/GRH/personnelActions";
 
-class ServiceModal extends Component {
-  state = {
-    modal8: false,
-    modal9: false,
-  };
-
-  toggle = (nr) => () => {
-    let modalNumber = "modal" + nr;
-    this.setState({
-      [modalNumber]: !this.state[modalNumber],
+const ServiceModal = ({ service }) => {
+  const dispatch = useDispatch();
+  const [modal8, setModal8] = useState(false);
+  const [info, setInfo] = useState({
+    id: service._id,
+    nom: service.nom,
+    responsable: service.responsable._id,
+  });
+  const toggle = () => {
+    setModal8(!modal8);
+    setInfo({
+      id: service._id,
+      nom: service.nom,
+      responsable: service.responsable._id,
     });
   };
 
-  render() {
-    return (
-      <MDBContainer>
-        <MDBBtn color="info" onClick={this.toggle(8)}>
-          Right
-        </MDBBtn>
-        <MDBModal
-          isOpen={this.state.modal8}
-          toggle={this.toggle(8)}
-          fullHeight
-          position="right"
-        >
-          <MDBModalHeader toggle={this.toggle(8)}>
-            MDBModal title
-          </MDBModalHeader>
-          <MDBModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </MDBModalBody>
-          <MDBModalFooter>
-            <MDBBtn color="secondary" onClick={this.toggle(8)}>
-              Close
-            </MDBBtn>
-            <MDBBtn color="primary">Save changes</MDBBtn>
-          </MDBModalFooter>
-        </MDBModal>
-        <MDBBtn color="info" onClick={this.toggle(9)}>
-          Bottom
-        </MDBBtn>
-        <MDBModal
-          isOpen={this.state.modal9}
-          toggle={this.toggle(9)}
-          fullHeight
-          position="bottom"
-        >
-          <MDBModalHeader toggle={this.toggle(9)}>
-            MDBModal title
-          </MDBModalHeader>
-          <MDBModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </MDBModalBody>
-          <MDBModalFooter>
-            <MDBBtn color="secondary" onClick={this.toggle(9)}>
-              Close
-            </MDBBtn>
-            <MDBBtn color="primary">Save changes</MDBBtn>
-          </MDBModalFooter>
-        </MDBModal>
-      </MDBContainer>
-    );
-  }
-}
+  const handleSave = () => {
+    dispatch(editService(info));
+    dispatch(loadPersonnel());
+    toggle();
+  };
+  const handlePersonnelChange = (val) => {
+    setInfo({ ...info, responsable: val });
+  };
+  const handleChange = (e) => {
+    setInfo({ ...info, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <MDBContainer>
+      {console.log(info)}
+      <MDBBtn color="info" onClick={toggle}>
+        Edit
+      </MDBBtn>
+      <MDBModal isOpen={modal8} toggle={toggle} fullHeight position="right">
+        <MDBModalHeader toggle={toggle}>Modify Service</MDBModalHeader>
+        <MDBModalBody>
+          <MDBInput
+            value={info.nom}
+            name="nom"
+            label="Nom"
+            onChange={handleChange}
+          ></MDBInput>
+          <PersonnelDropDown onPersonnelChange={handlePersonnelChange} />
+        </MDBModalBody>
+        <MDBModalFooter>
+          <MDBBtn color="secondary" onClick={toggle}>
+            Close
+          </MDBBtn>
+          <MDBBtn color="primary" onClick={handleSave}>
+            Save changes
+          </MDBBtn>
+        </MDBModalFooter>
+      </MDBModal>
+    </MDBContainer>
+  );
+};
 
 export default ServiceModal;
