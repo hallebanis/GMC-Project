@@ -46,7 +46,7 @@ router.get("/personnel", authMiddleware, (req, res) => {
   personnel
     .find()
     .populate("demande")
-    .populate("abscense")
+    .populate("absence")
     .populate("avance")
     .populate("contrat")
     .populate("diplome")

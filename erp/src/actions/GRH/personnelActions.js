@@ -35,6 +35,8 @@ import {
   LOAD_AVANCE_SUCCESS,
   ADD_AVANCE_FAILED,
   ADD_AVANCE_SUCCESS,
+  ADD_ABSENCE_SUCCESS,
+  ADD_ABSENCE_FAILED,
 } from "./types";
 
 export const loadPersonnel = () => (dispatch) => {
@@ -324,17 +326,38 @@ export const addAvance = (avance) => (dispatch) => {
     });
 };
 
-export const loadAvance =()=>(dispatch)=>{
+export const loadAvance = () => (dispatch) => {
   tokenSet();
-  axios.get('/api/avance').then((res)=>{
-    dispatch({
-      type:LOAD_AVANCE_SUCCESS,
-      payload:res.data,
+  axios
+    .get("/api/avance")
+    .then((res) => {
+      dispatch({
+        type: LOAD_AVANCE_SUCCESS,
+        payload: res.data,
+      });
     })
-  }).catch((err)=>{
-    dispatch({
-      type:LOAD_AVANCE_FAILED,
-      payload:err.response.data.errors
-    })
-  })
-}
+    .catch((err) => {
+      dispatch({
+        type: LOAD_AVANCE_FAILED,
+        payload: err.response.data.errors,
+      });
+    });
+};
+
+export const addAbsence = (info) => (dispatch) => {
+  tokenSet();
+  axios
+    .post("/api/absence", info)
+    .then((res) =>
+      dispatch({
+        type: ADD_ABSENCE_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: ADD_ABSENCE_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};

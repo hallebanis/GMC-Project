@@ -6,10 +6,8 @@ const Personnel = require("../modules/personnel");
 const personnel = require("../modules/personnel");
 
 router.post("/absence", authMiddleware, (req, res) => {
-  const { dateDepart, dateReprise, idPersonnel, motif } = req.body;
+  const { idPersonnel, motif } = req.body;
   let absenceModel = new newAbsence({
-    dateDepart,
-    dateReprise,
     idPersonnel,
     motif,
   });
@@ -22,7 +20,7 @@ router.post("/absence", authMiddleware, (req, res) => {
         .catch(() => {});
       res.status(200).json(absence);
     })
-    .catch((err) => res.status(400).json(err));
+    .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 router.get("/absence", authMiddleware, (req, res) => {
   newAbsence.find((err, doc) => {
@@ -37,7 +35,14 @@ router.delete("/absence/:id", authMiddleware, (req, res) => {
   const absenceId = req.params.id;
   newAbsence
     .findByIdAndDelete(absenceId)
-    .then((absence) => res.status(200).json(absence))
+    .then((absence) => {
+      Personnel.findByIdAndUpdate(absence, {
+        $pull: { absence: absence._id },
+      })
+        .then(() => {})
+        .catch(() => {});
+      res.status(200).json(absence);
+    })
     .catch((err) =>
       res.status(400).json({ errors: [{ msg: "server ERROR" }] })
     );

@@ -24,6 +24,7 @@ const UserDashboard = () => {
       <Row>
         <Col md="auto">
           <AdminDashboardSidebar
+            color="white"
             linkList={[
               {
                 categorie: "Demandes",
