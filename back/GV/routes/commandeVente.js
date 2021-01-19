@@ -1,10 +1,18 @@
-const express = require('express')
+const express = require("express");
 const router = express.Router();
-const newCommVente = require('../modules/CommandeVente');
+const newCommVente = require("../modules/CommandeVente");
 
 //Route Create Commande Vente
+//path: http://localhost:5000/api/AddCommandeVente
 router.post("/AddCommandeVente", (req, res) => {
-    const { dateCommande, total, isValidate, numero, clientId,ligneVente } = req.body
+    const {
+        dateCommande,
+        total,
+        isValidate,
+        numero,
+        clientId,
+        ligneVente,
+    } = req.body;
     let CommandeVenteModel = new newCommVente({
         dateCommande,
         total,
@@ -13,35 +21,46 @@ router.post("/AddCommandeVente", (req, res) => {
         clientId,
         ligneVente,
     });
-    CommandeVenteModel
-        .save()
+    CommandeVenteModel.save()
         .then((commandeVente) => res.status(200).json(commandeVente))
-        .catch((err) => res.status(400).json(err));
+        .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 
 //Route Read all Commande Vente
+//path: http://localhost:5000/api/CommandesVente
 router.get("/CommandesVente", (req, res) => {
-    newCommVente.find()
-        .then(CommandesVente => res.json(CommandesVente))
-        .catch(err => console.log(err.message))
+    newCommVente
+        .find()
+        .then((CommandesVente) => res.json(CommandesVente))
+        .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 
 //Route Update Commande Vente
-router.put('/updateCommVente/:id', (req, res) => {
-    newCommVente.findByIdAndUpdate(req.params.id, { $set: { ...req.body } }, (err, data) => {
-        if (err) { throw err }
-        newCommVente.findById(req.params.id)
-            .then(client => res.json(client))
-            .catch(err => console.log(err.message))
-    })
+//path: http://localhost:5000/api/updateCommVente
+router.put("/updateCommVente", (req, res) => {
+    const { id, dateCommande, total, isValidate, numero } = req.body;
+    newCommVente.findByIdAndUpdate(
+        id,
+        { dateCommande, total, isValidate, numero },
+        (err, data) => {
+            if (err) {
+                throw err;
+            }
+            newCommVente
+                .findById(req.params.id)
+                .then((comVente) => res.status(200).json(comVente))
+                .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
+        }
+    );
 });
 
 //Route Delete Commande Vente
-router.delete('/deleteCommVente/:id', (req, res) => {
-    newCommVente.findByIdAndDelete(req.params.id)
-        .then(() => res.json({ msg: 'Commande Vente Deleted' }))
-        .catch(err => console.log(err.message))
-
+//path: http://localhost:5000/api/deleteCommVente/:id
+router.delete("/deleteCommVente/:id", (req, res) => {
+    newCommVente
+        .findByIdAndDelete(req.params.id)
+        .then(() => res.status(200).json({ msg: "Commande Vente Deleted" }))
+        .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 
 module.exports = router;

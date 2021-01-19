@@ -30,8 +30,8 @@ router.get("/clients", (req, res) => {
 });
 
 //Route Update Client
-//path: http://localhost:5000/api/updateClient/:id
-router.put("/updateClient/", (req, res) => {
+//path: http://localhost:5000/api/updateClient
+router.put("/updateClient", (req, res) => {
   const { id, nom, prenom, adresse, civilite, email, tel } = req.body;
   newClient.findByIdAndUpdate(
     id,
