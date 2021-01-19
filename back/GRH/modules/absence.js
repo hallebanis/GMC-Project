@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 
 const absence = new mongoose.Schema({
-  dateDepart: { type: Date, required: true },
-  dateReprise: { type: Date, required: true },
-  motif: { type: String },
+  dateDepart: { type: Date, default: Date.now() },
+  motif: { type: String, default: "N/A" },
   idPersonnel: { type: mongoose.Types.ObjectId, ref: "personnel" },
 });
 module.exports = mongoose.model("absence", absence);
