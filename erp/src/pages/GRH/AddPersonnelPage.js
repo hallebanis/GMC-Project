@@ -27,10 +27,32 @@ const AddPersonnelPage = ({ history }) => {
               },
             ],
           },
+          {
+            categorie: "Contrat",
+            elements: [
+              {
+                title: "Add Contrat",
+                link: "/grh-dashboard/contrat",
+              },
+            ],
+          },
+          {
+            categorie: "Service",
+            elements: [
+              {
+                title: "Add Service",
+                link: "/grh-dashboard/AddService",
+              },
+              {
+                title: "List Service",
+                link: "/grh-dashboard/ListService",
+              },
+            ],
+          },
         ]}
       />
       <AddPersonnelForm history={history} />
-  </div>
+    </div>
   );
 };
 
