@@ -38,6 +38,7 @@ export const ListService = () => {
                 id={`1-${i}`}
               >{`${el.responsable.nom} ${el.responsable.prenom}`}</td>
               <td>
+                <ServiceModal service={el} />
                 <Button variant="danger" onClick={() => handleDelete(el._id)}>
                   Delete
                 </Button>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadPersonnelById } from "../../actions/authentification/authActions";
 import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
 import MainNavBar from "../../components/admin/MainNavBar";
+import SideNav from "../../components/admin/SideNav";
 import PersonnelInfo from "../../components/user/PersonnelInfo";
 
 const UserDashboard = () => {
@@ -37,6 +38,7 @@ const UserDashboard = () => {
           />
         </Col>
         <Col>
+          <SideNav />
           <PersonnelInfo />
         </Col>
       </Row>

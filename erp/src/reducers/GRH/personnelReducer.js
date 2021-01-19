@@ -29,13 +29,17 @@ import {
   DELETE_EMBAUCHE_FAILED,
   LOAD_EMBAUCHE_FAILED,
   ADD_EMBAUCHE_SUCCESS,
+  LOAD_AVANCE_FAILED,
+  LOAD_AVANCE_SUCCESS,
+  ADD_AVANCE_FAILED,
+  ADD_AVANCE_SUCCESS,
 } from "../../actions/GRH/types";
 
 const initState = {
   service: [],
   contrat: [],
   personnel: [],
-  embauche : [],
+  avance: [],
   errors: null,
 };
 
@@ -235,7 +239,31 @@ const personnelReducer = (state = initState, action) => {
       return {
         ...state,
         embauche: state.embauche,
-        erros: action.payload,
+        errors: action.payload,
+      };
+    case ADD_AVANCE_SUCCESS:
+      return {
+        ...state,
+        avance: [...state.avance, action.payload],
+        errors: null,
+      };
+    case ADD_AVANCE_FAILED:
+      return {
+        ...state,
+        avance: state.avance,
+        errors: action.payload,
+      };
+    case LOAD_AVANCE_SUCCESS:
+      return {
+        ...state,
+        avance: action.payload,
+        errors: null,
+      };
+    case LOAD_AVANCE_FAILED:
+      return {
+        ...state,
+        avance: state.avance,
+        errors: action.payload,
       };
     default:
       return state;

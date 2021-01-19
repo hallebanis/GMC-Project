@@ -1,13 +1,10 @@
 import React from "react";
-import { Navbar } from "react-bootstrap";
-import SideNavPage from "../../components/admin/SideBar";
 import { ListService } from "../../components/GRH/ListService";
 
-export const ListService = () => {
+export const ListServicePage = () => {
   return (
     <div>
       <ListService />
-     
     </div>
   );
 };

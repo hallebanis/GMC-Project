@@ -31,6 +31,10 @@ import {
   LOAD_EMBAUCHE_SUCCESS,
   ADD_EMBAUCHE_FAILED,
   ADD_EMBAUCHE_SUCCESS,
+  LOAD_AVANCE_FAILED,
+  LOAD_AVANCE_SUCCESS,
+  ADD_AVANCE_FAILED,
+  ADD_AVANCE_SUCCESS,
 } from "./types";
 
 export const loadPersonnel = () => (dispatch) => {
@@ -212,10 +216,10 @@ export const loadService = () => (dispatch) => {
     });
 };
 
-export const editService = (service, id) => (dispatch) => {
+export const editService = (service) => (dispatch) => {
   tokenSet();
   axios
-    .put("/api/service/" + id, service)
+    .put("/api/service", service)
     .then((res) => {
       dispatch({
         type: EDIT_SERVICE_SUCCESS,
@@ -301,3 +305,36 @@ export const deleteEmbauche = (id) => (dispatch) => {
       });
     });
 };
+
+export const addAvance = (avance) => (dispatch) => {
+  tokenSet();
+  axios
+    .post("/api/avance/", avance)
+    .then((res) => {
+      dispatch({
+        type: ADD_AVANCE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: ADD_AVANCE_FAILED,
+        payload: err.response.data.errors,
+      });
+    });
+};
+
+export const loadAvance =()=>(dispatch)=>{
+  tokenSet();
+  axios.get('/api/avance').then((res)=>{
+    dispatch({
+      type:LOAD_AVANCE_SUCCESS,
+      payload:res.data,
+    })
+  }).catch((err)=>{
+    dispatch({
+      type:LOAD_AVANCE_FAILED,
+      payload:err.response.data.errors
+    })
+  })
+}
