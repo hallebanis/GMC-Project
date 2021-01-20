@@ -8,55 +8,51 @@ import {
   MDBModalFooter,
   MDBInput,
 } from "mdbreact";
-import PersonnelDropDown from "./PersonnelDropDown";
 import { useDispatch } from "react-redux";
-import { editService, loadPersonnel } from "../../actions/GRH/personnelActions";
+import { addAbsence, loadPersonnel } from "../../actions/GRH/personnelActions";
 
-const ServiceModal = ({ service }) => {
+const MotifAbsenceModal = ({ modified, setModified, personnel }) => {
   const dispatch = useDispatch();
   const [modal8, setModal8] = useState(false);
   const [info, setInfo] = useState({
-    id: service._id,
-    nom: service.nom,
-    responsable: service.responsable._id,
+    idPersonnel: personnel._id,
+    motif: "N/A",
   });
   const toggle = () => {
     setModal8(!modal8);
     setInfo({
-      id: service._id,
-      nom: service.nom,
-      responsable: service.responsable._id,
+      idPersonnel: personnel._id,
+      motif: "N/A",
     });
   };
 
   const handleSave = () => {
-    dispatch(editService(info));
+    dispatch(addAbsence(info));
     dispatch(loadPersonnel());
+    setModified(!modified);
+
     toggle();
   };
-  const handlePersonnelChange = (val) => {
-    setInfo({ ...info, responsable: val });
-  };
-  const handleChange = (e) => {
-    setInfo({ ...info, [e.target.name]: e.target.value });
+  const handleMotifChange = (e) => {
+    setInfo({ ...info, motif: e.target.value });
   };
 
   return (
     <MDBContainer>
-      {console.log(info)}
-      <MDBBtn color="info" onClick={toggle}>
-        Edit
+      <MDBBtn color="danger" onClick={toggle}>
+        Absent
       </MDBBtn>
       <MDBModal isOpen={modal8} toggle={toggle} fullHeight position="right">
-        <MDBModalHeader toggle={toggle}>Modify Service</MDBModalHeader>
+        <MDBModalHeader
+          toggle={toggle}
+        >{`Motif Absence de ${personnel.nom} ${personnel.prenom}`}</MDBModalHeader>
         <MDBModalBody>
           <MDBInput
-            value={info.nom}
+            value={info.motif}
             name="nom"
-            label="Nom"
-            onChange={handleChange}
+            label="Motif d'absence"
+            onChange={handleMotifChange}
           ></MDBInput>
-          <PersonnelDropDown onPersonnelChange={handlePersonnelChange} />
         </MDBModalBody>
         <MDBModalFooter>
           <MDBBtn color="secondary" onClick={toggle}>
@@ -71,4 +67,4 @@ const ServiceModal = ({ service }) => {
   );
 };
 
-export default ServiceModal;
+export default MotifAbsenceModal;

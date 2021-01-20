@@ -49,7 +49,7 @@ router.get("/loadpersonnel/:id", authMiddleware, (req, res) => {
   const id = req.params.id;
   Personnel.findById(id)
     .populate("demande")
-    .populate("abscense")
+    .populate("absence")
     .populate("avance")
     .populate("contrat")
     .populate("diplome")

@@ -37,42 +37,45 @@ export const GrhDashboard = () => {
                 ],
               },
               {
-                categorie : "Service",
-                elements :[
+                categorie: "Service",
+                elements: [
                   {
-                    title:"Add Service",
-                    link : "/grh-dashboard/AddService"
+                    title: "Add Service",
+                    link: "/grh-dashboard/AddService",
                   },
                   {
-                   title:"List Service",
-                   link :"/grh-dashboard/ListService"
-                  }]},
+                    title: "List Service",
+                    link: "/grh-dashboard/ListService",
+                  },
+                ],
+              },
+              {
+                categorie: "Avance",
+                elements: [
                   {
-                    categorie : "Avance",
-                    elements : [
-                      {
-                        title:"Add Avance",
-                        link:"/grh-dashboard/AddAvance"
-                      },
-                      {
-                        title:"List Avance",
-                        link:"/grh-dashboard/ListAvance"
-                      }
-                    ]
-                  }
-                  
-                  
-                
-                
-              
-              
+                    title: "Add Avance",
+                    link: "/grh-dashboard/AddAvance",
+                  },
+                  {
+                    title: "List Avance",
+                    link: "/grh-dashboard/ListAvance",
+                  },
+                ],
+              },
+              {
+                categorie: "Pointage",
+                elements: [
+                  {
+                    title: "Pointage",
+                    link: "/grh-dashboard/pointage",
+                  },
+                ],
+              },
             ]}
           />
         </Col>
         <Col></Col>
       </Row>
-      
-     
     </Container>
   );
 };
