@@ -26,7 +26,11 @@ import FullPageIntroWithFixedTransparentNavbar, {
 import DemandeCongePage from "./pages/user/DemandeCongePage";
 import Demande from "./pages/user/DemandeCongePage";
 import { AvancePage } from "./pages/GRH/AvancePage";
+
+import ListeClients from "./pages/GV/ListeClients";
+
 import PointagePage from "./pages/GRH/PointagePage";
+
 
 function App() {
   return (
@@ -78,7 +82,15 @@ function App() {
           component={Demande}
         />
         <Route exact path="/grh-dashboard/AddAvance" component={AvancePage} />
+
+        <Route
+          exact
+          path="/gv-dashboard/listeClients"
+          component={ListeClients}
+        />
+
         <Route exact path="/grh-dashboard/pointage" component={PointagePage} />
+
       </Switch>
     </Router>
   );
