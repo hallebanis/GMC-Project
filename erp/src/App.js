@@ -26,6 +26,7 @@ import FullPageIntroWithFixedTransparentNavbar, {
 import DemandeCongePage from "./pages/user/DemandeCongePage";
 import Demande from "./pages/user/DemandeCongePage";
 import { AvancePage } from "./pages/GRH/AvancePage";
+import ListeClients from "./pages/GV/ListeClients";
 
 function App() {
   return (
@@ -76,10 +77,11 @@ function App() {
           path={`/user-dashboard/:id/demande/new`}
           component={Demande}
         />
+        <Route exact path="/grh-dashboard/AddAvance" component={AvancePage} />
         <Route
           exact
-          path="/grh-dashboard/AddAvance"
-          component={AvancePage}
+          path="/gv-dashboard/listeClients"
+          component={ListeClients}
         />
       </Switch>
     </Router>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { tokenSet } from "../../helpers/tokenSet";
 import {
   ADD_CLIENT_SUCCESS,
   ADD_CLIENT_FAILED,
@@ -69,6 +70,7 @@ import {
 //Actions of Client
 // 1-Add Client Action
 export const addClient = (client) => (dispatch) => {
+  tokenSet();
   axios
     .post("/api/AddClient", client)
     .then((res) =>
@@ -86,6 +88,7 @@ export const addClient = (client) => (dispatch) => {
 };
 //2-Get Client Action
 export const getClient = () => (dispatch) => {
+  tokenSet();
   axios
     .get("/api/clients")
     .then((res) =>
@@ -103,6 +106,7 @@ export const getClient = () => (dispatch) => {
 };
 //3-Update Client Action
 export const updateClient = (client) => (dispatch) => {
+  tokenSet();
   axios
     .put("/api/updateClient", client)
     .then((res) =>
@@ -120,6 +124,7 @@ export const updateClient = (client) => (dispatch) => {
 };
 //4-Delete Client Action
 export const deleteClient = (id) => (dispatch) => {
+  tokenSet();
   axios
     .delete(`/api/deleteClient/${id}`)
     .then((res) =>
@@ -173,6 +178,7 @@ export const getCommandeVente = () => (dispatch) => {
 };
 //3-Update CommandeVente Action
 export const updateCommandeVente = (comVente) => (dispatch) => {
+  
   axios
     .put("/api/updateCommVente", comVente)
     .then((res) =>
