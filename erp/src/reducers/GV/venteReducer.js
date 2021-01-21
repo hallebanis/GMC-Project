@@ -11,6 +11,7 @@ import {
 
 const initState = {
   client: [],
+  commandeVente: [],
   errors: null,
 };
 const venteReducer = (state = initState, action) => {
@@ -21,44 +22,39 @@ const venteReducer = (state = initState, action) => {
         client: [...state.client, action.payload],
         errors: null,
       };
-    case ADD_CLIENT_FAILED:
-      return {
-        ...state,
-        client: state.client,
-        errors: action.payload,
-      };
     case GET_CLIENT_SUCCESS:
       return {
         ...state,
         client: action.payload,
         errors: null,
       };
+      case UPDATE_CLIENT_SUCCESS:
+      return {
+        ...state,
+        errors: null,
+        client: state.client.map((el) => {
+          if (el._id === action.payload._id) return action.payload;
+          return el;
+        }),
+      };
+      case DELETE_CLIENT_SUCCESS:
+        return {
+          ...state,
+          errors:null,
+          client: state.client.filter(el=>el._id!==action.payload._id)
+        };
+    case ADD_CLIENT_FAILED:
     case GET_CLIENT_FAILED:
-      return {
-        ...state,
-        client: state.client,
-        errors: action.payload,
-      };
-    case UPDATE_CLIENT_SUCCESS:
-      return {
-        ...state,
-      };
     case UPDATE_CLIENT_FAILED:
-      return {
-        ...state,
-        client: state.client,
-        errors: action.payload,
-      };
-    case DELETE_CLIENT_SUCCESS:
-      return {
-        ...state,
-      };
     case DELETE_CLIENT_FAILED:
       return {
         ...state,
-        client: state.client,
         errors: action.payload,
       };
+    
+   
+     
+
     default:
       return state;
   }

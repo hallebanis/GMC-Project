@@ -1,10 +1,12 @@
 const express = require('express')
 const router = express.Router();
-const newCategorie = require("../modules/categorie")
+const newCategorie = require("../modules/categorie");
+const authMiddleware= require("../../helpers/authMiddleware")
 
 
-
-router.post("/categorie", (req, res) => {
+// Add categorie Route
+// Path : http://localhost:5000/api/addCategorie
+router.post("/addCategorie",authMiddleware, (req, res) => {
   const { reference, designation } = req.body
   const categorieModel = new newCategorie({
     reference,
@@ -12,12 +14,18 @@ router.post("/categorie", (req, res) => {
   });
   categorieModel.save()
     .then((categorie) => res.status(200).json(categorie))
-    .catch((err) => res.status(400).json(err));
+    .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
+
+
 });
 
-router.get("/categorie", (req, res) => {
+
+// Read Categorie Route
+// Path : http://localhost:5000/api/categories
+router.get("/categories",authMiddleware, (req, res) => {
   newCategorie.find()
-    .then(categories => res.json(categories))
-    .catch(err => console.log(err.message))
+    .then(categories => res.status(200).json(categories))
+    .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
+
 });
 module.exports = router;

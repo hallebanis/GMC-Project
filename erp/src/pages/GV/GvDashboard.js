@@ -1,11 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import GvSidebar from "../../components/GV/GvSidebar";
+import { Col, Container, Row } from 'react-bootstrap'
 
 const GvDashboard = () => {
   return (
-    <div>
-      <Link to="gv-dashboard/addclient">Add Client</Link>
-    </div>
+    <Container fluid>
+      <Row>
+        <Col>
+        <GvSidebar />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

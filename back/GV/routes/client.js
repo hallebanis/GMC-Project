@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const newClient = require("../modules/Client");
+const authMiddleware= require("../../helpers/authMiddleware")
 
 //Route Create a client
 //path: http://localhost:5000/api/AddClient
-router.post("/AddClient", (req, res) => {
+router.post("/AddClient", authMiddleware,(req, res) => {
   const { nom, prenom, adresse, civilite, email, tel } = req.body;
   let clientModel = new newClient({
     nom,
@@ -22,7 +23,7 @@ router.post("/AddClient", (req, res) => {
 
 //Route Read all client
 //path: http://localhost:5000/api/clients
-router.get("/clients", (req, res) => {
+router.get("/clients", authMiddleware, (req, res) => {
   newClient
     .find()
     .then((clients) => res.status(200).json(clients))
@@ -30,18 +31,18 @@ router.get("/clients", (req, res) => {
 });
 
 //Route Update Client
-//path: http://localhost:5000/api/updateClient/:id
-router.put("/updateClient/", (req, res) => {
-  const { id, nom, prenom, adresse, civilite, email, tel } = req.body;
+//path: http://localhost:5000/api/updateClient
+router.put("/updateClient", authMiddleware, (req, res) => {
+  const { _id, nom, prenom, adresse, civilite, email, tel } = req.body;
   newClient.findByIdAndUpdate(
-    id,
+    _id,
     { nom, prenom, adresse, civilite, email, tel },
     (err, data) => {
       if (err) {
         throw err;
       }
       newClient
-        .findById(req.params.id)
+        .findById(_id)
         .then((client) => res.status(200).json(client))
         .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
     }
@@ -50,10 +51,10 @@ router.put("/updateClient/", (req, res) => {
 
 //Route Delete Client
 //path: http://localhost:5000/api/deleteClient/:id
-router.delete("/deleteClient/:id", (req, res) => {
+router.delete("/deleteClient/:id", authMiddleware, (req, res) => {
   newClient
     .findByIdAndDelete(req.params.id)
-    .then(() => res.status(200).json({ msg: "Client Deleted" }))
+    .then((client) => res.status(200).json(client))
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 

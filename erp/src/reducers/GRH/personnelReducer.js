@@ -33,6 +33,8 @@ import {
   LOAD_AVANCE_SUCCESS,
   ADD_AVANCE_FAILED,
   ADD_AVANCE_SUCCESS,
+  ADD_ABSENCE_SUCCESS,
+  ADD_ABSENCE_FAILED,
 } from "../../actions/GRH/types";
 
 const initState = {
@@ -40,6 +42,7 @@ const initState = {
   contrat: [],
   personnel: [],
   avance: [],
+  absence: [],
   errors: null,
 };
 
@@ -263,6 +266,17 @@ const personnelReducer = (state = initState, action) => {
       return {
         ...state,
         avance: state.avance,
+        errors: action.payload,
+      };
+    case ADD_ABSENCE_SUCCESS:
+      return {
+        ...state,
+        errors: null,
+        absence: [...state.absence, action.payload],
+      };
+    case ADD_ABSENCE_FAILED:
+      return {
+        ...state,
         errors: action.payload,
       };
     default:

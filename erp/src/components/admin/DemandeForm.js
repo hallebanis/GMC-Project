@@ -27,6 +27,7 @@ const DemandeForm = ({ match, history }) => {
   const handleSave = () => {
     dispatch(addDemande(info));
     dispatch(loadPersonnelById(info.personnelId));
+    history.goBack();
   };
 
   const handleCancel = () => {

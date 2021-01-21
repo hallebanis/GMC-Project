@@ -23,12 +23,7 @@ router.get('/allCheque', (req, res) => {
         .then(cheques => res.json(cheques))
         .catch(err => console.log(err.message))
 })
-//Route Read One cheque By Id
-router.get('/cheque/:id', (req, res) => {
-    newCheque.findById(req.params.id)
-        .then(cheque => res.json(cheque))
-        .catch(err => console.log(err.message))
-})
+
 //Route Delete cheque
 router.delete('/deleteCheque/:id', (req, res) => {
     newCheque.findByIdAndDelete(req.params.id)

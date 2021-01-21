@@ -3,6 +3,7 @@ const router = express.Router();
 const newEntreprise = require("../modules/Entreprise");
 
 //Route Create Entreprise
+//path: http://localhost:5000/api/AddEntreprise
 router.post("/AddEntreprise", (req, res) => {
     const { matricule, tel, email,contactId } = req.body;
     let EntrepriseModel = new newEntreprise({
@@ -13,40 +14,44 @@ router.post("/AddEntreprise", (req, res) => {
     });
     EntrepriseModel.save()
         .then((entreprise) => res.status(200).json(entreprise))
-        .catch((err) => res.status(400).json(err));
+        .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 
 //Route Read Entreprises
+//path: http://localhost:5000/api/Entreprises
 router.get("/Entreprises", (req, res) => {
     newEntreprise
         .find()
-        .then((Entreprises) => res.json(Entreprises))
-        .catch((err) => console.log(err.message));
+        .then((Entreprises) => res.status(200).json(Entreprises))
+        .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 
 //Route Update Entreprise
-router.put("/updateEntreprise/:id", (req, res) => {
+//path: http://localhost:5000/api/updateEntreprise
+router.put("/updateEntreprise", (req, res) => {
+    const {id,matricule,tel,email} =req.body;
     newEntreprise.findByIdAndUpdate(
-        req.params.id,
-        { $set: { ...req.body } },
+        id,
+        { matricule,tel,email},
         (err, data) => {
             if (err) {
                 throw err;
             }
             newEntreprise
                 .findById(req.params.id)
-                .then((entreprise) => res.json(entreprise))
-                .catch((err) => console.log(err.message));
+                .then((entreprise) => res.status(200).json(entreprise))
+                .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
         }
     );
 });
 
 //Route Delete Entreprise
+//path: http://localhost:5000/api/deleteEntreprise/:id
 router.delete("/deleteEntreprise/:id", (req, res) => {
     newEntreprise
         .findByIdAndDelete(req.params.id)
-        .then(() => res.json({ msg: "Entreprise Deleted" }))
-        .catch((err) => console.log(err.message));
+        .then(() => res.status(200).json({ msg: "Entreprise Deleted" }))
+        .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 
 module.exports = router;
