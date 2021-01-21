@@ -34,7 +34,7 @@ router.put("/updateReservation", authMiddleware, (req, res) => {
         { dateReservation },
         (err, data) => {
             if (err) {
-                throw err;
+                res.status(400).json({ errors: [{ msg: err }] });
             }
             newReservation
                 .findById(req.params.id)

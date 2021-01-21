@@ -34,7 +34,7 @@ router.put("/updateLigneReservation", authMiddleware, (req, res) => {
         { quantité},
         (err, data) => {
             if (err) {
-                throw err;
+                res.status(400).json({ errors: [{ msg: err }] });
             }
             newLigneReservation
                 .findById(req.params.id)

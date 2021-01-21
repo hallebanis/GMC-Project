@@ -37,7 +37,7 @@ router.put("/updateLigneVente", authMiddleware, (req, res) => {
         { quantité,description,sousTotal},
         (err, data) => {
             if (err) {
-                throw err;
+                res.status(400).json({ errors: [{ msg: err }] });
             }
             newLigneVente
                 .findById(req.params.id)

@@ -41,7 +41,7 @@ router.put("/updateClient", authMiddleware, (req, res) => {
     (err, data) => {
       if (err) {
         cd;
-        throw err;
+        res.status(400).json({ errors: [{ msg: err }] });
       }
       newClient
         .findById(_id)

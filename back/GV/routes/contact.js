@@ -38,7 +38,7 @@ router.put("/updateContact", authMiddleware, (req, res) => {
         { nom, prenom, fonction, email, tel },
         (err, data) => {
             if (err) {
-                throw err;
+                res.status(400).json({ errors: [{ msg: err }] });
             }
             newContact
                 .findById(req.params.id)

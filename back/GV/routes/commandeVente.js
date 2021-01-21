@@ -44,7 +44,7 @@ router.put("/updateCommVente", authMiddleware, (req, res) => {
         { dateCommande, total, isValidate, numero },
         (err, data) => {
             if (err) {
-                throw err;
+                res.status(400).json({ errors: [{ msg: err }] });
             }
             newCommVente
                 .findById(req.params.id)
