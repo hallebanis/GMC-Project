@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const newReservation = require("../modules/Reservation");
+const authMiddleware = require ("../../helpers/authMiddleware");
 
 //Route Create Reservation
 //path: http://localhost:5000/api/AddReservation
-router.post("/AddReservation", (req, res) => {
+router.post("/AddReservation", authMiddleware, (req, res) => {
     const { dateReservation,reservationId } = req.body;
     let ReservationModel = new newReservation({
         dateReservation,
@@ -17,7 +18,7 @@ router.post("/AddReservation", (req, res) => {
 
 //Route Read Reservation
 //path: http://localhost:5000/api/reservations
-router.get("/reservations", (req, res) => {
+router.get("/reservations", authMiddleware, (req, res) => {
     newReservation
         .find()
         .then((Reservation) => res.status(200).json(Reservation))
@@ -26,7 +27,7 @@ router.get("/reservations", (req, res) => {
 
 //Route Update Reservation
 //path: http://localhost:5000/api/updateReservation
-router.put("/updateReservation", (req, res) => {
+router.put("/updateReservation", authMiddleware, (req, res) => {
     const {id,dateReservation} = req.body;
     newReservation.findByIdAndUpdate(
         id,
@@ -45,7 +46,7 @@ router.put("/updateReservation", (req, res) => {
 
 //Route Delete Reservation
 //path: http://localhost:5000/api/deleteReservation/:id
-router.delete("/deleteReservation/:id", (req, res) => {
+router.delete("/deleteReservation/:id", authMiddleware, (req, res) => {
     newReservation
         .findByIdAndDelete(req.params.id)
         .then(() => res.status(200).json({ msg: "Reservation Deleted" }))

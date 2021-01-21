@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const newContact = require("../modules/Contact");
+const authMiddleware = require ("../../helpers/authMiddleware");
 
 //Route Create Contact
 //path: http://localhost:5000/api/AddContact
-router.post("/AddContact", (req, res) => {
+router.post("/AddContact", authMiddleware, (req, res) => {
     const { nom, prenom, fonction, email, tel, entrepriseId } = req.body;
     let ContactModel = new newContact({
         nom,
@@ -21,7 +22,7 @@ router.post("/AddContact", (req, res) => {
 
 //Route Read Contacts
 //path: http://localhost:5000/api/Contacts
-router.get("/Contacts", (req, res) => {
+router.get("/Contacts", authMiddleware, (req, res) => {
     newContact
         .find()
         .then((Contacts) => res.status(200).json(Contacts))
@@ -30,7 +31,7 @@ router.get("/Contacts", (req, res) => {
 
 //Route Update Contact
 //path: http://localhost:5000/api/updateContact
-router.put("/updateContact", (req, res) => {
+router.put("/updateContact", authMiddleware, (req, res) => {
     const { id, nom, prenom, fonction, email, tel } = req.body;
     newContact.findByIdAndUpdate(
         id,
@@ -49,7 +50,7 @@ router.put("/updateContact", (req, res) => {
 
 //Route Delete Contact
 //path: http://localhost:5000/api/deleteContact/:id
-router.delete("/deleteContact/:id", (req, res) => {
+router.delete("/deleteContact/:id", authMiddleware, (req, res) => {
     newContact
         .findByIdAndDelete(req.params.id)
         .then(() => res.status(200).json({ msg: "Contact Deleted" }))
