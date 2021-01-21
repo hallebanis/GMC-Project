@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const newClient = require("../modules/Client");
-const authMiddleware= require("../../helpers/authMiddleware")
+const authMiddleware = require("../../helpers/authMiddleware");
 
 //Route Create a client
 //path: http://localhost:5000/api/AddClient
-router.post("/AddClient", authMiddleware,(req, res) => {
+router.post("/AddClient", authMiddleware, (req, res) => {
   const { nom, prenom, adresse, civilite, email, tel } = req.body;
   let clientModel = new newClient({
     nom,
@@ -31,6 +31,7 @@ router.get("/clients", authMiddleware, (req, res) => {
 });
 
 //Route Update Client
+
 //path: http://localhost:5000/api/updateClient
 router.put("/updateClient", authMiddleware, (req, res) => {
   const { _id, nom, prenom, adresse, civilite, email, tel } = req.body;
@@ -39,6 +40,7 @@ router.put("/updateClient", authMiddleware, (req, res) => {
     { nom, prenom, adresse, civilite, email, tel },
     (err, data) => {
       if (err) {
+        cd;
         throw err;
       }
       newClient
