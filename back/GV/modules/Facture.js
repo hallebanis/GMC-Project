@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
-const FactureSchema = new schema({
+const FactureVenteSchema = new schema({
   numFacture: {
     type: Number,
     required: true,
@@ -27,12 +27,15 @@ const FactureSchema = new schema({
   isValidate: {
     type: Boolean,
     default: false,
-    required: true,
   },
-  idFournisseur: {
+  idClient: {
     type: mongoose.Types.ObjectId,
-    ref: "fournisseur",
+    ref: "client",
+  },
+  idCommand: {
+    type: mongoose.Types.ObjectId,
+    ref: "commandeVente",
   },
 });
 
-module.exports = mongoose.model("facture", FactureSchema);
+module.exports = mongoose.model("factureVente", FactureVenteSchema);

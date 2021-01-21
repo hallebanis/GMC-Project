@@ -32,16 +32,17 @@ router.get("/clients", (req, res) => {
 //Route Update Client
 //path: http://localhost:5000/api/updateClient/:id
 router.put("/updateClient/", (req, res) => {
-  const { id, nom, prenom, adresse, civilite, email, tel } = req.body;
+  const { _id, nom, prenom, adresse, civilite, email, tel } = req.body;
   newClient.findByIdAndUpdate(
-    id,
+    _id,
     { nom, prenom, adresse, civilite, email, tel },
     (err, data) => {
       if (err) {
+        cd;
         throw err;
       }
       newClient
-        .findById(req.params.id)
+        .findById(_id)
         .then((client) => res.status(200).json(client))
         .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
     }

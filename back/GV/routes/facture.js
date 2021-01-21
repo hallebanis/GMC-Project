@@ -1,25 +1,29 @@
 const express = require("express");
 const router = express.Router();
-const newFacture = require("../modules/facture");
+const newFacture = require("../modules/Facture");
 
 // Route Create New facture
-router.post("/addFacture", (req, res) => {
+router.post("/addFactureVente", (req, res) => {
   const {
     numFacture,
     totalAvantRemise,
     description,
     remise,
     totalApresRemise,
-    idFournisseur,
+    idClient,
     idCommand,
   } = req.body;
   const factureModel = new newFacture({
     numFacture,
+    date,
     totalAvantRemise,
     description,
     remise,
     totalApresRemise,
+    type,
+    isValidate,
     idFournisseur,
+    idClient,
     idCommand,
   });
   factureModel
@@ -28,33 +32,32 @@ router.post("/addFacture", (req, res) => {
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 // Route Read All facture
-router.get("/allFacture", (req, res) => {
+router.get("/allFactureVente", (req, res) => {
   newFacture
     .find()
     .then((factures) => res.status(200).json(factures))
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 //Route Read One facture By Id
-router.get("/facture/:id", (req, res) => {
+router.get("/facturevente/:id", (req, res) => {
   newFacture
     .findById(req.params.id)
     .then((facture) => res.json(facture))
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 //Route Delete facture
-router.delete("/deleteFacture/:id", (req, res) => {
+router.delete("/deleteFactureVente/:id", (req, res) => {
   newFacture
     .findByIdAndDelete(req.params.id)
     .then((facture) => res.json(facture))
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 //Route  Update  facture
-router.put("/updateFacture", (req, res) => {
+router.put("/updateFactureVente", (req, res) => {
   const {
     id,
     numFacture,
     date,
-    isValidate,
     totalAvantRemise,
     description,
     remise,
@@ -66,7 +69,6 @@ router.put("/updateFacture", (req, res) => {
     {
       numFacture,
       date,
-      isValidate,
       totalAvantRemise,
       description,
       remise,
