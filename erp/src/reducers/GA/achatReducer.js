@@ -47,7 +47,7 @@ const achatReducer = (state = initState, action) => {
         }
         )
       }
-      case GET_COMMANDEACHAT_SUCCESS:
+    case GET_COMMANDEACHAT_SUCCESS:
       return {
         ...state, errors: null, commandeAchat: action.payload
       }
@@ -55,13 +55,13 @@ const achatReducer = (state = initState, action) => {
       return {
         ...state, commandeAchat: [...state.commandeAchat, action.payload], errors: null
       }
-      case DELETE_COMMANDEACHAT_SUCCESS:
+    case DELETE_COMMANDEACHAT_SUCCESS:
       return {
         ...state, commandeAchat: state.commandeAchat.filter(el =>
           el._id !== action.payload._id
         )
       }
-      case UPDATE_COMMANDEACHAT_SUCCESS:
+    case UPDATE_COMMANDEACHAT_SUCCESS:
       return {
         ...state, errors: null, commandeAchat: state.commandeAchat.map(el => {
           if (el._id === action.payload._id)
