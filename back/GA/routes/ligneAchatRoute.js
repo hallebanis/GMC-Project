@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const newLigne = require("../modules/ligneAchat")
+const authMiddleware = require("../../helpers/authMiddleware")
 
 
 // Route Create New Ligne
-router.post('/addLigne', (req, res) => {
+// Path : http://localhost:5000/api/addLigne
+router.post('/addLigne', authMiddleware, (req, res) => {
     const { quantite, sousTotal, description, idCommande, idProduit } = req.body
     const ligneModel = new newLigne({
         quantite,
@@ -15,30 +17,43 @@ router.post('/addLigne', (req, res) => {
     })
     ligneModel.save()
         .then(ligne => res.json(ligne))
-        .catch(err => console.log(err.message))
+        .catch(err => res.status(400).json({ errors: [{ msg: err }] }))
 })
 
 // Route Read ligne
-router.get('/Ligne', (req, res) => {
+// Path : http://localhost:5000/api/Ligne
+router.get('/Ligne', authMiddleware, (req, res) => {
     newLigne.find()
         .then(ligne => res.json(ligne))
-        .catch(err => console.log(err.message))
+        .catch(err => res.status(400).json({ errors: [{ msg: err }] }))
 })
 
 
 //Route Delete ligne
-router.delete('/deleteLigne/:id', (req, res) => {
+// Path : http://localhost:5000/api/deleteLigne/:id
+router.delete('/deleteLigne/:id', authMiddleware, (req, res) => {
     newLigne.findByIdAndDelete(req.params.id)
         .then(() => res.json({ msg: 'Ligne Deleted' }))
-        .catch(err => console.log(err.message))
+        .catch(err => res.status(400).json({ errors: [{ msg: err }] }))
 })
 //Route  Update  ligne
-router.put('/updateligne/:id', (req, res) => {
-    newLigne.findByIdAndUpdate(req.params.id, { $set: { ...req.body } }, (err, data) => {
-        if (err) { throw err }
-        newLigne.findById(req.params.id)
-            .then(ligne => res.json(ligne))
-            .catch(err => console.log(err.message))
-    })
+// Path : http://localhost:5000/api/updateligne
+router.put('/updateligne', authMiddleware, (req, res) => {
+    const { quantite, sousTotal, description } = req.body;
+
+    newLigne.findByIdAndUpdate(
+        id,
+        { quantite, sousTotal, description },
+        (err, data) => {
+            if (err) {
+                res.status(400).json({ errors: [{ msg: err }] });
+            }
+            newLigne.findById(req.params.id)
+                .then(ligne => res.json(ligne))
+                .catch(err => res.status(400).json({ errors: [{ msg: err }] }))
+        })
 })
+
+
+
 module.exports = router

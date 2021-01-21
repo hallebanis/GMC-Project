@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const newFournissuer = require("../modules/fournisseur")
+const authMiddleware = require("../../helpers/authMiddleware")
 
 
 // Route Create New Fournissuer
-router.post('/addFournisseur', (req, res) => {
+// Path : http://localhost:5000/api/addFournisseur
+router.post('/addFournisseur', authMiddleware, (req, res) => {
     const { matricule, numTel, email, adresse, idCompteBancaire } = req.body
     const fournisseurModel = new newFournissuer({
         matricule,
@@ -15,35 +17,42 @@ router.post('/addFournisseur', (req, res) => {
     })
     fournisseurModel.save()
         .then(fournisseur => res.json(fournisseur))
-        .catch(err => console.log(err.message))
+        .catch(err => res.status(400).json({ errors: [{ msg: err }] }))
 })
 
 // Route Read All fournisseur
-router.get('/allFournisseur', (req, res) => {
+// Path : http://localhost:5000/api/allFournisseur
+router.get('/allFournisseur', authMiddleware, (req, res) => {
     newFournisseur.find()
         .then(fournisseurs => res.json(fournisseurs))
-        .catch(err => console.log(err.message))
+        .catch(err => res.status(400).json({ errors: [{ msg: err }] }))
 })
 
-//Route Read One fournisseur By Id
-router.get('/Fournisseur/:id', (req, res) => {
-    newFournisseur.findById(req.params.id)
-        .then(fournisseur => res.json(fournisseur))
-        .catch(err => console.log(err.message))
-})
+
 //Route Delete fournisseur
-router.delete('/deleteFournisseur/:id', (req, res) => {
+// Path : http://localhost:5000/api/deleteFournisseur/:id
+router.delete('/deleteFournisseur/:id', authMiddleware, (req, res) => {
     newFournisseur.findByIdAndDelete(req.params.id)
         .then(() => res.json({ msg: 'Fournisseur Deleted' }))
-        .catch(err => console.log(err.message))
+        .catch(err => res.status(400).json({ errors: [{ msg: err }] }))
 })
 //Route  Update  fournisseur
-router.put('/updateFournisseur/:id', (req, res) => {
-    newFournisseur.findByIdAndUpdate(req.params.id, { $set: { ...req.body } }, (err, data) => {
-        if (err) { throw err }
-        newfournisseur.findById(req.params.id)
-            .then(fournisseur => res.json(fournisseur))
-            .catch(err => console.log(err.message))
-    })
+// Path : http://localhost:5000/api/updateFournisseur
+router.put('/updateFournisseur', authMiddleware, (req, res) => {
+    const { matricule, numTel, email, adresse } = req.body
+    newFournisseur.findByIdAndUpdate(
+        id,
+        { matricule, numTel, email, adresse },
+        (err, data) => {
+            if (err) {
+                res.status(400).json({ errors: [{ msg: err }] });
+            }
+            newfournisseur.findById(req.params.id)
+                .then(fournisseur => res.json(fournisseur))
+                .catch(err => res.status(400).json({ errors: [{ msg: err }] }))
+        })
 })
+
+
+
 module.exports = router
