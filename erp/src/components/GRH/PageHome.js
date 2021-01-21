@@ -1,5 +1,6 @@
 import { createMedia } from "@artsy/fresnel";
 import PropTypes from "prop-types";
+import image from "../../res/img/ERP.jpg";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -29,7 +30,7 @@ const HomepageHeading = ({ mobile }) => (
   <Container text>
     <Header
       as="h1"
-      content="Imagine-a-Company"
+      content="Entreprise Ressource Planning"
       inverted
       style={{
         fontSize: mobile ? "2em" : "4em",
@@ -40,7 +41,7 @@ const HomepageHeading = ({ mobile }) => (
     />
     <Header
       as="h2"
-      content="Do whatever you want when you want to."
+      content="Manage your entreprise"
       inverted
       style={{
         fontSize: mobile ? "1.5em" : "1.7em",
@@ -49,7 +50,10 @@ const HomepageHeading = ({ mobile }) => (
       }}
     />
     <Button primary size="huge">
-      Get Started
+      {" "}
+      <Link to="/login" style={{ color: "white" }}>
+        Login
+      </Link>
       <Icon name="right arrow" />
     </Button>
   </Container>
@@ -93,9 +97,7 @@ class DesktopContainer extends Component {
                 <Menu.Item as="a" active>
                   Home
                 </Menu.Item>
-                <Menu.Item as="a">Work</Menu.Item>
-                <Menu.Item as="a">Company</Menu.Item>
-                <Menu.Item as="a">Careers</Menu.Item>
+
                 <Menu.Item position="right">
                   <Button as="a" inverted={!fixed}>
                     <Link to="/login" style={{ color: "white" }}>
@@ -221,35 +223,37 @@ const HomepageLayout = () => (
         <Grid.Row>
           <Grid.Column width={8}>
             <Header as="h3" style={{ fontSize: "2em" }}>
-              We Help Companies and Companions
+              Definition of Enterprise Resource Planning (ERP)
             </Header>
             <p style={{ fontSize: "1.33em" }}>
-              We can give your company superpowers to do things that they never
-              thought possible. Let us delight your customers and empower your
-              needs... through pure data analytics.
-            </p>
-            <Header as="h3" style={{ fontSize: "2em" }}>
-              We Make Bananas That Can Dance
-            </Header>
-            <p style={{ fontSize: "1.33em" }}>
-              Yes that's right, you thought it was the stuff of dreams, but even
-              bananas can be bioengineered.
+              Enterprise resource planning (ERP) refers to a type of software
+              that organizations use to manage day-to-day business activities
+              such as accounting, procurement, project management, risk
+              management and compliance, and supply chain operations. A complete
+              ERP suite also includes enterprise performance management,
+              software that helps plan, budget, predict, and report on an
+              organization’s financial results. ERP systems tie together a
+              multitude of business processes and enable the flow of data
+              between them. By collecting an organization’s shared transactional
+              data from multiple sources, ERP systems eliminate data duplication
+              and provide data integrity with a single source of truth. Today,
+              ERP systems are critical for managing thousands of businesses of
+              all sizes and in all industries. To these companies, ERP is as
+              indispensable as the electricity that keeps the lights on
             </p>
           </Grid.Column>
-          <Grid.Column floated="right" width={6}>
-            <Image
-              bordered
-              rounded
-              size="large"
-              src="/images/wireframe/white-image.png"
-            />
+          <Grid.Column /* floated="right" */ width={6}>
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/c9HfNg4a_Og"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row>
-          <Grid.Column textAlign="center">
-            <Button size="huge">Check Them Out</Button>
-          </Grid.Column>
-        </Grid.Row>
+        <Grid.Row></Grid.Row>
       </Grid>
     </Segment>
 
@@ -269,7 +273,7 @@ const HomepageLayout = () => (
               "I shouldn't have gone with their competitor."
             </Header>
             <p style={{ fontSize: "1.33em" }}>
-              <Image avatar src="/images/avatar/large/nan.jpg" />
+              <Image avatar src={image} />
               <b>Nan</b> Chief Fun Officer Acme Toys
             </p>
           </Grid.Column>
@@ -280,16 +284,20 @@ const HomepageLayout = () => (
     <Segment style={{ padding: "8em 0em" }} vertical>
       <Container text>
         <Header as="h3" style={{ fontSize: "2em" }}>
-          Breaking The Grid, Grabs Your Attention
+          Why Use ERP?
         </Header>
         <p style={{ fontSize: "1.33em" }}>
-          Instead of focusing on content creation and hard work, we have learned
-          how to master the art of doing nothing by providing massive amounts of
-          whitespace and generic content that can seem massive, monolithic and
-          worth your attention.
+          Enterprise resource planning software is used to manage a number of
+          business functions, but how is it any better than other solutions?
+          Even though ERP may have similar goals to other solutions, its unique
+          features make it a distinctive competitor in the software market. Here
+          are the eight reasons why the importance of enterprise resource
+          planning (ERP) systems should be considered by any organization:
         </p>
         <Button as="a" size="large">
-          Read More
+          <a href="https://www.selecthub.com/enterprise-resource-planning/why-erp-systems-are-important/">
+            Read More
+          </a>
         </Button>
 
         <Divider
@@ -302,15 +310,17 @@ const HomepageLayout = () => (
         </Divider>
 
         <Header as="h3" style={{ fontSize: "2em" }}>
-          Did We Tell You About Our Bananas?
+          {" "}
+          ERP CASES
         </Header>
         <p style={{ fontSize: "1.33em" }}>
-          Yes I know you probably disregarded the earlier boasts as non-sequitur
-          filler content, but it's really true. It took years of gene splicing
-          and combinatory DNA research, but our bananas can really dance.
+          Let’s look at three companies that found success with their ERP
+          implementation projects, and their key lessons learned.
         </p>
         <Button as="a" size="large">
-          I'm Still Quite Interested
+          <a href="https://www.netsuite.com/portal/resource/articles/erp/erp-implementation-case-study.shtml">
+            I'm Still Quite Interested
+          </a>
         </Button>
       </Container>
     </Segment>
@@ -322,29 +332,33 @@ const HomepageLayout = () => (
             <Grid.Column width={3}>
               <Header inverted as="h4" content="About" />
               <List link inverted>
-                <List.Item as="a">Sitemap</List.Item>
+                <List.Item as="a">Home</List.Item>
                 <List.Item as="a">Contact Us</List.Item>
-                <List.Item as="a">Religious Ceremonies</List.Item>
-                <List.Item as="a">Gazebo Plans</List.Item>
+                <List.Item as="a">
+                  <Link to="/login" style={{ color: "white" }}>
+                    Log in
+                  </Link>
+                </List.Item>
+                <List.Item as="a">
+                  <Link to="/register " style={{ color: "white" }}>
+                    Sign Up
+                  </Link>
+                </List.Item>
               </List>
             </Grid.Column>
             <Grid.Column width={3}>
               <Header inverted as="h4" content="Services" />
               <List link inverted>
-                <List.Item as="a">Banana Pre-Order</List.Item>
-                <List.Item as="a">DNA FAQ</List.Item>
-                <List.Item as="a">How To Access</List.Item>
-                <List.Item as="a">Favorite X-Men</List.Item>
+                <List.Item as="a">Vente</List.Item>
+                <List.Item as="a">Achat</List.Item>
+                <List.Item as="a">Humain Ressource</List.Item>
               </List>
             </Grid.Column>
             <Grid.Column width={7}>
               <Header as="h4" inverted>
-                Footer Header
+                Please contact us
               </Header>
-              <p>
-                Extra space for a call to action inside the footer that could
-                help re-engage users.
-              </p>
+              <p>Erpcompany@gmail.com</p>
             </Grid.Column>
           </Grid.Row>
         </Grid>
