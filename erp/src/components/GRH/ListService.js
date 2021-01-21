@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Navbar, Table } from "react-bootstrap";
+import { Button, Container, Navbar, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteService, loadService } from "../../actions/GRH/personnelActions";
@@ -18,7 +18,7 @@ export const ListService = () => {
   };
 
   return (
-    <div>
+    <Container>
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand href="#home">List Of Services</Navbar.Brand>
       </Navbar>
@@ -47,6 +47,6 @@ export const ListService = () => {
           ))}
         </tbody>
       </Table>
-    </div>
+      </Container>
   );
 };

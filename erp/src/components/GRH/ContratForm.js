@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import {
   addContrat,
   loadContrat,
   loadPersonnel,
 } from "../../actions/GRH/personnelActions";
+import { Paper, Typography } from "@material-ui/core";
 import { ListService } from "../../components/GRH/ListService";
+import MainNavBar from "../admin/MainNavBar";
 import { Select } from "./DatePicker";
+import { NavSide } from "./NavSide";
 import PersonnelDropDown from "./PersonnelDropDown";
+import useStyles from "./styles";
 
 export const ContratForm = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadContrat());
@@ -40,43 +45,62 @@ export const ContratForm = () => {
     dispatch(loadPersonnel());
   };
   return (
-    <Form>
-      <PersonnelDropDown onPersonnelChange={handleSelect}> </PersonnelDropDown>
-      <Form.Group controlId="formBasicEmail">
-        <Form.Label>
-          date Debut :
-          <Select name="dateDebut" onDateChange={handleDateChange} />
-        </Form.Label>
-      </Form.Group>
+    <Container fluid>
+      <Row>
+        <Col>
+          <MainNavBar></MainNavBar>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={3}>
+          {" "}
+          <NavSide />
+        </Col>
+        <Col md={6}>
+        
+          <Paper className={classes.paper} style={{margin:"50px" }}>
+          <Typography  style={{textAlign:"center"}} variant="h6">Contrat Form</Typography>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>salaire de base</Form.Label>
+              <Form.Control
+                onChange={(e) =>
+                  setInfo({ ...info, [e.target.name]: +e.target.value })
+                }
+                name="salaireDeBase"
+                type="text"
+                placeholder=""
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>type contrat</Form.Label>
+              <Form.Control
+                onChange={handleChange}
+                name="typeContrat"
+                type="text"
+                placeholder=""
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>
+                date Debut :
+                <Select name="dateDebut" onDateChange={handleDateChange} />
+              </Form.Label>
+            </Form.Group>
 
-      <Form.Group controlId="formBasicPassword">
-        <Form.Label>
-          date Fin : <Select name="dateFin" onDateChange={handleDate} />
-        </Form.Label>
-      </Form.Group>
-      <Form.Group controlId="formBasicPassword">
-        <Form.Label>salaire de base</Form.Label>
-        <Form.Control
-          onChange={(e) =>
-            setInfo({ ...info, [e.target.name]: +e.target.value })
-          }
-          name="salaireDeBase"
-          type="text"
-          placeholder=""
-        />
-      </Form.Group>
-      <Form.Group controlId="formBasicPassword">
-        <Form.Label>type contrat</Form.Label>
-        <Form.Control
-          onChange={handleChange}
-          name="typeContrat"
-          type="text"
-          placeholder=""
-        />
-      </Form.Group>
-      <Button variant="primary" onClick={handleSave}>
-        Submit
-      </Button>
-    </Form>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>
+                date Fin : <Select name="dateFin" onDateChange={handleDate} />
+              </Form.Label>
+            </Form.Group>
+            <PersonnelDropDown onPersonnelChange={handleSelect}>
+              {" "}
+            </PersonnelDropDown>
+            <Button variant="primary" onClick={handleSave}>
+              Submit
+            </Button>
+          </Paper>
+        </Col>
+      </Row>
+    </Container>
   );
 };

@@ -6,6 +6,7 @@ import { Select } from "./DatePicker";
 import { useDispatch } from "react-redux";
 import PersonnelDropDown from "./PersonnelDropDown";
 import { addAvance, loadPersonnel } from "../../actions/GRH/personnelActions";
+import { instance } from "./NavSide";
 
 export const AvanceForm = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ export const AvanceForm = () => {
           noValidate
           className={`${classes.root} ${classes.form}`}
         >
-          <Typography variant="h6">Avance Form</Typography>
+          <Typography style={{textAlign:"center"}} variant="h6">Avance Form</Typography>
           <TextField
             name="montant"
             type="text"
@@ -71,6 +72,7 @@ export const AvanceForm = () => {
           </Button>
         </form>
       </Paper>
+      <instance/>
     </div>
   );
 };

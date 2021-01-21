@@ -5,6 +5,8 @@ import { ListPersonnel } from "../../components/GRH/ListPersonnel";
 import { loadPersonnel } from "../../actions/GRH/personnelActions";
 import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
 import { Container, Table, Row, Col } from "react-bootstrap";
+import { NavSide } from "../../components/GRH/NavSide";
+import MainNavBar from "../../components/admin/MainNavBar";
 
 export const ListPersonnelPage = () => {
   const dispatch = useDispatch();
@@ -14,51 +16,13 @@ export const ListPersonnelPage = () => {
   const personnel = useSelector((state) => state.personnel);
   return (
     <Container fluid>
+      <Row><Col><MainNavBar></MainNavBar></Col></Row>
       <Row>
         <Col md={3}>
           {" "}
-          <AdminDashboardSidebar
-            color="blue"
-            linkList={[
-              {
-                categorie: "Personnel",
-                elements: [
-                  {
-                    title: "Add Personnel",
-                    link: "/grh-dashboard/addpersonnel",
-                  },
-                  {
-                    title: "personnel list",
-                    link: "/grh-dashboard/listpersonnel",
-                  },
-                ],
-              },
-              {
-                categorie: "Contrat",
-                elements: [
-                  {
-                    title: "Add Contrat",
-                    link: "/grh-dashboard/contrat",
-                  },
-                ],
-              },
-              {
-                categorie: "Service",
-                elements: [
-                  {
-                    title: "Add Service",
-                    link: "/grh-dashboard/AddService",
-                  },
-                  {
-                    title: "List Service",
-                    link: "/grh-dashboard/ListService",
-                  },
-                ],
-              },
-            ]}
-          />
+          <NavSide/>
         </Col>
-        <Col>
+        <Col >
           <ListPersonnel list={personnel} />
         </Col>
       </Row>

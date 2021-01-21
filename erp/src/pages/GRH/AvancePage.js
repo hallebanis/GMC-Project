@@ -1,10 +1,22 @@
-import React from 'react'
-import { AvanceForm } from '../../components/GRH/AvanceForm'
+import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import MainNavBar from "../../components/admin/MainNavBar";
+import { AvanceForm } from "../../components/GRH/AvanceForm";
+import { NavSide } from "../../components/GRH/NavSide";
 
 export const AvancePage = () => {
-    return (
-        <div>
-            <AvanceForm/>
-        </div>
-    )
-}
+  return (
+    <Container fluid>
+      <Row><Col><MainNavBar></MainNavBar></Col></Row>
+      <Row>
+        <Col md={3}>
+          <NavSide />
+        </Col>
+        <Col>
+          {" "}
+          <AvanceForm />
+        </Col>
+      </Row>{" "}
+    </Container>
+  );
+};
