@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const newFacture = require("../modules/Facture");
+const authMiddleware = require ("../../helpers/authMiddleware");
 
-// Route Create New facture
-router.post("/addFactureVente", (req, res) => {
+
+// Route Create new facture
+//path: http://localhost:5000/api/addFactureVente
+router.post("/addFactureVente", authMiddleware, (req, res) => {
   const {
     numFacture,
     totalAvantRemise,
@@ -28,32 +31,22 @@ router.post("/addFactureVente", (req, res) => {
   });
   factureModel
     .save()
-    .then((facture) => res.json(facture))
+    .then((facture) => res.status(200).json(facture))
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
+
 // Route Read All facture
-router.get("/allFactureVente", (req, res) => {
+//path: http://localhost:5000/api/allFactureVente
+router.get("/allFactureVente", authMiddleware, (req, res) => {
   newFacture
     .find()
     .then((factures) => res.status(200).json(factures))
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
-//Route Read One facture By Id
-router.get("/facturevente/:id", (req, res) => {
-  newFacture
-    .findById(req.params.id)
-    .then((facture) => res.json(facture))
-    .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
-});
-//Route Delete facture
-router.delete("/deleteFactureVente/:id", (req, res) => {
-  newFacture
-    .findByIdAndDelete(req.params.id)
-    .then((facture) => res.json(facture))
-    .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
-});
+
 //Route  Update  facture
-router.put("/updateFactureVente", (req, res) => {
+//path: http://localhost:5000/api/updateFactureVente
+router.put("/updateFactureVente", authMiddleware, (req, res) => {
   const {
     id,
     numFacture,
@@ -86,4 +79,15 @@ router.put("/updateFactureVente", (req, res) => {
     }
   );
 });
+
+//Route Delete facture
+//path: http://localhost:5000/api/deleteFactureVente/:id
+router.delete("/deleteFactureVente/:id", authMiddleware, (req, res) => {
+  newFacture
+    .findByIdAndDelete(req.params.id)
+    .then((facture) => res.status(200).json(facture))
+    .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
+});
+
+
 module.exports = router;

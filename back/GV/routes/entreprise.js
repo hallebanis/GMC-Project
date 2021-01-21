@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const newEntreprise = require("../modules/Entreprise");
 const authMiddleware = require ("../../helpers/authMiddleware");
+
 //Route Create Entreprise
 //path: http://localhost:5000/api/AddEntreprise
 router.post("/AddEntreprise", authMiddleware, (req, res) => {
@@ -35,7 +36,7 @@ router.put("/updateEntreprise", authMiddleware, (req, res) => {
         { matricule,tel,email},
         (err, data) => {
             if (err) {
-                throw err;
+                res.status(400).json({ errors: [{ msg: err }] });
             }
             newEntreprise
                 .findById(req.params.id)

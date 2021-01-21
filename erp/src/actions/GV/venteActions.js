@@ -65,6 +65,14 @@ import {
   UPDATE_TVA_FAILED,
   DELETE_TVA_SUCCESS,
   DELETE_TVA_FAILED,
+  ADD_FACTUREVENTE_SUCCESS,
+  ADD_FACTUREVENTE_FAILED,
+  GET_FACTUREVENTE_SUCCESS,
+  GET_FACTUREVENTE_FAILED,
+  UPDATE_FACTUREVENTE_SUCCESS,
+  UPDATE_FACTUREVENTE_FAILED,
+  DELETE_FACTUREVENTE_SUCCESS,
+  DELETE_FACTUREVENTE_FAILED,
 } from "./types";
 
 //Actions of Client
@@ -363,6 +371,81 @@ export const deleteEntreprise = (id) => (dispatch) => {
     );
 };
 
+//Actions of Facture Vente
+// 1-Add Facture Vente Action
+export const addFactureVente = (factureVente) => (dispatch) => {
+  tokenSet();
+  axios
+    .post("/api/addFactureVente", factureVente)
+    .then((res) =>
+      dispatch({
+        type: ADD_FACTUREVENTE_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: ADD_FACTUREVENTE_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};
+//2-Get FactureVente Action
+export const getFactureVente = () => (dispatch) => {
+  tokenSet();
+  axios
+    .get("/api/allFactureVente")
+    .then((res) =>
+      dispatch({
+        type: GET_FACTUREVENTE_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_FACTUREVENTE_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};
+//3-Update FactureVente Action
+export const updateFactureVente = (factureVente) => (dispatch) => {
+  tokenSet();
+  axios
+    .put("/api/updateFactureVente", factureVente)
+    .then((res) =>
+      dispatch({
+        type: UPDATE_FACTUREVENTE_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: UPDATE_FACTUREVENTE_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};
+//4-Delete FactureVente Action
+export const deleteFactureVente = (id) => (dispatch) => {
+  tokenSet();
+  axios
+    .delete(`/api/deleteFactureVente/${id}`)
+    .then((res) =>
+      dispatch({
+        type: DELETE_FACTUREVENTE_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: DELETE_FACTUREVENTE_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};
+
+
 //Actions of LigneReservation:
 // 1-Add LigneReservation Action
 export const addLigneReservation = (LigneReservation) => (dispatch) => {
@@ -658,5 +741,7 @@ export const deleteTVA = (id) => (dispatch) => {
       })
     );
 };
+
+
 
 

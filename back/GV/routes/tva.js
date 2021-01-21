@@ -35,7 +35,7 @@ router.put("/updateTVA", authMiddleware, (req, res) => {
         { taux,description},
         (err, data) => {
             if (err) {
-                throw err;
+                res.status(400).json({ errors: [{ msg: err }] });
             }
             newTVA
                 .findById(req.params.id)
