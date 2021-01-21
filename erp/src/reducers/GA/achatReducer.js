@@ -1,13 +1,17 @@
+
 import { ADD_FACTURE_SUCCESS, ADD_PRODUIT_SUCCESS, GET_FACTURE_FAILED, GET_FACTURE_SUCCESS } from "../../actions/GA/types";
+
 
 const initState = {
   facture: [],
+  commandeVente: [],
   errors: null,
   produit: [],
 };
 
 const achatReducer = (state = initState, action) => {
   switch (action.type) {
+
     case ADD_PRODUIT_SUCCESS:
       return {
         ...state, produit: [...state.produit, action.payload], errors: null
@@ -88,6 +92,7 @@ const achatReducer = (state = initState, action) => {
       return {
         ...state, errors: action.payload
       }
+
     default:
       return state;
   }
