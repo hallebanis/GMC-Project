@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { getClient, getCommandeVente } from "../../actions/GV/venteActions";
+import { Col, Container, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import {  getCommandeVente } from "../../actions/GV/venteActions";
 import MainNavBar from "../../components/admin/MainNavBar";
+import AddCommandeModal from "../../components/GV/AddCommandeModal";
 import GvSidebar from "../../components/GV/GvSidebar";
 import ListeCommandes from "../../components/GV/ListeCommandes"
 
 const Commande = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getClient());
+    //dispatch(getClient());
     dispatch(getCommandeVente())
   }, []);
   const vente = useSelector(state => state.vente)
@@ -20,7 +21,7 @@ const Commande = () => {
         <Col md={3}>
           <GvSidebar />
         </Col>
-        <Col> <ListeCommandes ListeCommandes={vente.commandeVente} /> </Col>
+        <Col> <ListeCommandes commandList={vente.commandeVente} /> <AddCommandeModal /></Col>
       </Row>
     </Container>
   );
