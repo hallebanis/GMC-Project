@@ -24,6 +24,7 @@ const FactureSchema = new schema({
     type: Number,
     required: true,
   },
+
   isValidate: {
     type: Boolean,
     default: false,
@@ -32,6 +33,11 @@ const FactureSchema = new schema({
   idFournisseur: {
     type: mongoose.Types.ObjectId,
     ref: "fournisseur",
+  },
+
+  idCommand: {
+    type: mongoose.Types.ObjectId,
+    ref: "commandeAchat",
   },
 });
 
