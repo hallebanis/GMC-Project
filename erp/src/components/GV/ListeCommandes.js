@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const ListeCommandes = ({commandList}) => {
-    return (
-        
-    )
-}
+const ListeCommandes = ({ commandList }) => {
+  return <div></div>;
+};
 
-export default ListeCommandes
+export default ListeCommandes;
