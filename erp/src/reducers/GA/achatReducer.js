@@ -1,8 +1,11 @@
-import { ADD_COMMANDEVENTE_FAILED, ADD_COMMANDEVENTE_SUCCESS } from "../../actions/GV/types";
+import {
+  ADD_COMMANDEVENTE_FAILED,
+  ADD_COMMANDEVENTE_SUCCESS,
+} from "../../actions/GV/types";
 
 const initState = {
   facture: [],
-  commandeVente:[],
+  commandeVente: [],
   errors: null,
 };
 
@@ -12,13 +15,14 @@ const achatReducer = (state = initState, action) => {
       return {
         ...state,
         commandeVente: [...state.commandeVente, action.payload],
-        errors:null
+        errors: null,
       };
-      case ADD_COMMANDEVENTE_FAILED:
-          return:{
-              ...state,
-              errors:action.payload
-          }
+
+    case ADD_COMMANDEVENTE_FAILED:
+      return {
+        ...state,
+        errors: action.payload,
+      };
     default:
       return state;
   }
