@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const newLigneVente = require("../modules/LigneVente");
+const authMiddleware = require ("../../helpers/authMiddleware");
 
 //Route Create Ligne Vente
 //path: http://localhost:5000/api/AddLigneVente
-router.post("/AddLigneVente", (req, res) => {
+router.post("/AddLigneVente", authMiddleware, (req, res) => {
     const { quantité, description, sousTotal, produitId, commandeId} = req.body;
     let LVenteModel = new newLigneVente({
         quantité,
@@ -20,7 +21,7 @@ router.post("/AddLigneVente", (req, res) => {
 
 //Route Read Ligne Vente
 //path: http://localhost:5000/api/LignesVente
-router.get("/LignesVente", (req, res) => {
+router.get("/LignesVente", authMiddleware, (req, res) => {
     newLigneVente
         .find()
         .then((LVente) => res.status(200).json(LVente))
@@ -29,7 +30,7 @@ router.get("/LignesVente", (req, res) => {
 
 //Route Update Ligne Vente
 //path: http://localhost:5000/api/updateLigneVente
-router.put("/updateLigneVente", (req, res) => {
+router.put("/updateLigneVente", authMiddleware, (req, res) => {
     const {id,quantité,description,sousTotal} = req.body;
     newLigneVente.findByIdAndUpdate(
         id,
@@ -48,7 +49,7 @@ router.put("/updateLigneVente", (req, res) => {
 
 //Route Delete Ligne Vente
 //path: http://localhost:5000/api/deleteLigneVente/:id
-router.delete("/deleteLigneVente/:id", (req, res) => {
+router.delete("/deleteLigneVente/:id", authMiddleware, (req, res) => {
     newLigneVente
         .findByIdAndDelete(req.params.id)
         .then(() => res.status(200).json({ msg: "Ligne Vente Deleted" }))

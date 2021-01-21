@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const newTVA = require("../modules/TVA");
+const authMiddleware = require ("../../helpers/authMiddleware");
 
 //Route Create TVA
 //path: http://localhost:5000/api/AddTVA
-router.post("/AddTVA", (req, res) => {
+router.post("/AddTVA", authMiddleware, (req, res) => {
     const { taux, description } = req.body;
     let TVAModel = new newTVA({
         taux,
@@ -18,7 +19,7 @@ router.post("/AddTVA", (req, res) => {
 
 //Route Read TVAs
 //path: http://localhost:5000/api/TVAs
-router.get("/TVAs", (req, res) => {
+router.get("/TVAs", authMiddleware, (req, res) => {
     newTVA
         .find()
         .then((TVA) => res.status(200).json(TVA))
@@ -27,7 +28,7 @@ router.get("/TVAs", (req, res) => {
 
 //Route Update TVA
 //path: http://localhost:5000/api/updateTVA
-router.put("/updateTVA", (req, res) => {
+router.put("/updateTVA", authMiddleware, (req, res) => {
     const {id,taux,description} = req.body;
     newTVA.findByIdAndUpdate(
         id,
@@ -46,7 +47,7 @@ router.put("/updateTVA", (req, res) => {
 
 //Route Delete TVA
 //path: http://localhost:5000/api/deleteTVA/:id
-router.delete("/deleteTVA/:id", (req, res) => {
+router.delete("/deleteTVA/:id", authMiddleware, (req, res) => {
     newTVA
         .findByIdAndDelete(req.params.id)
         .then(() => res.status(200).json({ msg: "TVA Deleted" }))

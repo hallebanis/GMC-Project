@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const newCommVente = require("../modules/CommandeVente");
-
+const  authMiddleware = require ("../../helpers/authMiddleware");
 //Route Create Commande Vente
 //path: http://localhost:5000/api/AddCommandeVente
-router.post("/AddCommandeVente", (req, res) => {
+router.post("/AddCommandeVente", authMiddleware, (req, res) => {
     const {
         dateCommande,
         total,
@@ -28,7 +28,7 @@ router.post("/AddCommandeVente", (req, res) => {
 
 //Route Read all Commande Vente
 //path: http://localhost:5000/api/CommandesVente
-router.get("/CommandesVente", (req, res) => {
+router.get("/CommandesVente", authMiddleware, (req, res) => {
     newCommVente
         .find()
         .then((CommandesVente) => res.json(CommandesVente))
@@ -37,7 +37,7 @@ router.get("/CommandesVente", (req, res) => {
 
 //Route Update Commande Vente
 //path: http://localhost:5000/api/updateCommVente
-router.put("/updateCommVente", (req, res) => {
+router.put("/updateCommVente", authMiddleware, (req, res) => {
     const { id, dateCommande, total, isValidate, numero } = req.body;
     newCommVente.findByIdAndUpdate(
         id,
@@ -56,7 +56,7 @@ router.put("/updateCommVente", (req, res) => {
 
 //Route Delete Commande Vente
 //path: http://localhost:5000/api/deleteCommVente/:id
-router.delete("/deleteCommVente/:id", (req, res) => {
+router.delete("/deleteCommVente/:id", authMiddleware, (req, res) => {
     newCommVente
         .findByIdAndDelete(req.params.id)
         .then(() => res.status(200).json({ msg: "Commande Vente Deleted" }))
