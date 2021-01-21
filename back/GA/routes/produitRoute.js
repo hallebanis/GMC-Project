@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const newProduit = require("../modules/produit")
-
+const authMiddleware = require("../../helpers/authMiddleware")
 
 // Route Create New produit
-router.post('/addProduit', (req, res) => {
+// Path : http://localhost:5000/api/addProduit
+router.post('/addProduit', authMiddleware, (req, res) => {
     const { reference, designation, prixUnitaire, etat, prixAchatHT, prixVenteHT, qteStock, idCategorie, idTva } = req.body
     const produitModel = new newProduit({
         reference,
@@ -18,34 +19,39 @@ router.post('/addProduit', (req, res) => {
         idTva
     })
     produitModel.save()
-        .then(produit => res.json(produit))
-        .catch(err => console.log(err.message))
+        .then(produit => res.status(200).json(produit))
+        .catch(err => res.status(400).json({ errors: [{ msg: err }] }))
 })
 // Route Read All produit
-router.get('/allProduit', (req, res) => {
+// Path : http://localhost:5000/api/allProduit
+router.get('/allProduit', authMiddleware, (req, res) => {
     newProduit.find()
-        .then(produits => res.json(produits))
-        .catch(err => console.log(err.message))
+        .then(produits => res.status(200).json(produits))
+        .catch(err => res.status(400).json({ errors: [{ msg: err }] }))
 })
-//Route Read One produit By Id
-router.get('/Produit/:id', (req, res) => {
-    newProduit.findById(req.params.id)
-        .then(produit => res.json(produit))
-        .catch(err => console.log(err.message))
-})
+
 //Route Delete produit
-router.delete('/deleteproduit/:id', (req, res) => {
+// Path : http://localhost:5000/api/deleteproduit/:id
+router.delete('/deleteproduit/:id', authMiddleware, (req, res) => {
     newProduit.findByIdAndDelete(req.params.id)
-        .then(() => res.json({ msg: 'Produit Deleted' }))
-        .catch(err => console.log(err.message))
+        .then(() => res.status(200).json({ msg: 'Produit Deleted' }))
+        .catch(err => res.status(400).json({ errors: [{ msg: err }] }))
 })
 //Route  Update  produit
-router.put('/updateProduit/:id', (req, res) => {
-    newProduit.findByIdAndUpdate(req.params.id, { $set: { ...req.body } }, (err, data) => {
-        if (err) { throw err }
-        newProduit.findById(req.params.id)
-            .then(produit => res.json(produit))
-            .catch(err => console.log(err.message))
-    })
+// Path : http://localhost:5000/api/updateProduit
+router.put('/updateProduit', authMiddleware, (req, res) => {
+    const { reference, designation, prixUnitaire, etat, prixAchatHT, prixVenteHT, qteStock } = req.body
+    newProduit.findByIdAndUpdate(
+        id,
+        { reference, designation, prixUnitaire, etat, prixAchatHT, prixVenteHT, qteStock },
+        (err, data) => {
+            if (err) {
+                res.status(400).json({ errors: [{ msg: err }] });
+            }
+            newProduit.findById(req.params.id)
+                .then(produit => res.status(200).json(produit))
+                .catch(err => res.status(400).json({ errors: [{ msg: err }] }))
+        })
 })
+
 module.exports = router
