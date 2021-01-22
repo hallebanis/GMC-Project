@@ -1,157 +1,157 @@
-import axios from ('axios');
+import axios from "axios";
 import { tokenSet } from "../../helpers/tokenSet";
 import {
-    ADD_CATEGORIE_FAILED,
-    ADD_CATEGORIE_SUCCESS,
-    ADD_COMMANDEACHAT_FAILED,
-    ADD_COMMANDEACHAT_SUCCESS,
-    ADD_COMPTEBANCAIRE_FAILED,
-    ADD_COMPTEBANCAIRE_SUCCESS,
-    ADD_FACTURE_FAILED,
-    ADD_FACTURE_SUCCESS,
-    ADD_PRODUIT_FAILED,
-    ADD_PRODUIT_SUCCESS,
-    DELETE_COMMANDEACHAT_FAILED,
-    DELETE_COMMANDEACHAT_SUCCESS,
-    DELETE_COMPTEBANCAIRE_FAILED,
-    DELETE_COMPTEBANCAIRE_SUCCESS,
-    DELETE_FACTURE_FAILED,
-    DELETE_FACTURE_SUCCESS,
-    DELETE_PRODUIT_FAILED,
-    DELETE_PRODUIT_SUCCESS,
-    GET_CATEGORIE_FAILED,
-    GET_CATEGORIE_SUCCESS,
-    GET_COMMANDEACHAT_FAILED,
-    GET_COMMANDEACHAT_SUCCESS,
-    GET_COMPTEBANCAIRE_FAILED,
-    GET_COMPTEBANCAIRE_SUCCESS,
-    GET_FACTURE_FAILED,
-    GET_FACTURE_SUCCESS,
-    GET_PRODUIT_FAILED,
-    GET_PRODUIT_SUCCESS,
-    UPDATE_COMMANDEACHAT_FAILED,
-    UPDATE_COMMANDEACHAT_SUCCESS,
-    UPDATE_FACTURE_FAILED,
-    UPDATE_FACTURE_SUCCESS,
-    UPDATE_PRODUIT_FAILED,
-    UPDATE_PRODUIT_SUCCESS
+  ADD_CATEGORIE_FAILED,
+  ADD_CATEGORIE_SUCCESS,
+  ADD_COMMANDEACHAT_FAILED,
+  ADD_COMMANDEACHAT_SUCCESS,
+  ADD_COMPTEBANCAIRE_FAILED,
+  ADD_COMPTEBANCAIRE_SUCCESS,
+  ADD_FACTURE_FAILED,
+  ADD_FACTURE_SUCCESS,
+  ADD_PRODUIT_FAILED,
+  ADD_PRODUIT_SUCCESS,
+  DELETE_COMMANDEACHAT_FAILED,
+  DELETE_COMMANDEACHAT_SUCCESS,
+  DELETE_COMPTEBANCAIRE_FAILED,
+  DELETE_COMPTEBANCAIRE_SUCCESS,
+  DELETE_FACTURE_FAILED,
+  DELETE_FACTURE_SUCCESS,
+  DELETE_PRODUIT_FAILED,
+  DELETE_PRODUIT_SUCCESS,
+  GET_CATEGORIE_FAILED,
+  GET_CATEGORIE_SUCCESS,
+  GET_COMMANDEACHAT_FAILED,
+  GET_COMMANDEACHAT_SUCCESS,
+  GET_COMPTEBANCAIRE_FAILED,
+  GET_COMPTEBANCAIRE_SUCCESS,
+  GET_FACTURE_FAILED,
+  GET_FACTURE_SUCCESS,
+  GET_PRODUIT_FAILED,
+  GET_PRODUIT_SUCCESS,
+  UPDATE_COMMANDEACHAT_FAILED,
+  UPDATE_COMMANDEACHAT_SUCCESS,
+  UPDATE_COMPTEBANCAIRE_FAILED,
+  UPDATE_COMPTEBANCAIRE_SUCCESS,
+  UPDATE_FACTURE_FAILED,
+  UPDATE_FACTURE_SUCCESS,
+  UPDATE_PRODUIT_FAILED,
+  UPDATE_PRODUIT_SUCCESS,
 } from "./types";
-
 
 //Actions of Categorie
 // 1-Add Categorie Action
 export const addCategorie = (categorie) => (dispatch) => {
-    tokenSet();
-    axios
-        .post("/api/addCategorie", categorie)
-        .then((res) =>
-            dispatch({
-                type: ADD_CATEGORIE_SUCCESS,
-                payload: res.data,
-            })
-        )
-        .catch((err) =>
-            dispatch({
-                type: ADD_CATEGORIE_FAILED,
-                payload: err.response.data.errors,
-            })
-        );
+  tokenSet();
+  axios
+    .post("/api/addCategorie", categorie)
+    .then((res) =>
+      dispatch({
+        type: ADD_CATEGORIE_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: ADD_CATEGORIE_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
 };
 //2-Get Categorie Action
 export const getCategorie = () => (dispatch) => {
-    tokenSet();
-    axios
-        .get("/api/categories")
-        .then((res) =>
-            dispatch({
-                type: GET_CATEGORIE_SUCCESS,
-                payload: res.data,
-            })
-        )
-        .catch((err) =>
-            dispatch({
-                type: GET_CATEGORIE_FAILED,
-                payload: err.response.data.errors,
-            })
-        );
+  tokenSet();
+  axios
+    .get("/api/categories")
+    .then((res) =>
+      dispatch({
+        type: GET_CATEGORIE_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_CATEGORIE_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
 };
-
 
 //Actions of Commande Achat
 // 1-Add Commande Achat Action
 export const addCommandeAchat = (commandeAchat) => (dispatch) => {
-    tokenSet();
-    axios
-      .post("/api/addCommande", commandeAchat)
-      .then((res) =>
-        dispatch({
-          type: ADD_COMMANDEACHAT_SUCCESS,
-          payload: res.data,
-        })
-      )
-      .catch((err) =>
-        dispatch({
-          type: ADD_COMMANDEACHAT_FAILED,
-          payload: err.response.data.errors,
-        })
-      );
-  };
-  //2-Get CommandeAchat Action
-  export const getCommandeAchat = () => (dispatch) => {
-    tokenSet();
-    axios
-      .get("/api/allCommande")
-      .then((res) =>
-        dispatch({
-          type: GET_COMMANDEACHAT_SUCCESS,
-          payload: res.data,
-        })
-      )
-      .catch((err) =>
-        dispatch({
-          type: GET_COMMANDEACHAT_FAILED,
-          payload: err.response.data.errors,
-        })
-      );
-  };
-  //3-Update CommandeAchat Action
-  export const updateCommandeAchat = (commandeAchat) => (dispatch) => {
-    tokenSet();
-    axios
-      .put("/api/updateCommande", commandeAchat)
-      .then((res) =>
-        dispatch({
-          type: UPDATE_COMMANDEACHAT_SUCCESS,
-          payload: res.data,
-        })
-      )
-      .catch((err) =>
-        dispatch({
-          type: UPDATE_COMMANDEACHAT_FAILED,
-          payload: err.response.data.errors,
-        })
-      );
-  };
-  //4-Delete CommandeAchat Action
-  export const deleteCommandeAchat = (id) => (dispatch) => {
-    tokenSet();
-    axios
-      .delete(`/api/deleteCommande/${id}`)
-      .then((res) =>
-        dispatch({
-          type: DELETE_COMMANDEACHAT_SUCCESS,
-          payload: res.data,
-        })
-      )
-      .catch((err) =>
-        dispatch({
-          type: DELETE_COMMANDEACHAT_FAILED,
-          payload: err.response.data.errors,
-        })
-      );
-  };
+  tokenSet();
+  axios
+    .post("/api/addCommande", commandeAchat)
+    .then((res) =>
+      dispatch({
+        type: ADD_COMMANDEACHAT_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: ADD_COMMANDEACHAT_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};
+//2-Get CommandeAchat Action
+export const getCommandeAchat = () => (dispatch) => {
+  tokenSet();
+  axios
+    .get("/api/allCommande")
+    .then((res) =>
+      dispatch({
+        type: GET_COMMANDEACHAT_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_COMMANDEACHAT_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};
+//3-Update CommandeAchat Action
+export const updateCommandeAchat = (commandeAchat) => (dispatch) => {
+  tokenSet();
+  axios
+    .put("/api/updateCommande", commandeAchat)
+    .then((res) =>
+      dispatch({
+        type: UPDATE_COMMANDEACHAT_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: UPDATE_COMMANDEACHAT_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};
+//4-Delete CommandeAchat Action
+export const deleteCommandeAchat = (id) => (dispatch) => {
+  tokenSet();
+  axios
+    .delete(`/api/deleteCommande/${id}`)
+    .then((res) =>
+      dispatch({
+        type: DELETE_COMMANDEACHAT_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: DELETE_COMMANDEACHAT_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};
 
-  //Actions of Compte Bancaire
+//Actions of Compte Bancaire
 // 1-Add Compte Bancaire Action
 export const addCompteBanquaire = (compteBanquaire) => (dispatch) => {
   tokenSet();
@@ -299,7 +299,6 @@ export const deleteFacture = (id) => (dispatch) => {
     );
 };
 
-
 //Actions of Produit
 // 1-Add Produit Action
 export const addProduit = (produit) => (dispatch) => {
@@ -373,5 +372,3 @@ export const deleteProduit = (id) => (dispatch) => {
       })
     );
 };
-
-  

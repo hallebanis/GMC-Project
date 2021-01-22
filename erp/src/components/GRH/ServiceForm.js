@@ -1,11 +1,16 @@
+import { Paper, Typography } from "@material-ui/core";
 import { MDBInput } from "mdbreact";
 import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addService, loadService } from "../../actions/GRH/personnelActions";
 import PersonnelDropDown from "./PersonnelDropDown";
+import useStyles from "./styles";
+
 
 export const ServiceForm = () => {
+  const classes = useStyles();
+
   const dispatch = useDispatch();
   const [info, setInfo] = useState({
     nom: "",
@@ -24,8 +29,9 @@ export const ServiceForm = () => {
     dispatch(addService(info));
   };
   return (
-    <div >
-      <Form>
+    
+      <Paper className={classes.paper} style={{margin:"50px"}}>
+        <Typography style={{textAlign:"center"}} variant="h6">Service Form</Typography>
         <MDBInput
           onChange={handleChange}
           name="nom"
@@ -45,7 +51,6 @@ export const ServiceForm = () => {
         <Button variant="primary" /* type="submit" */ onClick={handleSave}>
           Submit
         </Button>
-      </Form>
-    </div>
+        </Paper>    
   );
 };
