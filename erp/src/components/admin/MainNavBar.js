@@ -21,7 +21,6 @@ function MainNavBar({ bg, variant }) {
         return "/ga-dashboard";
       case "resVente":
         return "/gv-dashboard";
-
       default:
         return `/user-dashboard/${auth.user._id}`;
     }
