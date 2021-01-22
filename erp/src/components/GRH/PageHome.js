@@ -241,7 +241,7 @@ const HomepageLayout = () => (
               all sizes and in all industries. To these companies, ERP is as
               indispensable as the electricity that keeps the lights on
             </p>
-          </Grid.Column>
+          </Grid.Column >
           <Grid.Column /* floated="right" */ width={6}>
             <iframe
               width="560"
