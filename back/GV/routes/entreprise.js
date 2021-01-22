@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const newEntreprise = require("../modules/Entreprise");
+const authMiddleware = require ("../../helpers/authMiddleware");
 
 //Route Create Entreprise
 //path: http://localhost:5000/api/AddEntreprise
-router.post("/AddEntreprise", (req, res) => {
+router.post("/AddEntreprise", authMiddleware, (req, res) => {
     const { matricule, tel, email,contactId } = req.body;
     let EntrepriseModel = new newEntreprise({
         matricule,
@@ -19,7 +20,7 @@ router.post("/AddEntreprise", (req, res) => {
 
 //Route Read Entreprises
 //path: http://localhost:5000/api/Entreprises
-router.get("/Entreprises", (req, res) => {
+router.get("/Entreprises", authMiddleware, (req, res) => {
     newEntreprise
         .find()
         .then((Entreprises) => res.status(200).json(Entreprises))
@@ -28,14 +29,14 @@ router.get("/Entreprises", (req, res) => {
 
 //Route Update Entreprise
 //path: http://localhost:5000/api/updateEntreprise
-router.put("/updateEntreprise", (req, res) => {
+router.put("/updateEntreprise", authMiddleware, (req, res) => {
     const {id,matricule,tel,email} =req.body;
     newEntreprise.findByIdAndUpdate(
         id,
         { matricule,tel,email},
         (err, data) => {
             if (err) {
-                throw err;
+                res.status(400).json({ errors: [{ msg: err }] });
             }
             newEntreprise
                 .findById(req.params.id)
@@ -47,7 +48,7 @@ router.put("/updateEntreprise", (req, res) => {
 
 //Route Delete Entreprise
 //path: http://localhost:5000/api/deleteEntreprise/:id
-router.delete("/deleteEntreprise/:id", (req, res) => {
+router.delete("/deleteEntreprise/:id", authMiddleware, (req, res) => {
     newEntreprise
         .findByIdAndDelete(req.params.id)
         .then(() => res.status(200).json({ msg: "Entreprise Deleted" }))

@@ -52,6 +52,7 @@ app.use("/api", require("./GV/routes/ligneReservation"));
 app.use("/api", require("./GV/routes/ligneVente"));
 app.use("/api", require("./GV/routes/reservation"));
 app.use("/api", require("./GV/routes/tva"));
+app.use("/api", require("./GV/routes/facture"));
 
 app.listen(PORT, (err) => {
   if (err) throw err;

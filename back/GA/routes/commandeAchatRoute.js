@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const newCommande = require("../modules/commandeAchat")
-
+const authMiddleware = require("../../helpers/authMiddleware")
 
 // Route Create New commande
-router.post('/addCommande', (req, res) => {
+// Path : http://localhost:5000/api/addCommande
+router.post('/addCommande', authMiddleware, (req, res) => {
     const { date, total, isValidate, numero, idFournisseur } = req.body
     const commandeModel = new newCommande({
         date,
@@ -14,34 +15,43 @@ router.post('/addCommande', (req, res) => {
         idFournisseur
     })
     commandeModel.save()
-        .then(commande => res.json(commande))
-        .catch(err => console.log(err.message))
+        .then(commande => res.status(200).json(commande))
+        .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 })
 // Route Read All commande
-router.get('/allCommande', (req, res) => {
+// Path : http://localhost:5000/api/allCommande
+router.get('/allCommande', authMiddleware, (req, res) => {
     newCommande.find()
-        .then(commandes => res.json(commandes))
-        .catch(err => console.log(err.message))
+        .then(commandes => res.status(200).json(commandes))
+        .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 })
-//Route Read One commande By Id
-router.get('/Commande/:id', (req, res) => {
-    newCommande.findById(req.params.id)
-        .then(commande => res.json(commande))
-        .catch(err => console.log(err.message))
-})
+
 //Route Delete commande
-router.delete('/deleteCommande/:id', (req, res) => {
+// Path : http://localhost:5000/api/deleteCommande/:id
+router.delete('/deleteCommande/:id', authMiddleware, (req, res) => {
     newCommande.findByIdAndDelete(req.params.id)
-        .then(() => res.json({ msg: 'Commande Deleted' }))
-        .catch(err => console.log(err.message))
+        .then(() => res.status(200).json({ msg: 'Commande Deleted' }))
+        .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 })
+
+
 //Route  Update  commande
-router.put('/updateCommande/:id', (req, res) => {
-    newCommande.findByIdAndUpdate(req.params.id, { $set: { ...req.body } }, (err, data) => {
-        if (err) { throw err }
-        newCommande.findById(req.params.id)
-            .then(commande => res.json(commande))
-            .catch(err => console.log(err.message))
-    })
+// Path : http://localhost:5000/api/updateCommande
+router.put('/updateCommande', authMiddleware, (req, res) => {
+    const { id, date, total, isValidate, numero } = req.body;
+    newCommande.findByIdAndUpdate(
+        id,
+        { date, total, isValidate, numero }, (err, data) => {
+            if (err) {
+                res.status(400).json({ errors: [{ msg: err }] });
+            }
+            newCommande.findById(req.params.id)
+                .then(commande => res.status(200).json(commande))
+                .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
+        })
 })
+
+
 module.exports = router
+
+

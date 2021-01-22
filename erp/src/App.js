@@ -31,6 +31,9 @@ import ListeClients from "./pages/GV/ListeClients";
 
 import PointagePage from "./pages/GRH/PointagePage";
 
+import Commande from "./pages/GV/Commande";
+
+
 function App() {
   return (
     <Router>
@@ -89,6 +92,9 @@ function App() {
         />
 
         <Route exact path="/grh-dashboard/pointage" component={PointagePage} />
+
+        <Route exact path="/gv-dashboard/commande" component={Commande} />
+
       </Switch>
     </Router>
   );

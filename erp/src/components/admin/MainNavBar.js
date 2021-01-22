@@ -27,14 +27,22 @@ function MainNavBar({ bg, variant }) {
     }
   };
   return (
-    <Navbar bg={bg || "dark"} variant={variant || "dark"}>
-      <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+    <Navbar style={{ height: "10vh" }} background-color="#1D1D1D">
+      <Navbar.Brand style={{ fontWeight: "bold" }} href="#home">
+        ERP
+      </Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link>
-          <Link to="/">Home</Link>
+          <Link style={{ color: "white" }} to="/">
+            Home
+          </Link>
         </Nav.Link>
         <Nav.Link>
-          {auth.isAuth && <Link to={switchDashboard}>Dashboard</Link>}
+          {auth.isAuth && (
+            <Link style={{ color: "white" }} to={switchDashboard}>
+              Dashboard
+            </Link>
+          )}
         </Nav.Link>
       </Nav>
       <Form inline>
@@ -42,7 +50,9 @@ function MainNavBar({ bg, variant }) {
           <Nav.Link onClick={handleLogout}>LOGOUT</Nav.Link>
         ) : (
           <Nav.Link>
-            <Link to="/login">LOGIN</Link>
+            <Link style={{ color: "white" }} to="/login">
+              LOGIN
+            </Link>
           </Nav.Link>
         )}
       </Form>

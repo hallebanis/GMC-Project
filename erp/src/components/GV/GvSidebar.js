@@ -12,9 +12,8 @@ const GvSidebar = () => {
         <Link to="/gv-dashboard/addclient">Add Client</Link>
       </Nav.Link>
       <Nav.Link eventKey="link-2"><Link to="/gv-dashboard/listeClients">Liste des Clients</Link></Nav.Link>
-      <Nav.Link eventKey="disabled" disabled>
-        Disabled
-      </Nav.Link>
+      <Nav.Link eventKey="link-2"><Link to="/gv-dashboard/Commande">Liste des Commandes</Link></Nav.Link>
+      <Nav.Link eventKey="disabled" disabled>Disabled</Nav.Link>
     </Nav>
   );
 };
