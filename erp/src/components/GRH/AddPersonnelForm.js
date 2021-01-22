@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Form, Button, Col, Dropdown, DropdownButton } from "react-bootstrap";
+import { Form, Button, Col, Dropdown, DropdownButton, Container } from "react-bootstrap";
 import { Select } from "./DatePicker";
 import { addPersonnel } from "../../actions/GRH/personnelActions";
 import { Link } from "react-router-dom";
@@ -39,6 +39,7 @@ export const AddPersonnelForm = () => {
     setInfo({ ...info, dateDeNaissance: d });
   };
   return (
+    
     <Paper className={classes.paper}>
       <form
         autoComplete="off"
@@ -148,5 +149,6 @@ export const AddPersonnelForm = () => {
         </Button>
       </form>
     </Paper>
+    
   );
 };

@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import { loadPersonnel } from "../../actions/GRH/personnelActions";
 import { AddPersonnelForm } from "../../components/GRH/AddPersonnelForm";
 import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
+import { Col, Container, Row } from "react-bootstrap";
+import { NavSide } from "../../components/GRH/NavSide";
+import MainNavBar from "../../components/admin/MainNavBar";
 
 const AddPersonnelPage = ({ history }) => {
   const dispatch = useDispatch();
@@ -10,49 +13,22 @@ const AddPersonnelPage = ({ history }) => {
     dispatch(loadPersonnel());
   }, []);
   return (
-    <div>
-      <AdminDashboardSidebar
-        color="blue"
-        linkList={[
-          {
-            categorie: "Personnel",
-            elements: [
-              {
-                title: "Add Personnel",
-                link: "/grh-dashboard/addpersonnel",
-              },
-              {
-                title: "personnel list",
-                link: "/grh-dashboard/listpersonnel",
-              },
-            ],
-          },
-          {
-            categorie: "Contrat",
-            elements: [
-              {
-                title: "Add Contrat",
-                link: "/grh-dashboard/contrat",
-              },
-            ],
-          },
-          {
-            categorie: "Service",
-            elements: [
-              {
-                title: "Add Service",
-                link: "/grh-dashboard/AddService",
-              },
-              {
-                title: "List Service",
-                link: "/grh-dashboard/ListService",
-              },
-            ],
-          },
-        ]}
-      />
-      <AddPersonnelForm history={history} />
-    </div>
+    <Container fluid>
+      
+      <Row><Col><MainNavBar></MainNavBar></Col></Row>
+
+        
+      <Row>
+        <Col md={3}>
+          <NavSide />
+        </Col>
+        <Col md={6}>
+          {" "}
+          <AddPersonnelForm history={history} />
+        </Col>
+      </Row>
+      
+    </Container>
   );
 };
 
