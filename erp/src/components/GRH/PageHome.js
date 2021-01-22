@@ -1,7 +1,7 @@
 import { createMedia } from "@artsy/fresnel";
 import PropTypes from "prop-types";
-import image from "../../res/img/ERP.jpg";
-import React, { Component } from "react";
+/* import image from "../../res/img/ERP.jpg";
+ */import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -273,7 +273,7 @@ const HomepageLayout = () => (
               "I shouldn't have gone with their competitor."
             </Header>
             <p style={{ fontSize: "1.33em" }}>
-              <Image avatar src={image} />
+              <Image avatar /* src={image} */ />
               <b>Nan</b> Chief Fun Officer Acme Toys
             </p>
           </Grid.Column>

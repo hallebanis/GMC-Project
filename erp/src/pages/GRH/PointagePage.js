@@ -17,7 +17,11 @@ const PointagePage = () => {
   const personnel = useSelector((state) => state.personnel);
   return (
     <Container fluid>
-      <Row><Col><MainNavBar></MainNavBar></Col></Row>
+      <Row>
+        <Col>
+          <MainNavBar></MainNavBar>
+        </Col>
+      </Row>
       <Row>
         <Col md={3}>
           <NavSide />
@@ -41,7 +45,6 @@ const PointagePage = () => {
           />
         </Col>
       </Row>
-      
     </Container>
   );
 };
