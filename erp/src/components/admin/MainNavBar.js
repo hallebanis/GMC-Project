@@ -26,8 +26,11 @@ function MainNavBar({ bg, variant }) {
     }
   };
   return (
-    <Navbar style={{ height: "10vh" }} background-color="#1D1D1D">
-      <Navbar.Brand style={{ fontWeight: "bold" }} href="#home">
+    <Navbar
+      style={{ height: "10vh", backgroundColor: "#1D1D1D" }}
+      background-color="#1D1D1D"
+    >
+      <Navbar.Brand style={{ fontWeight: "bold", color: "white" }} href="#home">
         ERP
       </Navbar.Brand>
       <Nav className="mr-auto">
@@ -46,7 +49,9 @@ function MainNavBar({ bg, variant }) {
       </Nav>
       <Form inline>
         {auth.isAuth ? (
-          <Nav.Link onClick={handleLogout}>LOGOUT</Nav.Link>
+          <Nav.Link onClick={handleLogout} style={{ color: "white" }}>
+            LOGOUT
+          </Nav.Link>
         ) : (
           <Nav.Link>
             <Link style={{ color: "white" }} to="/login">

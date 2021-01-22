@@ -38,7 +38,7 @@ export const NavSide = () => {
             <Link to="/">Dashboard</Link>
           </MenuItem>
           <SubMenu title="Personnel" icon={<BsFillPersonFill />}>
-            <MenuItem >
+            <MenuItem>
               <Link to="/grh-dashboard/addpersonnel">Add Personnel</Link>
             </MenuItem>
             <MenuItem>
