@@ -16,7 +16,7 @@ const ListeClients = () => {
   const [filter, setFilter] = useState("");
   return (
     <Container fluid>
-      <Row > <Col><MainNavBar /> </Col></Row>
+      <Row > <Col><MainNavBar  /> </Col></Row>
       <Row>
         <Col md={3}>
           <GvSidebar />
