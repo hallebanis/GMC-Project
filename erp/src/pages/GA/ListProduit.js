@@ -1,11 +1,13 @@
 import React from 'react'
-import { Row, Table } from 'react-bootstrap'
+import { Button, Row, Table } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
+import { deleteProduit } from '../../actions/GA/achatActions'
 
 function ListProduit({ listProduit }) {
-    /*  designation
- prixVenteHT
- qteStock
- idCategorie */
+    const dispatch = useDispatch()
+   const handleDelete =(id)=>{
+       dispatch(deleteProduit(id))
+   }
     return (
         <Table>
             <thead>
@@ -13,13 +15,15 @@ function ListProduit({ listProduit }) {
                 <th>Prix de Vente HT</th>
                 <th>Quantite en stock</th>
                 <th>Categorie</th>
+                <th>Delete</th>
             </thead>
-            <tbody>{listProduit.map(el => <row>
+            <tbody>{listProduit.map(el => <tr>
                 <td>{el.designation}</td>
                 <td>{el.prixVenteHT}</td>
                 <td>{el.qteStock}</td>
-                <td>{el.idCategorie}</td>
-            </row>
+                <td>{el.idCategorie.designation}</td>
+                <td><Button variant="danger" onClick={()=> handleDelete(el._id)} >Delete</Button></td>
+            </tr>
             )}
             </tbody>
         </Table>
