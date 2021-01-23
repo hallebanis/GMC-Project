@@ -5,76 +5,25 @@ import { ContratForm } from "../../components/GRH/ContratForm";
 import { ServiceForm } from "../../components/GRH/ServiceForm";
 import { Col, Container, Row } from "react-bootstrap";
 import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
+import { NavSide } from "../../components/GRH/NavSide";
+import image from "../../res/img/system.png";
+import MainNavBar from "../../components/admin/MainNavBar";
 
 export const GrhDashboard = () => {
   return (
     <Container fluid>
-      <Row md="auto">
+      <Row>
         <Col>
-          <AdminDashboardSidebar
-            color="blue"
-            linkList={[
-              {
-                categorie: "Personnel",
-                elements: [
-                  {
-                    title: "Add Personnel",
-                    link: "/grh-dashboard/addpersonnel",
-                  },
-                  {
-                    title: "personnel list",
-                    link: "/grh-dashboard/listpersonnel",
-                  },
-                ],
-              },
-              {
-                categorie: "Contrat",
-                elements: [
-                  {
-                    title: "Add Contrat",
-                    link: "/grh-dashboard/contrat",
-                  },
-                ],
-              },
-              {
-                categorie: "Service",
-                elements: [
-                  {
-                    title: "Add Service",
-                    link: "/grh-dashboard/AddService",
-                  },
-                  {
-                    title: "List Service",
-                    link: "/grh-dashboard/ListService",
-                  },
-                ],
-              },
-              {
-                categorie: "Avance",
-                elements: [
-                  {
-                    title: "Add Avance",
-                    link: "/grh-dashboard/AddAvance",
-                  },
-                  {
-                    title: "List Avance",
-                    link: "/grh-dashboard/ListAvance",
-                  },
-                ],
-              },
-              {
-                categorie: "Pointage",
-                elements: [
-                  {
-                    title: "Pointage",
-                    link: "/grh-dashboard/pointage",
-                  },
-                ],
-              },
-            ]}
-          />
+          <MainNavBar></MainNavBar>
         </Col>
-        <Col></Col>
+      </Row>
+      <Row height="80vh">
+        <Col md={2}>
+          <NavSide />
+        </Col>
+        <Col>
+          <img src={image} />
+        </Col>
       </Row>
     </Container>
   );
