@@ -1,5 +1,4 @@
 import { ADD_FACTURE_SUCCESS, ADD_PRODUIT_SUCCESS, GET_FACTURE_FAILED, GET_FACTURE_SUCCESS } from "../../actions/GA/types";
-
 const initState = {
   facture: [],
   errors: null,
