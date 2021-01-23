@@ -26,11 +26,19 @@ function MainNavBar({ bg, variant }) {
     }
   };
   return (
+<<<<<<< HEAD
+=======
+
+>>>>>>> f1bd9624a40216f7c477dc41713572c598d2ceb6
     <Navbar
       style={{ height: "10vh", backgroundColor: "#1D1D1D" }}
       background-color="#1D1D1D"
     >
       <Navbar.Brand style={{ fontWeight: "bold", color: "white" }} href="#home">
+<<<<<<< HEAD
+=======
+
+>>>>>>> f1bd9624a40216f7c477dc41713572c598d2ceb6
         ERP
       </Navbar.Brand>
       <Nav className="mr-auto">
