@@ -22,6 +22,8 @@ import {
   UPDATE_COMMANDEACHAT_SUCCESS,
   UPDATE_FACTURE_SUCCESS,
   UPDATE_PRODUIT_FAILED,
+  GET_CATEGORIE_SUCCESS,
+  GET_CATEGORIE_FAILED,
 } from "../../actions/GA/types";
 
 const initState = {
@@ -106,6 +108,13 @@ const achatReducer = (state = initState, action) => {
           return el;
         }),
       };
+    case GET_CATEGORIE_SUCCESS:
+      return {
+        ...state,
+        categorie: action.payload,
+        errors: null
+      }
+    case GET_CATEGORIE_FAILED:
     case GET_PRODUIT_FAILED:
     case ADD_PRODUIT_FAILED:
     case UPDATE_PRODUIT_FAILED:
