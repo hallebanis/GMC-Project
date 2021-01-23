@@ -83,14 +83,14 @@ export const ContratForm = () => {
             </Form.Group>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>
-                date Debut :
+                Date Debut :
                 <Select name="dateDebut" onDateChange={handleDateChange} />
               </Form.Label>
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
               <Form.Label>
-                date Fin : <Select name="dateFin" onDateChange={handleDate} />
+                Date Fin : <Select name="dateFin" onDateChange={handleDate} />
               </Form.Label>
             </Form.Group>
             <PersonnelDropDown onPersonnelChange={handleSelect}>

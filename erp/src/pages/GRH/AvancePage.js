@@ -9,7 +9,7 @@ export const AvancePage = () => {
     <Container fluid>
       <Row>
         <Col>
-          <MainNavBar></MainNavBar>
+          <MainNavBar color="#343A40"></MainNavBar>
         </Col>
       </Row>
       <Row>

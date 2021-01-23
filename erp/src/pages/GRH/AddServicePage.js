@@ -10,7 +10,7 @@ export const AddServicePage = () => {
     <Container fluid>
       <Row>
         <Col>
-          <MainNavBar />
+          <MainNavBar color="#343A40" />
         </Col>
       </Row>
       <Row>
