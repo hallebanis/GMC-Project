@@ -49,6 +49,8 @@ import {
   GET_LIGNERESERVATION_SUCCESS,
   GET_LIGNEVENTE_FAILED,
   GET_LIGNEVENTE_SUCCESS,
+  GET_PRODUIT_VENTE_FAILED,
+  GET_PRODUIT_VENTE_SUCCESS,
   GET_RESERVATION_FAILED,
   GET_RESERVATION_SUCCESS,
   GET_TVA_FAILED,
@@ -83,11 +85,11 @@ const initState = {
   ligneVente: [],
   reservation: [],
   tva: [],
+  produit: [],
   errors: null,
 };
 const venteReducer = (state = initState, action) => {
   switch (action.type) {
-
     //CRUD SUCCESS:
     //CRUD Client SUCCESS:
     case ADD_CLIENT_SUCCESS:
@@ -115,7 +117,7 @@ const venteReducer = (state = initState, action) => {
       return {
         ...state,
         errors: null,
-        client: state.client.filter(el => el._id !== action.payload._id)
+        client: state.client.filter((el) => el._id !== action.payload._id),
       };
 
     //CRUD Commande Vente SUCCESS:
@@ -144,7 +146,9 @@ const venteReducer = (state = initState, action) => {
       return {
         ...state,
         errors: null,
-        commandeVente: state.commandeVente.filter(el => el._id !== action.payload._id)
+        commandeVente: state.commandeVente.filter(
+          (el) => el._id !== action.payload._id
+        ),
       };
 
     //CRUD Contact SUCCESS:
@@ -173,7 +177,7 @@ const venteReducer = (state = initState, action) => {
       return {
         ...state,
         errors: null,
-        contact: state.contact.filter(el => el._id !== action.payload._id)
+        contact: state.contact.filter((el) => el._id !== action.payload._id),
       };
 
     //CRUD Entreprise SUCCESS:
@@ -202,7 +206,9 @@ const venteReducer = (state = initState, action) => {
       return {
         ...state,
         errors: null,
-        entreprise: state.entreprise.filter(el => el._id !== action.payload._id)
+        entreprise: state.entreprise.filter(
+          (el) => el._id !== action.payload._id
+        ),
       };
 
     //CRUD Facture Vente SUCCESS:
@@ -231,7 +237,9 @@ const venteReducer = (state = initState, action) => {
       return {
         ...state,
         errors: null,
-        factureVente: state.factureVente.filter(el => el._id !== action.payload._id)
+        factureVente: state.factureVente.filter(
+          (el) => el._id !== action.payload._id
+        ),
       };
 
     //CRUD Ligne Reservation SUCCESS:
@@ -260,7 +268,9 @@ const venteReducer = (state = initState, action) => {
       return {
         ...state,
         errors: null,
-        ligneReservation: state.ligneReservation.filter(el => el._id !== action.payload._id)
+        ligneReservation: state.ligneReservation.filter(
+          (el) => el._id !== action.payload._id
+        ),
       };
 
     //CRUD Ligne Vente SUCCESS:
@@ -289,7 +299,9 @@ const venteReducer = (state = initState, action) => {
       return {
         ...state,
         errors: null,
-        ligneVente: state.ligneVente.filter(el => el._id !== action.payload._id)
+        ligneVente: state.ligneVente.filter(
+          (el) => el._id !== action.payload._id
+        ),
       };
     //CRUD Reservation SUCCESS:
     case ADD_RESERVATION_SUCCESS:
@@ -317,7 +329,9 @@ const venteReducer = (state = initState, action) => {
       return {
         ...state,
         errors: null,
-        reservation: state.reservation.filter(el => el._id !== action.payload._id)
+        reservation: state.reservation.filter(
+          (el) => el._id !== action.payload._id
+        ),
       };
 
     //CRUD TVA SUCCESS:
@@ -346,7 +360,13 @@ const venteReducer = (state = initState, action) => {
       return {
         ...state,
         errors: null,
-        tva: state.tva.filter(el => el._id !== action.payload._id)
+        tva: state.tva.filter((el) => el._id !== action.payload._id),
+      };
+    case GET_PRODUIT_VENTE_SUCCESS:
+      return {
+        ...state,
+        errors: null,
+        produit: action.payload,
       };
 
     // CRUD FAILED
@@ -386,6 +406,7 @@ const venteReducer = (state = initState, action) => {
     case GET_TVA_FAILED:
     case UPDATE_TVA_FAILED:
     case DELETE_TVA_FAILED:
+    case GET_PRODUIT_VENTE_FAILED:
       return {
         ...state,
         errors: action.payload,

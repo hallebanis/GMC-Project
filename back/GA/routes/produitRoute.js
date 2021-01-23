@@ -35,7 +35,7 @@ router.post("/addProduit", authMiddleware, (req, res) => {
 // Path : http://localhost:5000/api/allProduit
 router.get("/allProduit", authMiddleware, (req, res) => {
   newProduit
-    .find()
+    .find().populate('idCategorie')
     .then((produits) => res.status(200).json(produits))
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
@@ -45,7 +45,7 @@ router.get("/allProduit", authMiddleware, (req, res) => {
 router.delete("/deleteproduit/:id", authMiddleware, (req, res) => {
   newProduit
     .findByIdAndDelete(req.params.id)
-    .then(() => res.status(200).json({ msg: "Produit Deleted" }))
+    .then((produit) => res.status(200).json(produit))
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 //Route  Update  produit

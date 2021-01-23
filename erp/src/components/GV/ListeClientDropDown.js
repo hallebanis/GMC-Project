@@ -1,31 +1,22 @@
-import {
-  MDBDropdown,
-  MDBDropdownItem,
-  MDBDropdownMenu,
-  MDBDropdownToggle,
-} from "mdbreact";
-import React, { useState } from "react";
+import React from "react";
+import { Form } from "react-bootstrap";
 
 const ListeClientDropDown = ({ listeClient, setClientId }) => {
-  const [selectedItem, setSelectedItem] = useState("Select Client");
   const handleItemChange = (e) => {
-    setSelectedItem(e.targer.text);
     setClientId(e.target.id);
   };
   return (
-    <MDBDropdown dropright>
-      <MDBDropdownToggle caret color="primary">
-        {selectedItem}
-      </MDBDropdownToggle>
-      <MDBDropdownMenu basic>
+    <Form.Group controlId="exampleForm.ControlSelect2">
+      <Form.Label>Liste des clients</Form.Label>
+      <Form.Control as="select" multiple>
         {listeClient.map((el) => (
-          <MDBDropdownItem
+          <option
             id={el._id}
             onClick={handleItemChange}
-          >{`${el.nom} ${el.prenom}`}</MDBDropdownItem>
+          >{`${el.nom} ${el.prenom}`}</option>
         ))}
-      </MDBDropdownMenu>
-    </MDBDropdown>
+      </Form.Control>
+    </Form.Group>
   );
 };
 

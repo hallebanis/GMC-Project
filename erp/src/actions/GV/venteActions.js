@@ -73,6 +73,8 @@ import {
   UPDATE_FACTUREVENTE_FAILED,
   DELETE_FACTUREVENTE_SUCCESS,
   DELETE_FACTUREVENTE_FAILED,
+  GET_PRODUIT_VENTE_FAILED,
+  GET_PRODUIT_VENTE_SUCCESS,
 } from "./types";
 
 //Actions of Client
@@ -189,7 +191,7 @@ export const getCommandeVente = () => (dispatch) => {
 //3-Update CommandeVente Action
 export const updateCommandeVente = (comVente) => (dispatch) => {
   tokenSet();
-    axios
+  axios
     .put("/api/updateCommVente", comVente)
     .then((res) =>
       dispatch({
@@ -207,7 +209,7 @@ export const updateCommandeVente = (comVente) => (dispatch) => {
 //4-Delete CommandeVente Action
 export const deleteCommandeVente = (id) => (dispatch) => {
   tokenSet();
-    axios
+  axios
     .delete(`/api/deleteCommVente/${id}`)
     .then((res) =>
       dispatch({
@@ -444,7 +446,6 @@ export const deleteFactureVente = (id) => (dispatch) => {
       })
     );
 };
-
 
 //Actions of LigneReservation:
 // 1-Add LigneReservation Action
@@ -742,6 +743,20 @@ export const deleteTVA = (id) => (dispatch) => {
     );
 };
 
-
-
-
+export const getProduitsVente = () => (dispatch) => {
+  tokenSet();
+  axios
+    .get("/api/allProduit")
+    .then((res) =>
+      dispatch({
+        type: GET_PRODUIT_VENTE_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_PRODUIT_VENTE_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};
