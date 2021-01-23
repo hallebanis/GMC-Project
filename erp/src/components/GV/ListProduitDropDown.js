@@ -5,27 +5,23 @@ import {
   MDBDropdownToggle,
 } from "mdbreact";
 import React, { useState } from "react";
+import { Form } from "react-bootstrap";
 
 const ListProduitDropDown = ({ listeProduit, setProduitId }) => {
-  const [selectedItem, setSelectedItem] = useState("Select Client");
   const handleItemChange = (e) => {
-    setSelectedItem(e.targer.text);
     setProduitId(e.target.id);
   };
   return (
-    <MDBDropdown dropright>
-      <MDBDropdownToggle caret color="primary">
-        {selectedItem}
-      </MDBDropdownToggle>
-      <MDBDropdownMenu basic>
+    <Form.Group controlId="exampleForm.ControlSelect2">
+      <Form.Control as="select">
         {listeProduit.map((el) => (
-          <MDBDropdownItem
+          <option
             id={el._id}
             onClick={handleItemChange}
-          >{`${el.nom} ${el.prenom}`}</MDBDropdownItem>
+          >{`${el.designation}`}</option>
         ))}
-      </MDBDropdownMenu>
-    </MDBDropdown>
+      </Form.Control>
+    </Form.Group>
   );
 };
 
