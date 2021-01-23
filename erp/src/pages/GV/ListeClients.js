@@ -18,7 +18,7 @@ const ListeClients = () => {
     <Container fluid>
       <Row > <Col><MainNavBar  /> </Col></Row>
       <Row>
-        <Col md={3}>
+        <Col md={3} style={{height:"90vh"}}>
           <GvSidebar />
         </Col>
         <Col>
