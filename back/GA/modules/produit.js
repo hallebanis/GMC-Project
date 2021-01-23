@@ -9,13 +9,10 @@ const ProduitAchatSchema = new schema({
   designation: {
     type: String,
   },
-  prixUnitaire: {
-    type: Number,
-    required: true,
-  },
   etat: {
     type: String,
     enum: ["en stock", "hors stock"],
+    default: "en stock",
   },
   prixAchatHT: { type: Number },
   prixVenteHT: { type: Number },
@@ -24,9 +21,8 @@ const ProduitAchatSchema = new schema({
     type: mongoose.Types.ObjectId,
     ref: "categorie",
   },
-  idTva: {
-    type: mongoose.Types.ObjectId,
-    ref: "tva",
+  tva: {
+    type: Number,
   },
 });
 module.exports = mongoose.model("produit", ProduitAchatSchema);

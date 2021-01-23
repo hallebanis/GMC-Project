@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { loadPersonnel } from "../../actions/GRH/personnelActions";
+import MainNavBar from "../../components/admin/MainNavBar";
 import ListePointage from "../../components/GRH/ListePointage";
+import { NavSide } from "../../components/GRH/NavSide";
 
 const PointagePage = () => {
   const [filter, setFilter] = useState("");
@@ -14,8 +16,12 @@ const PointagePage = () => {
   }, [dispatch]);
   const personnel = useSelector((state) => state.personnel);
   return (
-    <Container>
+    <Container fluid>
+      <Row><Col><MainNavBar></MainNavBar></Col></Row>
       <Row>
+        <Col md={3}>
+          <NavSide />
+        </Col>
         <Col>
           <MDBInput
             label="Filter"
@@ -35,6 +41,7 @@ const PointagePage = () => {
           />
         </Col>
       </Row>
+      
     </Container>
   );
 };

@@ -10,7 +10,7 @@ import {
 } from "mdbreact";
 
 import { useDispatch } from "react-redux";
-import { editService, loadPersonnel } from "../../actions/GRH/personnelActions";
+
 import { updateClient } from "../../actions/GV/venteActions";
 
 const EditClientModal = ({client}) => {

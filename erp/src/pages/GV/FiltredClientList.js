@@ -3,7 +3,7 @@ import Client from '../../components/GV/Client'
 
 const FiltredClientList = ({clientList}) => {
     return (
-        <div>
+        
         <table class="table">
         <thead>
             <tr>
@@ -23,7 +23,6 @@ const FiltredClientList = ({clientList}) => {
             ))}
         </tbody>
     </table>
-    </div>
     )
 }
 
