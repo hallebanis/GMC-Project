@@ -14,10 +14,11 @@ const AddPersonnelPage = ({ history }) => {
   }, []);
   return (
     <Container fluid>
-      
-      <Row><Col><MainNavBar></MainNavBar></Col></Row>
-
-        
+      <Row>
+        <Col>
+          <MainNavBar></MainNavBar>
+        </Col>
+      </Row>
       <Row>
         <Col md={3}>
           <NavSide />
@@ -27,7 +28,6 @@ const AddPersonnelPage = ({ history }) => {
           <AddPersonnelForm history={history} />
         </Col>
       </Row>
-      
     </Container>
   );
 };

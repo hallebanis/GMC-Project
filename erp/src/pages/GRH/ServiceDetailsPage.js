@@ -4,7 +4,7 @@ import PersonnelDropDown from "../../components/GRH/PersonnelDropDown";
 import { editService } from "../../actions/GRH/personnelActions";
 import { useDispatch } from "react-redux";
 
-export const ServiceDetailsPage = ({match}) => {
+export const ServiceDetailsPage = ({ match }) => {
   const dispatch = useDispatch();
   const [info, setInfo] = useState({
     nom: "",
@@ -17,7 +17,7 @@ export const ServiceDetailsPage = ({match}) => {
     setInfo({ ...info, responsable: id });
   };
   const handleEdit = () => {
-    dispatch(editService(info,match.params.id ));
+    dispatch(editService(info, match.params.id));
   };
   return (
     <MDBRow>

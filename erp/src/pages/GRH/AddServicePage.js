@@ -8,10 +8,14 @@ import { ServiceForm } from "../../components/GRH/ServiceForm";
 export const AddServicePage = () => {
   return (
     <Container fluid>
-      <Row><Col><MainNavBar /></Col></Row>
+      <Row>
+        <Col>
+          <MainNavBar />
+        </Col>
+      </Row>
       <Row>
         <Col md={4}>
-          <NavSide/>
+          <NavSide />
         </Col>
         <Col>
           <ServiceForm />

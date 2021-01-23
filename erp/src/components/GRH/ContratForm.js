@@ -57,9 +57,10 @@ export const ContratForm = () => {
           <NavSide />
         </Col>
         <Col md={6}>
-        
-          <Paper className={classes.paper} style={{margin:"50px" }}>
-          <Typography  style={{textAlign:"center"}} variant="h6">Contrat Form</Typography>
+          <Paper className={classes.paper} style={{ margin: "50px" }}>
+            <Typography style={{ textAlign: "center" }} variant="h6">
+              Contrat Form
+            </Typography>
             <Form.Group controlId="formBasicPassword">
               <Form.Label>salaire de base</Form.Label>
               <Form.Control
