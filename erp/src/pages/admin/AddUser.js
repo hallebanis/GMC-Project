@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import AddUserForm from "../../components/admin/AddUserForm";
 import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
 import MainNavBar from "../../components/admin/MainNavBar";
+import SideNav from "../../components/admin/SideNav";
 import PersonnelDropDown from "../../components/GRH/PersonnelDropDown";
 
 const AddUser = ({ history }) => {
@@ -15,28 +16,8 @@ const AddUser = ({ history }) => {
         </Col>
       </Row>
       <Row>
-        <Col md="auto">
-          <AdminDashboardSidebar
-            color="rgb(52,58,64)"
-            linkList={[
-              {
-                categorie: "Utilisateur",
-                elements: [
-                  { title: "User List", link: "/admin-dashboard/users" },
-                  { title: "Add User", link: "/admin-dashboard/adduser" },
-                ],
-              },
-              {
-                categorie: "Roles",
-                elements: [
-                  {
-                    title: "Role List",
-                    link: "/admin-dashboard/roles",
-                  },
-                ],
-              },
-            ]}
-          />
+        <Col md={3} style={{ height: "90vh" }}>
+          <SideNav />
         </Col>
         <Col>
           <AddUserForm history={history} />;

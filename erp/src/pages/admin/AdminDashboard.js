@@ -1,9 +1,16 @@
-import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Col, Container, Image, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
 import MainNavBar from "../../components/admin/MainNavBar";
+import SideNav from "../../components/admin/SideNav";
+import dashboardCover from "../../res/img/dashboardCover.jpg";
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ history }) => {
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (!auth.auth.isAuth) history.push("/login");
+  }, [auth, history]);
   return (
     <Container fluid>
       <Row>
@@ -13,27 +20,21 @@ const AdminDashboard = () => {
       </Row>
 
       <Row>
-        <Col md="auto">
-          <AdminDashboardSidebar
-            color="rgb(52,58,64)"
-            linkList={[
-              {
-                categorie: "Utilisateur",
-                elements: [
-                  { title: "User List", link: "/admin-dashboard/users" },
-                  { title: "Add User", link: "/admin-dashboard/adduser" },
-                ],
-              },
-              {
-                categorie: "Roles",
-                elements: [
-                  {
-                    title: "Role List",
-                    link: "/admin-dashboard/roles",
-                  },
-                ],
-              },
-            ]}
+        <Col md={3} style={{ height: "90vh" }}>
+          <SideNav />
+        </Col>
+        <Col md={9} lg={9} style={{ paddingLeft: "0", margin: "0" }}>
+          <Image
+            style={{
+              height: "100%",
+              maxWidth: "200%",
+              maxHeight: "100%",
+              width: "100%",
+              margin: "0",
+              padding: "0",
+            }}
+            src={dashboardCover}
+            fluid
           />
         </Col>
       </Row>

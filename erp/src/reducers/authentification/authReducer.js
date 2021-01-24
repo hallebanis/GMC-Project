@@ -49,7 +49,10 @@ const authReducer = (state = inState, action) => {
     case LOGOUT:
       localStorage.removeItem("token");
       return {
-        auth: { isAuth: false, user: null, errors: null },
+        ...state,
+        isAuth: false,
+        user: null,
+        errors: null,
       };
     case ADD_DEMANDE_SUCCESS:
       return {
