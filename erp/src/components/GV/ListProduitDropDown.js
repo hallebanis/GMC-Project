@@ -5,23 +5,48 @@ import {
   MDBDropdownToggle,
 } from "mdbreact";
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
 
-const ListProduitDropDown = ({ listeProduit, setProduitId }) => {
+const ListProduitDropDown = ({
+  listeProduit,
+  setlisteLigneVente,
+  listeLigneVente,
+  id,
+}) => {
+  const [selectedItem, setSelectedItem] = useState("Product List");
   const handleItemChange = (e) => {
-    setProduitId(e.target.id);
+    setSelectedItem(e.target.value);
+    setlisteLigneVente(
+      listeLigneVente.map((el) => {
+        if (el.id === id)
+          return {
+            ...el,
+            sousTotal: +e.target.name * el.quantité,
+            produitId: e.target.id,
+            pu: +e.target.name,
+          };
+        return el;
+      })
+    );
   };
+
   return (
-    <Form.Group controlId="exampleForm.ControlSelect2">
-      <Form.Control as="select">
+    <MDBDropdown>
+      <MDBDropdownToggle caret color="primary">
+        {selectedItem}
+      </MDBDropdownToggle>
+      <MDBDropdownMenu basic>
         {listeProduit.map((el) => (
-          <option
+          <MDBDropdownItem
             id={el._id}
+            name={el.prixVenteHT}
             onClick={handleItemChange}
-          >{`${el.designation}`}</option>
+            value={el.designation}
+          >
+            {el.designation}
+          </MDBDropdownItem>
         ))}
-      </Form.Control>
-    </Form.Group>
+      </MDBDropdownMenu>
+    </MDBDropdown>
   );
 };
 
