@@ -28,6 +28,7 @@ function MainNavBar({ bg, variant,color }) {
   return (
 
 
+
     <Navbar
       style={{ height: "10vh", backgroundColor:color || "#1D1D1D" }}
       

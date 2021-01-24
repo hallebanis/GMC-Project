@@ -5,12 +5,13 @@ const authMiddleware = require("../../helpers/authMiddleware");
 //Route Create Commande Vente
 //path: http://localhost:5000/api/AddCommandeVente
 router.post("/AddCommandeVente", authMiddleware, (req, res) => {
-  const { total, isValidate, numero, clientId} = req.body;
+  const { _id, total, isValidate, numero, clientId } = req.body;
   let CommandeVenteModel = new newCommVente({
+    _id,
     total,
     isValidate,
     numero,
-    clientId
+    clientId,
   });
   CommandeVenteModel.save()
     .then((commandeVente) => res.status(200).json(commandeVente))
@@ -22,6 +23,7 @@ router.post("/AddCommandeVente", authMiddleware, (req, res) => {
 router.get("/CommandesVente", authMiddleware, (req, res) => {
   newCommVente
     .find()
+    .populate("clientId")
     .then((CommandesVente) => res.json(CommandesVente))
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
