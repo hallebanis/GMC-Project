@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
+import { useSelector } from "react-redux";
 import MainNavBar from "../../components/admin/MainNavBar";
 import { NavSide } from "../../components/GRH/NavSide";
 import { ServiceForm } from "../../components/GRH/ServiceForm";
 
-export const AddServicePage = () => {
+export const AddServicePage = ({ history }) => {
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (!auth.isAuth) history.push("/login");
+  }, [auth, history]);
   return (
     <Container fluid>
       <Row>

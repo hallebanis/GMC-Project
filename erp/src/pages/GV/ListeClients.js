@@ -7,22 +7,34 @@ import GvSidebar from "../../components/GV/GvSidebar";
 import FiltredClientList from "./FiltredClientList";
 import MainNavBar from "../../components/admin/MainNavBar";
 
-const ListeClients = () => {
+const ListeClients = ({ history }) => {
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (!auth.isAuth) history.push("/login");
+  }, [auth, history]);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getClient());
-  }, []);
+  }, [dispatch]);
   const vente = useSelector((state) => state.vente);
   const [filter, setFilter] = useState("");
   return (
     <Container fluid>
-      <Row > <Col><MainNavBar  /> </Col></Row>
       <Row>
-        <Col md={3} style={{height:"90vh"}}>
+        {" "}
+        <Col>
+          <MainNavBar />{" "}
+        </Col>
+      </Row>
+      <Row>
+        <Col md={3} style={{ height: "90vh" }}>
           <GvSidebar />
         </Col>
         <Col>
-          <MDBInput label="Filter" onChange={(e) => setFilter(e.target.value)} />
+          <MDBInput
+            label="Filter"
+            onChange={(e) => setFilter(e.target.value)}
+          />
           <FiltredClientList
             clientList={vente.client.filter(
               (el) =>

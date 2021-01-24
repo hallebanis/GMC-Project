@@ -7,8 +7,11 @@ import MainNavBar from "../../components/admin/MainNavBar";
 import SideNav from "../../components/admin/SideNav";
 import PersonnelInfo from "../../components/user/PersonnelInfo";
 
-const UserDashboard = () => {
+const UserDashboard = ({ history }) => {
   const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (!auth.isAuth) history.push("/login");
+  }, [auth, history]);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadPersonnelById(auth.user.personnelId._id));
