@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
 import DemandeForm from "../../components/admin/DemandeForm";
 import MainNavBar from "../../components/admin/MainNavBar";
+import UserSideNav from "../../components/user/UserSideNav";
 
 const Demande = ({ history, match }) => {
   const auth = useSelector((state) => state.auth);
@@ -18,10 +18,10 @@ const Demande = ({ history, match }) => {
         </Col>
       </Row>
       <Row>
-        <Col sm={2} md={2} lg={2}>
-          <AdminDashboardSidebar />
+        <Col md={3} style={{ height: "90vh" }}>
+          <UserSideNav />
         </Col>
-        <Col style={{ alignItems: "center" }}>
+        <Col style={{ alignItems: "flex-end" }}>
           <DemandeForm history={history} match={match} />
         </Col>
       </Row>

@@ -35,9 +35,8 @@ import Commande from "./pages/GV/Commande";
 
 import AddCommand from "./pages/GV/AddCommande";
 
-
 import Produits from "./pages/GA/Produit";
-
+import Categorie from "./pages/GA/Categorie";
 
 function App() {
   return (
@@ -46,68 +45,124 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/user-dashboard/:id" component={UserDashboard} />
-        <Route exact path="/admin-dashboard" component={AdminDashboard} />
-        <Route exact path="/admin-dashboard/users" component={UsersListPage} />
-        <Route exact path="/admin-dashboard/adduser" component={AddUser} />
-        <Route exact path="/user/:id" component={UserDetailsPage} />
-        <Route exact path="/admin-dashboard/roles" component={RolePage} />
-        <Route exact path="/grh-dashboard" component={GrhDashboard} />
-        <Route exact path="/ga-dashboard" component={GaDashboard} />
-        <Route exact path="/gv-dashboard" component={GvDashboard} />
-        <Route exact path="/personnel/:id" component={PersonnelDetailsPage} />
-        <Route
+        <AdminPrivateRoute
+          exact
+          path="/user-dashboard/:id"
+          component={UserDashboard}
+        />
+        <AdminPrivateRoute
+          exact
+          path="/admin-dashboard"
+          component={AdminDashboard}
+        />
+        <AdminPrivateRoute
+          exact
+          path="/admin-dashboard/users"
+          component={UsersListPage}
+        />
+        <AdminPrivateRoute
+          exact
+          path="/admin-dashboard/adduser"
+          component={AddUser}
+        />
+        <AdminPrivateRoute exact path="/user/:id" component={UserDetailsPage} />
+        <AdminPrivateRoute
+          exact
+          path="/admin-dashboard/roles"
+          component={RolePage}
+        />
+        <AdminPrivateRoute
+          exact
+          path="/grh-dashboard"
+          component={GrhDashboard}
+        />
+        <AdminPrivateRoute exact path="/ga-dashboard" component={GaDashboard} />
+        <AdminPrivateRoute exact path="/gv-dashboard" component={GvDashboard} />
+        <AdminPrivateRoute
+          exact
+          path="/personnel/:id"
+          component={PersonnelDetailsPage}
+        />
+        <AdminPrivateRoute
           exact
           path="/grh-dashboard/addpersonnel"
           component={AddPersonnelPage}
         />
-        <Route exact path="/grh-dashboard/contrat" component={ContratForm} />
-        <Route
+        <AdminPrivateRoute
+          exact
+          path="/grh-dashboard/contrat"
+          component={ContratForm}
+        />
+        <AdminPrivateRoute
           exact
           path="/grh-dashboard/listpersonnel"
           component={ListPersonnelPage}
         />
-        <Route exact path="/gv-dashboard/addclient" component={AddClient} />
-        <Route
+        <AdminPrivateRoute
+          exact
+          path="/gv-dashboard/addclient"
+          component={AddClient}
+        />
+        <AdminPrivateRoute
           exact
           path="/grh-dashboard/AddService"
           component={AddServicePage}
         />
-        <Route
+        <AdminPrivateRoute
           exact
           path="/grh-dashboard/ListService"
           component={ListServicePage}
         />
-        <Route
+        <AdminPrivateRoute
           exact
           path="/grh-dashboard/ListService/editService/:id"
           component={ServiceDetailsPage}
         />
-        <Route
+        <AdminPrivateRoute
           exact
           path={`/user-dashboard/:id/demande/new`}
           component={Demande}
         />
-        <Route exact path="/grh-dashboard/AddAvance" component={AvancePage} />
+        <AdminPrivateRoute
+          exact
+          path="/grh-dashboard/AddAvance"
+          component={AvancePage}
+        />
 
-        <Route
+        <AdminPrivateRoute
           exact
           path="/gv-dashboard/listeClients"
           component={ListeClients}
         />
 
-        <Route exact path="/grh-dashboard/pointage" component={PointagePage} />
+        <AdminPrivateRoute
+          exact
+          path="/grh-dashboard/pointage"
+          component={PointagePage}
+        />
 
-        <Route exact path="/gv-dashboard/commande" component={Commande} />
+        <AdminPrivateRoute
+          exact
+          path="/gv-dashboard/commande"
+          component={Commande}
+        />
 
-        <Route
+        <AdminPrivateRoute
           exact
           path="/gv-dashboard/commande/addCommande"
           component={AddCommand}
         />
 
-        <Route exact path="/ga-dashboard/produits" component={Produits} />
-
+        <AdminPrivateRoute
+          exact
+          path="/ga-dashboard/produits"
+          component={Produits}
+        />
+        <AdminPrivateRoute
+          exact
+          path="/ga-dashboard/categorie"
+          component={Categorie}
+        />
       </Switch>
     </Router>
   );
