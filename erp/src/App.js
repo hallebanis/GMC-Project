@@ -33,8 +33,10 @@ import PointagePage from "./pages/GRH/PointagePage";
 
 import Commande from "./pages/GV/Commande";
 
-import Produits from "./pages/GA/Produit";
+import AddCommand from "./pages/GV/AddCommande";
 
+
+import Produits from "./pages/GA/Produit";
 
 
 function App() {
@@ -97,7 +99,15 @@ function App() {
         <Route exact path="/grh-dashboard/pointage" component={PointagePage} />
 
         <Route exact path="/gv-dashboard/commande" component={Commande} />
+
+        <Route
+          exact
+          path="/gv-dashboard/commande/addCommande"
+          component={AddCommand}
+        />
+
         <Route exact path="/ga-dashboard/produits" component={Produits} />
+
       </Switch>
     </Router>
   );

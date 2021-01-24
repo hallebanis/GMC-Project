@@ -1,6 +1,9 @@
 .errorTitle {
   color: red;
 }
+.number {
+  padding-top: 0px;
+}
 .navTitle {
   color: white;
 }
