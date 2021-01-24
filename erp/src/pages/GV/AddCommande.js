@@ -10,9 +10,11 @@ import {
   getCommandeVente,
   getProduitsVente,
 } from "../../actions/GV/venteActions";
-import { Button, Table } from "react-bootstrap";
+import MainNavBar from "../../components/admin/MainNavBar";
+import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import ListeClientDropDown from "../../components/GV/ListeClientDropDown";
 import mongoose from "mongoose";
+import GvSidebar from "../../components/GV/GvSidebar";
 const AddCommand = ({ history }) => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -100,106 +102,123 @@ const AddCommand = ({ history }) => {
   };
 
   return (
-    <MDBContainer>
-      <MDBInput
-        label="CLient Filter"
-        onChange={(e) => setClientFilter(e.target.value)}
-      />
-      <ListeClientDropDown
-        listeClient={vente.client.filter(
-          (el) =>
-            el.nom
-              .toUpperCase()
-              .trim()
-              .includes(clientFilter.toUpperCase().trim()) ||
-            el.prenom
-              .toUpperCase()
-              .trim()
-              .includes(clientFilter.toUpperCase().trim())
-        )}
-        setClientId={setClientId}
-      />
-      <h2>commande Num : {info.numero}</h2>
-      <Table>
-        <thead>
-          <th>Produit</th>
-          <th>Qte</th>
-          <th>P.U</th>
-          <th>S.TOTAL</th>
-        </thead>
-        <tbody>
-          {listeLigneVente.map((el) => (
-            <tr>
-              <td>
-                <ListeProduitDropDown
-                  id={el.id}
-                  listeProduit={vente.produit.filter((el) =>
-                    el.designation
-                      .toUpperCase()
-                      .trim()
-                      .includes(ProductFilter.toUpperCase().trim())
-                  )}
-                  setlisteLigneVente={setlisteLigneVente}
-                  listeLigneVente={listeLigneVente}
-                />
-              </td>
-              <td>
-                <MDBInput
-                  id={el.id}
-                  name="quantité"
-                  value={el.quantité}
-                  onChange={handleQteChange}
-                />
-              </td>
-              <td>
-                <MDBInput disabled={true} name="PU" value={el.pu} />
-              </td>
-              <td>
-                <MDBInput
-                  name="sousTotal"
-                  disabled={true}
-                  value={el.sousTotal}
-                />
-              </td>
-              <td>
-                <Button variant="danger" id={el.id} onClick={handleDeleteLigne}>
-                  del
-                </Button>
-              </td>
-            </tr>
-          ))}
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <h4>TOTAL :</h4>
-              {totalCalc()}
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <Button variant="primary" onClick={handelSave}>
-                save
-              </Button>
-              <Button variant="danger" onClick={handleCancel}>
-                cancel
-              </Button>
-            </td>
-          </tr>
-        </tbody>
-        <MDBInput
-          label="Product Filter"
-          onChange={(e) => setProductFilter(e.target.value)}
-        />
-        <Button variant="primary" onClick={addLigne}>
-          Add
-        </Button>
-      </Table>
-    </MDBContainer>
+    <Container fluid>
+      <Row>
+        <Col>
+          <MainNavBar />
+        </Col>
+      </Row>
+      <Row>
+        <Col md={3} style={{ height: "90vh" }}>
+          {" "}
+          <GvSidebar />
+        </Col>
+        <Col>
+          <MDBInput
+            label="CLient Filter"
+            onChange={(e) => setClientFilter(e.target.value)}
+          />
+          <ListeClientDropDown
+            listeClient={vente.client.filter(
+              (el) =>
+                el.nom
+                  .toUpperCase()
+                  .trim()
+                  .includes(clientFilter.toUpperCase().trim()) ||
+                el.prenom
+                  .toUpperCase()
+                  .trim()
+                  .includes(clientFilter.toUpperCase().trim())
+            )}
+            setClientId={setClientId}
+          />
+          <h2>commande Num : {info.numero}</h2>
+          <Table>
+            <thead>
+              <th>Produit</th>
+              <th>Qte</th>
+              <th>P.U</th>
+              <th>S.TOTAL</th>
+            </thead>
+            <tbody>
+              {listeLigneVente.map((el) => (
+                <tr>
+                  <td>
+                    <ListeProduitDropDown
+                      id={el.id}
+                      listeProduit={vente.produit.filter((el) =>
+                        el.designation
+                          .toUpperCase()
+                          .trim()
+                          .includes(ProductFilter.toUpperCase().trim())
+                      )}
+                      setlisteLigneVente={setlisteLigneVente}
+                      listeLigneVente={listeLigneVente}
+                    />
+                  </td>
+                  <td>
+                    <MDBInput
+                      id={el.id}
+                      name="quantité"
+                      value={el.quantité}
+                      onChange={handleQteChange}
+                    />
+                  </td>
+                  <td>
+                    <MDBInput disabled={true} name="PU" value={el.pu} />
+                  </td>
+                  <td>
+                    <MDBInput
+                      name="sousTotal"
+                      disabled={true}
+                      value={el.sousTotal}
+                    />
+                  </td>
+                  <td>
+                    <Button
+                      variant="danger"
+                      id={el.id}
+                      onClick={handleDeleteLigne}
+                    >
+                      del
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <h4>TOTAL :</h4>
+                  {totalCalc()}
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <Button variant="primary" onClick={handelSave}>
+                    save
+                  </Button>
+                  <Button variant="danger" onClick={handleCancel}>
+                    cancel
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+            <MDBInput
+              label="Product Filter"
+              onChange={(e) => setProductFilter(e.target.value)}
+            />
+            <Button variant="primary" onClick={addLigne}>
+              Add
+            </Button>
+          </Table>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
