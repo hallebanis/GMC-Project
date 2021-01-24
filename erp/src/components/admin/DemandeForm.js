@@ -41,9 +41,8 @@ const DemandeForm = ({ match, history }) => {
 
   return (
     <Container>
-      <Row>
-        <h2>Nouvelle Demande :</h2>
-      </Row>
+      <h2>Nouvelle Demande :</h2>
+
       <Form>
         <Form.Group>
           <Form.Label>Choisit un sujet</Form.Label>

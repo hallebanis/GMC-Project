@@ -43,8 +43,8 @@ const PointagePage = ({ history }) => {
               (el) =>
                 (el.nom.toLowerCase().includes(filter.toLowerCase()) ||
                   el.prenom.toLowerCase().includes(filter.toLowerCase()) ||
-                  el.matricule.toLowerCase().includes(filter.toLowerCase())) &&
-                !el.absence.some((elm) => elm.dateDepart !== Date.now())
+                  el.matricule.toLowerCase().includes(filter.toLowerCase())) /* &&
+                !el.absence.some((elm) => elm.dateDepart !== Date.now()) */
             )}
           />
         </Col>

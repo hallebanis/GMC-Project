@@ -2,8 +2,7 @@ import { MDBBtn } from "mdbreact";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-import { useDispatch } from "react-redux";
-import { addAbsence } from "../../actions/GRH/personnelActions";
+
 import MotifAbsenceModal from "./MotifAbsenceModal";
 const ListePointage = ({ modified, setModified, personnelList }) => {
   return (

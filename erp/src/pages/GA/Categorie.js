@@ -1,22 +1,17 @@
 import { MDBInput } from "mdbreact";
-import { getCategorie, getProduit } from "../../actions/GA/achatActions";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ListProduit from "./ListProduit";
-import AjoutModale from "../../components/GA/AjoutModale";
 import { Col, Container, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategorie } from "../../actions/GA/achatActions";
 import MainNavBar from "../../components/admin/MainNavBar";
+import AjoutCategorieModal from "../../components/GA/AjoutCategorieModal";
+import CategorieList from "../../components/GA/CategorieList";
 import GaSideNav from "../../components/GA/GaSideNav";
 
-const Produits = ({ history }) => {
-  const auth = useSelector((state) => state.auth);
-  useEffect(() => {
-    if (!auth.isAuth) history.push("/login");
-  }, [auth, history]);
+const Categorie = ({ history }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategorie());
-    dispatch(getProduit());
   }, [dispatch]);
   const achat = useSelector((state) => state.achat);
   const [filter, setFilter] = useState("");
@@ -28,28 +23,32 @@ const Produits = ({ history }) => {
         </Col>
       </Row>
       <Row>
-        <Col md={3} style={{ height: "90vh" }}>
+        <Col sm={0} md={3} style={{ height: "90vh" }}>
           <GaSideNav />
         </Col>
-        <Col>
+        <Col md={9}>
           <MDBInput
             label="Filter"
+            value={filter}
             onChange={(e) => setFilter(e.target.value)}
           />
-          <ListProduit
-            listProduit={achat.produit.filter(
+          <CategorieList
+            categorieList={achat.categorie.filter(
               (el) =>
-                el.designation.toUpperCase().includes(filter.toUpperCase()) ||
-                el.idCategorie.designation
+                el.designation
                   .toUpperCase()
-                  .includes(filter.toUpperCase())
+                  .trim()
+                  .includes(filter.toUpperCase().trim()) ||
+                el.reference
+                  .toUpperCase()
+                  .trim()
+                  .includes(filter.toUpperCase().trim())
             )}
           />
-          <AjoutModale />
         </Col>
       </Row>
     </Container>
   );
 };
 
-export default Produits;
+export default Categorie;

@@ -169,17 +169,11 @@ router.post("/addrole", (req, res) => {
         });
         newRole
           .save()
-          .then(() =>
-            res.status(200).json({
-              results: [{ msg: `role : "${titre}" a été créer avec succées` }],
-            })
-          )
-          .catch((err) =>
-            res.status(500).json({ errors: [{ msg: err.message }] })
-          );
+          .then((role) => res.status(200).json(role))
+          .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
       }
     })
-    .catch((err) => res.status(500).json({ errors: [{ msg: err.message }] }));
+    .catch((err) => res.status(500).json({ errors: [{ msg: err }] }));
 });
 
 router.put("/roles/edit/", authMiddleware, (req, res) => {

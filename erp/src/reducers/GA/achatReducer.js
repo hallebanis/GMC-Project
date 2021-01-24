@@ -1,4 +1,3 @@
-
 import {
   GET_COMMANDEACHAT_FAILED,
   ADD_COMMANDEACHAT_FAILED,
@@ -69,7 +68,6 @@ const achatReducer = (state = initState, action) => {
       };
     case UPDATE_FACTURE_SUCCESS:
       return {
-
         ...state,
         errors: null,
         facture: state.facture.map((el) => {
@@ -86,7 +84,6 @@ const achatReducer = (state = initState, action) => {
       };
     case ADD_COMMANDEACHAT_SUCCESS:
       return {
-
         ...state,
         commandeAchat: [...state.commandeAchat, action.payload],
         errors: null,
@@ -112,8 +109,8 @@ const achatReducer = (state = initState, action) => {
       return {
         ...state,
         categorie: action.payload,
-        errors: null
-      }
+        errors: null,
+      };
     case GET_CATEGORIE_FAILED:
     case GET_PRODUIT_FAILED:
     case ADD_PRODUIT_FAILED:
@@ -127,7 +124,6 @@ const achatReducer = (state = initState, action) => {
     case UPDATE_COMMANDEACHAT_FAILED:
     case DELETE_COMMANDEACHAT_FAILED:
       return {
-
         ...state,
         errors: action.payload,
       };

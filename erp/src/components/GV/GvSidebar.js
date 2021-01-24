@@ -20,7 +20,6 @@ const GvSidebar = () => {
   const auth = useSelector((state) => state.auth);
 
   return (
-
     <ProSidebar style={{ backgroundColor: "#343A40" }}>
       <SidebarHeader
         style={{
@@ -52,9 +51,13 @@ const GvSidebar = () => {
             <MenuItem>
               <Link to="/gv-dashboard/Commande">Liste des Commandes</Link>
             </MenuItem>
+            <MenuItem>
+              <Link to="/gv-dashboard/commande/addCommande">
+                Liste des Commandes
+              </Link>
+            </MenuItem>
           </SubMenu>
         </Menu>
-
       </SidebarContent>
       <SidebarFooter></SidebarFooter>
     </ProSidebar>

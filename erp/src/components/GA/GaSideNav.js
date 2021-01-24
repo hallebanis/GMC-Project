@@ -1,7 +1,7 @@
 import React from "react";
 import { AiFillHome } from "react-icons/ai";
 import "react-pro-sidebar/dist/css/styles.css";
-import { BsFillPersonFill } from "react-icons/bs";
+import { FaSellcast } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import {
@@ -15,7 +15,7 @@ import {
 } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import { useSelector } from "react-redux";
-const UserSideNav = () => {
+const GaSideNav = () => {
   const auth = useSelector((state) => state.auth);
   return (
     <ProSidebar style={{ backgroundColor: "#343A40" }}>
@@ -34,13 +34,16 @@ const UserSideNav = () => {
       <SidebarContent>
         <Menu iconShape="square">
           <MenuItem icon={<AiFillHome />}>
-            <Link to={"/user-dashboard/" + auth.user._id}>Dashboard</Link>
+            <Link to={"/ga-dashboard/"}>Dashboard</Link>
           </MenuItem>
-          <SubMenu title="Demande" icon={<BsFillPersonFill />}>
+          <SubMenu title="Produit" icon={<FaSellcast />}>
             <MenuItem>
-              <Link to={`/user-dashboard/${auth.user._id}/demande/new`}>
-                New Demand
-              </Link>
+              <Link to={`/ga-dashboard/produits`}>Product List</Link>
+            </MenuItem>
+          </SubMenu>
+          <SubMenu title="Categorie" icon={<FaSellcast />}>
+            <MenuItem>
+              <Link to={`/ga-dashboard/categorie`}>Category List</Link>
             </MenuItem>
           </SubMenu>
         </Menu>
@@ -49,4 +52,4 @@ const UserSideNav = () => {
     </ProSidebar>
   );
 };
-export default UserSideNav;
+export default GaSideNav;
