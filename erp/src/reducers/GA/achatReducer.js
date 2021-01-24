@@ -1,3 +1,4 @@
+
 import {
   GET_COMMANDEACHAT_FAILED,
   ADD_COMMANDEACHAT_FAILED,
@@ -21,7 +22,10 @@ import {
   UPDATE_COMMANDEACHAT_SUCCESS,
   UPDATE_FACTURE_SUCCESS,
   UPDATE_PRODUIT_FAILED,
+  GET_CATEGORIE_SUCCESS,
+  GET_CATEGORIE_FAILED,
 } from "../../actions/GA/types";
+
 const initState = {
   facture: [],
   errors: null,
@@ -65,6 +69,7 @@ const achatReducer = (state = initState, action) => {
       };
     case UPDATE_FACTURE_SUCCESS:
       return {
+
         ...state,
         errors: null,
         facture: state.facture.map((el) => {
@@ -72,6 +77,7 @@ const achatReducer = (state = initState, action) => {
           return el;
         }),
       };
+
     case GET_COMMANDEACHAT_SUCCESS:
       return {
         ...state,
@@ -80,6 +86,7 @@ const achatReducer = (state = initState, action) => {
       };
     case ADD_COMMANDEACHAT_SUCCESS:
       return {
+
         ...state,
         commandeAchat: [...state.commandeAchat, action.payload],
         errors: null,
@@ -91,6 +98,7 @@ const achatReducer = (state = initState, action) => {
           (el) => el._id !== action.payload._id
         ),
       };
+
     case UPDATE_COMMANDEACHAT_SUCCESS:
       return {
         ...state,
@@ -100,6 +108,13 @@ const achatReducer = (state = initState, action) => {
           return el;
         }),
       };
+    case GET_CATEGORIE_SUCCESS:
+      return {
+        ...state,
+        categorie: action.payload,
+        errors: null
+      }
+    case GET_CATEGORIE_FAILED:
     case GET_PRODUIT_FAILED:
     case ADD_PRODUIT_FAILED:
     case UPDATE_PRODUIT_FAILED:
@@ -112,9 +127,11 @@ const achatReducer = (state = initState, action) => {
     case UPDATE_COMMANDEACHAT_FAILED:
     case DELETE_COMMANDEACHAT_FAILED:
       return {
+
         ...state,
         errors: action.payload,
       };
+
     default:
       return state;
   }
