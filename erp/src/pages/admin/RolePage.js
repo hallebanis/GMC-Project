@@ -7,7 +7,11 @@ import MainNavBar from "../../components/admin/MainNavBar";
 import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
 import SideNav from "../../components/admin/SideNav";
 
-const RolePage = () => {
+const RolePage = ({ history }) => {
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (!auth.isAuth) history.push("/login");
+  }, [auth, history]);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadRoles());

@@ -3,16 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { ListPersonnel } from "../../components/GRH/ListPersonnel";
 import { loadPersonnel } from "../../actions/GRH/personnelActions";
-import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
-import { Container, Table, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { NavSide } from "../../components/GRH/NavSide";
 import MainNavBar from "../../components/admin/MainNavBar";
 
-export const ListPersonnelPage = () => {
+export const ListPersonnelPage = ({ history }) => {
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (!auth.isAuth) history.push("/login");
+  }, [auth, history]);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadPersonnel());
-  }, []);
+  }, [dispatch]);
   const personnel = useSelector((state) => state.personnel);
   return (
     <Container fluid>

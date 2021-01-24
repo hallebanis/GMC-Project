@@ -8,12 +8,15 @@ import GvSidebar from "../../components/GV/GvSidebar";
 import ListeCommandes from "../../components/GV/ListeCommandes";
 
 const Commande = ({ history }) => {
-  const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (!auth.isAuth) history.push("/login");
+  }, [auth, history]);
+  const dispatch = useDispatch();
   useEffect(() => {
     //dispatch(getClient());
     dispatch(getCommandeVente());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (!auth.isAuth) history.push("/");
@@ -29,7 +32,7 @@ const Commande = ({ history }) => {
         </Col>
       </Row>
       <Row>
-        <Col md={3} style={{height:"90vh"}}>
+        <Col md={3} style={{ height: "90vh" }}>
           <GvSidebar />
         </Col>
         <Col>

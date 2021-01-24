@@ -8,9 +8,8 @@ import { useSelector } from "react-redux";
 const GvDashboard = ({ history }) => {
   const auth = useSelector((state) => state.auth);
   useEffect(() => {
-    if (!auth.isAuth) history.GoBack();
-    //push("/");
-  }, [auth]);
+    if (!auth.isAuth) history.push("/login");
+  }, [auth, history]);
   return (
     <Container fluid>
       <Row>
@@ -32,6 +31,7 @@ const GvDashboard = ({ history }) => {
               display: "block",
             }}
             src={image}
+            alt="none"
           />
         </Col>
       </Row>

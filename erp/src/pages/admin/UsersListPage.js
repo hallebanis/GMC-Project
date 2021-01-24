@@ -8,10 +8,13 @@ import RoleDropDown from "../../components/admin/RoleDropDown";
 import UserList from "../../components/admin/UserList";
 import MainNavBar from "../../components/admin/MainNavBar";
 import { Col, Container, FormControl, Row } from "react-bootstrap";
-import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
 import SideNav from "../../components/admin/SideNav";
 
 const UsersListPage = ({ history }) => {
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (!auth.isAuth) history.push("/login");
+  }, [auth, history]);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUsers());
@@ -35,50 +38,52 @@ const UsersListPage = ({ history }) => {
         <Col md={3} style={{ height: "90vh" }}>
           <SideNav />
         </Col>
-        <Col md="auto">
-          <Form>
-            <h3>Filter</h3>
-            <Form inline>
-              <label>Nom :</label>
-              <FormControl
-                type="text"
-                name="nameFilter"
-                onChange={(e) => setNameFilter(e.target.value)}
-                value={nameFilter}
-              />
-              <lable>Role</lable>
-              <RoleDropDown
-                setRoleTitle={setRoleFilter}
-                dropDownMsg={
-                  roleFilter ? roleFilter : "Select a role from the list"
+        <Col md={9} sm={6}>
+          <Container fluid>
+            <Form>
+              <h5>Filter</h5>
+              <Form inline>
+                <label>Nom :</label>
+                <FormControl
+                  type="text"
+                  name="nameFilter"
+                  onChange={(e) => setNameFilter(e.target.value)}
+                  value={nameFilter}
+                />
+                <lable>Role</lable>
+                <RoleDropDown
+                  setRoleTitle={setRoleFilter}
+                  dropDownMsg={
+                    roleFilter ? roleFilter : "Select a role from the list"
+                  }
+                />
+                <Button style={{ marginLeft: "25px" }} onClick={handleReset}>
+                  Reset
+                </Button>
+              </Form>
+            </Form>
+            <Container>
+              <UserList
+                history={history}
+                userList={
+                  users
+                    ? users.users.filter((elm) =>
+                        elm.personnelId.nom
+                          ? (elm.personnelId.nom
+                              .toLowerCase()
+                              .includes(nameFilter.toLowerCase()) ||
+                              elm.personnelId.prenom
+                                .toLowerCase()
+                                .includes(nameFilter.toLowerCase())) &&
+                            (roleFilter === "Select a role from the list"
+                              ? true
+                              : elm.role.titre.includes(roleFilter))
+                          : null
+                      )
+                    : null
                 }
               />
-              <Button style={{ marginLeft: "25px" }} onClick={handleReset}>
-                Reset
-              </Button>
-            </Form>
-          </Form>
-          <Container>
-            <UserList
-              history={history}
-              userList={
-                users
-                  ? users.users.filter((elm) =>
-                      elm.personnelId.nom
-                        ? (elm.personnelId.nom
-                            .toLowerCase()
-                            .includes(nameFilter.toLowerCase()) ||
-                            elm.personnelId.prenom
-                              .toLowerCase()
-                              .includes(nameFilter.toLowerCase())) &&
-                          (roleFilter === "Select a role from the list"
-                            ? true
-                            : elm.role.titre.includes(roleFilter))
-                        : null
-                    )
-                  : null
-              }
-            />
+            </Container>
           </Container>
         </Col>
       </Row>

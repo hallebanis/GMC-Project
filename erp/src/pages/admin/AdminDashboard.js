@@ -9,7 +9,7 @@ import dashboardCover from "../../res/img/dashboardCover.jpg";
 const AdminDashboard = ({ history }) => {
   const auth = useSelector((state) => state.auth);
   useEffect(() => {
-    if (!auth.auth.isAuth) history.push("/login");
+    if (!auth.isAuth) history.push("/login");
   }, [auth, history]);
   return (
     <Container fluid>

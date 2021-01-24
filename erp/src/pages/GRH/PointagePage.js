@@ -7,7 +7,11 @@ import MainNavBar from "../../components/admin/MainNavBar";
 import ListePointage from "../../components/GRH/ListePointage";
 import { NavSide } from "../../components/GRH/NavSide";
 
-const PointagePage = () => {
+const PointagePage = ({ history }) => {
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (!auth.isAuth) history.push("/login");
+  }, [auth, history]);
   const [filter, setFilter] = useState("");
   const [modified, setModified] = useState(true);
   const dispatch = useDispatch();

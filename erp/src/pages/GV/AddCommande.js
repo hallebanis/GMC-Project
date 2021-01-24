@@ -16,6 +16,10 @@ import ListeClientDropDown from "../../components/GV/ListeClientDropDown";
 import mongoose from "mongoose";
 import GvSidebar from "../../components/GV/GvSidebar";
 const AddCommand = ({ history }) => {
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (!auth.isAuth) history.push("/login");
+  }, [auth, history]);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getClient());

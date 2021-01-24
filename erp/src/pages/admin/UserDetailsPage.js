@@ -8,6 +8,10 @@ import User from "../../components/admin/User";
 
 const UserDetailsPage = ({ match, history }) => {
   const users = useSelector((state) => state.users);
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (!auth.isAuth) history.push("/login");
+  }, [auth, history]);
   const [changeMaid, setChangeMaid] = useState("false");
   const user = users.users.filter((elm) => elm._id === match.params.id);
   useEffect(() => {
