@@ -1,26 +1,39 @@
 import { MDBInput } from "mdbreact";
-import { getProduit } from "../../actions/GA/achatActions";
+import { getCategorie, getProduit } from "../../actions/GA/achatActions";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ListProduit from "./ListProduit";
+import AjoutModale from "../../components/GA/AjoutModale";
 
-
-const Produits = () => {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getProduit());
-    }, []);
-    const achat = useSelector((state) => state.achat);
-    const [filter, setFilter] = useState("");
-    return (
-        <div>
-            <MDBInput label="Filter" onChange={(e) => setFilter(e.target.value)} />
-            <ListProduit listProduit={achat.produit} />
-        </div>
-    );
+const Produits = ({ history }) => {
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (!auth.isAuth) history.push("/login");
+  }, [auth, history]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCategorie());
+    dispatch(getProduit());
+  }, [dispatch]);
+  const achat = useSelector((state) => state.achat);
+  const [filter, setFilter] = useState("");
+  return (
+    <div>
+      <MDBInput label="Filter" onChange={(e) => setFilter(e.target.value)} />
+      <ListProduit
+        listProduit={achat.produit.filter(
+          (el) =>
+            el.designation.toUpperCase().includes(filter.toUpperCase()) ||
+            el.idCategorie.designation
+              .toUpperCase()
+              .includes(filter.toUpperCase())
+        )}
+      />
+      <div>
+        <AjoutModale />
+      </div>
+    </div>
+  );
 };
 
 export default Produits;
-
-
-

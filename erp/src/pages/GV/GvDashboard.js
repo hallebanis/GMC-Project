@@ -7,10 +7,9 @@ import { useSelector } from "react-redux";
 
 const GvDashboard = ({ history }) => {
   const auth = useSelector((state) => state.auth);
-   useEffect(() => {
-    if (!auth.isAuth) history.GoBack();
-    //push("/");
-  }, [auth]); 
+  useEffect(() => {
+    if (!auth.isAuth) history.push("/login");
+  }, [auth, history]);
   return (
     <Container fluid>
       <Row>
@@ -22,7 +21,7 @@ const GvDashboard = ({ history }) => {
         <Col md={3} style={{ height: "90vh" }}>
           <GvSidebar />
         </Col>
-        <Col style={{ height: "90vh", paddingLeft: '0' }}>
+        <Col style={{ height: "90vh", paddingLeft: "0" }}>
           <img
             style={{
               height: "100%",
@@ -32,6 +31,7 @@ const GvDashboard = ({ history }) => {
               display: "block",
             }}
             src={image}
+            alt="none"
           />
         </Col>
       </Row>

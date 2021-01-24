@@ -23,13 +23,12 @@ export const AvanceForm = () => {
     setInfo({ ...info, date: el });
   };
   const handleSave = () => {
-    dispatch(addAvance(info))
+    dispatch(addAvance(info));
     dispatch(loadPersonnel());
   };
   const handleSelect = (id) => {
     setInfo({ ...info, idPersonnel: id });
   };
-
 
   return (
     <div>
@@ -39,7 +38,9 @@ export const AvanceForm = () => {
           noValidate
           className={`${classes.root} ${classes.form}`}
         >
-          <Typography style={{textAlign:"center"}} variant="h6">Avance Form</Typography>
+          <Typography style={{ textAlign: "center" }} variant="h6">
+            Avance Form
+          </Typography>
           <TextField
             name="montant"
             type="text"
@@ -64,7 +65,6 @@ export const AvanceForm = () => {
             variant="contained"
             color="primary"
             size="large"
-            /* type="submit" */
             fullWidth
             onClick={handleSave}
           >
@@ -72,7 +72,7 @@ export const AvanceForm = () => {
           </Button>
         </form>
       </Paper>
-      <instance/>
+      <instance />
     </div>
   );
 };

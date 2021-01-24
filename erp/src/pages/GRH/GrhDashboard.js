@@ -1,20 +1,21 @@
-import React from "react";
-import { AddPersonnelForm } from "../../components/GRH/AddPersonnelForm";
-import { DiplomeForm } from "../../components/GRH/DiplomeForm";
-import { ContratForm } from "../../components/GRH/ContratForm";
-import { ServiceForm } from "../../components/GRH/ServiceForm";
+import React, { useEffect } from "react";
+
 import { Col, Container, Row } from "react-bootstrap";
-import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
 import { NavSide } from "../../components/GRH/NavSide";
 import image from "../../res/img/system.png";
 import MainNavBar from "../../components/admin/MainNavBar";
+import { useSelector } from "react-redux";
 
-export const GrhDashboard = () => {
+export const GrhDashboard = ({ history }) => {
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (!auth.isAuth) history.push("/login");
+  }, [auth, history]);
   return (
     <Container fluid>
       <Row>
         <Col>
-          <MainNavBar></MainNavBar>
+          <MainNavBar color="#343A40"></MainNavBar>
         </Col>
       </Row>
       <Row height="80vh">
@@ -22,7 +23,7 @@ export const GrhDashboard = () => {
           <NavSide />
         </Col>
         <Col>
-          <img src={image} />
+          <img src={image} alt="none" />
         </Col>
       </Row>
     </Container>
