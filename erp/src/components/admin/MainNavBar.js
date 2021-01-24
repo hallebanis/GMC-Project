@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authentification/authActions";
 
-function MainNavBar({ bg, variant }) {
+function MainNavBar({ bg, variant,color }) {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -27,10 +27,14 @@ function MainNavBar({ bg, variant }) {
   };
   return (
 
-    <Navbar style={{ height: "10vh", backgroundColor: "#1D1D1D" }}>
 
 
+    <Navbar
+      style={{ height: "10vh", backgroundColor:color || "#1D1D1D" }}
+      
+    >
       <Navbar.Brand style={{ fontWeight: "bold", color: "white" }} href="#home">
+
         ERP
       </Navbar.Brand>
       <Nav className="mr-auto">

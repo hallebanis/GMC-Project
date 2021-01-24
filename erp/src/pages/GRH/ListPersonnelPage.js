@@ -16,13 +16,17 @@ export const ListPersonnelPage = () => {
   const personnel = useSelector((state) => state.personnel);
   return (
     <Container fluid>
-      <Row><Col><MainNavBar></MainNavBar></Col></Row>
+      <Row>
+        <Col>
+          <MainNavBar color="#343A40"></MainNavBar>
+        </Col>
+      </Row>
       <Row>
         <Col md={3}>
           {" "}
-          <NavSide/>
+          <NavSide />
         </Col>
-        <Col >
+        <Col>
           <ListPersonnel list={personnel} />
         </Col>
       </Row>

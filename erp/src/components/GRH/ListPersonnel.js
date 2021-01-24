@@ -12,7 +12,7 @@ export const ListPersonnel = ({ list }) => {
 
   return (
     <>
-    <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark">
         <Navbar.Brand href="#home">List Of Personnel</Navbar.Brand>
       </Navbar>
       <Table hover striped bordered>

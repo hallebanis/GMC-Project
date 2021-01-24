@@ -1,7 +1,6 @@
 import { createMedia } from "@artsy/fresnel";
 import PropTypes from "prop-types";
-/* import image from "../../res/img/ERP.jpg";
- */import React, { Component } from "react";
+ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -242,7 +241,7 @@ const HomepageLayout = () => (
               indispensable as the electricity that keeps the lights on
             </p>
           </Grid.Column >
-          <Grid.Column /* floated="right" */ width={6}>
+          <Grid.Column width={6}>
             <iframe
               width="560"
               height="315"
@@ -273,7 +272,7 @@ const HomepageLayout = () => (
               "I shouldn't have gone with their competitor."
             </Header>
             <p style={{ fontSize: "1.33em" }}>
-              <Image avatar /* src={image} */ />
+              <Image avatar  />
               <b>Nan</b> Chief Fun Officer Acme Toys
             </p>
           </Grid.Column>

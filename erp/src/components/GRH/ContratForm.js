@@ -57,9 +57,10 @@ export const ContratForm = () => {
           <NavSide />
         </Col>
         <Col md={6}>
-        
-          <Paper className={classes.paper} style={{margin:"50px" }}>
-          <Typography  style={{textAlign:"center"}} variant="h6">Contrat Form</Typography>
+          <Paper className={classes.paper} style={{ margin: "50px" }}>
+            <Typography style={{ textAlign: "center" }} variant="h6">
+              Contrat Form
+            </Typography>
             <Form.Group controlId="formBasicPassword">
               <Form.Label>salaire de base</Form.Label>
               <Form.Control
@@ -82,14 +83,14 @@ export const ContratForm = () => {
             </Form.Group>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>
-                date Debut :
+                Date Debut :
                 <Select name="dateDebut" onDateChange={handleDateChange} />
               </Form.Label>
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
               <Form.Label>
-                date Fin : <Select name="dateFin" onDateChange={handleDate} />
+                Date Fin : <Select name="dateFin" onDateChange={handleDate} />
               </Form.Label>
             </Form.Group>
             <PersonnelDropDown onPersonnelChange={handleSelect}>

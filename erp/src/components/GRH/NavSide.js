@@ -68,7 +68,6 @@ export const NavSide = () => {
             <MenuItem>
               <Link to="/grh-dashboard/AddAvance">Add Avance</Link>
             </MenuItem>
-            <MenuItem>List Avance</MenuItem>
           </SubMenu>
         </Menu>
         <Menu iconShape="square">
