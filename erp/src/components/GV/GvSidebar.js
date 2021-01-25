@@ -1,8 +1,7 @@
 import React from "react";
-import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BiNotepad } from "react-icons/bi";
-import { BsFillBagFill, BsFillPersonFill } from "react-icons/bs";
+import { BsFillPersonFill } from "react-icons/bs";
 import { AiFillHome } from "react-icons/ai";
 
 import {
@@ -35,7 +34,7 @@ const GvSidebar = () => {
       <SidebarContent>
         <Menu iconShape="square">
           <MenuItem icon={<AiFillHome />}>
-            <Link to="/gv-dashboard">Home</Link>
+            <Link to="/gv-dashboard">Dashbord</Link>
           </MenuItem>
           <SubMenu title="Client" icon={<BsFillPersonFill />}>
             <MenuItem>
