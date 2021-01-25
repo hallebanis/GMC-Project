@@ -46,6 +46,18 @@ const GaSideNav = () => {
               <Link to={`/ga-dashboard/categorie`}>Category List</Link>
             </MenuItem>
           </SubMenu>
+          <SubMenu title="Fournisseurs" icon={<FaSellcast />}>
+            <MenuItem>
+              <Link to={`/ga-dashboard/addFournisseur`}>
+                nouveau Fournisseur
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to={`/ga-dashboard/fournisseur`}>
+                Liste des Fournisseurs
+              </Link>
+            </MenuItem>
+          </SubMenu>
         </Menu>
       </SidebarContent>
       <SidebarFooter></SidebarFooter>

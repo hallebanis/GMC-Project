@@ -6,10 +6,11 @@ const FournisseurSchema = new schema({
     type: String,
     required: true,
   },
+  nom: { type: String },
   numTel: { type: String },
   email: { type: String },
   adresse: { type: String },
-  idCompteBancaire: { type: mongoose.Types.ObjectId, ref: "compteBancaire" },
+  compteBancaire: { type: String },
 });
 
-module.exports = mongoose.model("founisseur", FournisseurSchema);
+module.exports = mongoose.model("fournisseur", FournisseurSchema);
