@@ -9,6 +9,8 @@ import {
   ADD_COMPTEBANCAIRE_SUCCESS,
   ADD_FACTURE_FAILED,
   ADD_FACTURE_SUCCESS,
+  ADD_FOURNISSEUR_FAILED,
+  ADD_FOURNISSEUR_SUCCESS,
   ADD_PRODUIT_FAILED,
   ADD_PRODUIT_SUCCESS,
   DELETE_COMMANDEACHAT_FAILED,
@@ -17,6 +19,8 @@ import {
   DELETE_COMPTEBANCAIRE_SUCCESS,
   DELETE_FACTURE_FAILED,
   DELETE_FACTURE_SUCCESS,
+  DELETE_FOURNISSEUR_FAILED,
+  DELETE_FOURNISSEUR_SUCCESS,
   DELETE_PRODUIT_FAILED,
   DELETE_PRODUIT_SUCCESS,
   GET_CATEGORIE_FAILED,
@@ -27,6 +31,8 @@ import {
   GET_COMPTEBANCAIRE_SUCCESS,
   GET_FACTURE_FAILED,
   GET_FACTURE_SUCCESS,
+  GET_FOURNISSEUR_FAILED,
+  GET_FOURNISSEUR_SUCCESS,
   GET_PRODUIT_FAILED,
   GET_PRODUIT_SUCCESS,
   UPDATE_COMMANDEACHAT_FAILED,
@@ -35,6 +41,8 @@ import {
   UPDATE_COMPTEBANCAIRE_SUCCESS,
   UPDATE_FACTURE_FAILED,
   UPDATE_FACTURE_SUCCESS,
+  UPDATE_FOURNISSEUR_FAILED,
+  UPDATE_FOURNISSEUR_SUCCESS,
   UPDATE_PRODUIT_FAILED,
   UPDATE_PRODUIT_SUCCESS,
 } from "./types";
@@ -368,6 +376,77 @@ export const deleteProduit = (id) => (dispatch) => {
     .catch((err) =>
       dispatch({
         type: DELETE_PRODUIT_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};
+export const getFournisseur = () => (dispatch) => {
+  tokenSet();
+  axios
+    .get("/api/allFournisseur")
+    .then((res) =>
+      dispatch({
+        type: GET_FOURNISSEUR_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_FOURNISSEUR_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};
+
+export const addFournisseur = (info) => (dispatch) => {
+  tokenSet();
+  axios
+    .post("/api/addFournisseur", info)
+    .then((res) =>
+      dispatch({
+        type: ADD_FOURNISSEUR_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: ADD_FOURNISSEUR_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};
+
+export const deleteFournisseur = (id) => (dispatch) => {
+  tokenSet();
+  axios
+    .delete(`/api/deleteFournisseur/${id}`)
+    .then((res) =>
+      dispatch({
+        type: DELETE_FOURNISSEUR_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: DELETE_FOURNISSEUR_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};
+
+export const updateFournisseur = (info) => (dispatch) => {
+  tokenSet();
+  axios
+    .put(`/api/updateFournisseur`, info)
+    .then((res) =>
+      dispatch({
+        type: UPDATE_FOURNISSEUR_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: UPDATE_FOURNISSEUR_FAILED,
         payload: err.response.data.errors,
       })
     );

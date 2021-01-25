@@ -23,12 +23,23 @@ import {
   UPDATE_PRODUIT_FAILED,
   GET_CATEGORIE_SUCCESS,
   GET_CATEGORIE_FAILED,
+  ADD_CATEGORIE_SUCCESS,
+  ADD_CATEGORIE_FAILED,
+  GET_FOURNISSEUR_SUCCESS,
+  ADD_FOURNISSEUR_SUCCESS,
+  ADD_FOURNISSEUR_FAILED,
+  GET_FOURNISSEUR_FAILED,
+  DELETE_FOURNISSEUR_SUCCESS,
+  DELETE_FOURNISSEUR_FAILED,
+  UPDATE_FOURNISSEUR_SUCCESS,
+  UPDATE_FOURNISSEUR_FAILED,
 } from "../../actions/GA/types";
 
 const initState = {
   facture: [],
   errors: null,
   produit: [],
+  fournisseur: [],
 };
 const achatReducer = (state = initState, action) => {
   switch (action.type) {
@@ -88,6 +99,12 @@ const achatReducer = (state = initState, action) => {
         commandeAchat: [...state.commandeAchat, action.payload],
         errors: null,
       };
+    case ADD_CATEGORIE_SUCCESS:
+      return {
+        ...state,
+        errors: null,
+        categorie: [...state.categorie, action.payload],
+      };
     case DELETE_COMMANDEACHAT_SUCCESS:
       return {
         ...state,
@@ -111,6 +128,39 @@ const achatReducer = (state = initState, action) => {
         categorie: action.payload,
         errors: null,
       };
+    case GET_FOURNISSEUR_SUCCESS:
+      return {
+        ...state,
+        fournisseur: action.payload,
+        errors: null,
+      };
+    case ADD_FOURNISSEUR_SUCCESS:
+      return {
+        ...state,
+        fournisseur: [...state.fournisseur, action.payload],
+        errors: null,
+      };
+    case DELETE_FOURNISSEUR_SUCCESS:
+      return {
+        ...state,
+        errors: null,
+        fournisseur: state.fournisseur.filter(
+          (el) => el._id !== action.payload._id
+        ),
+      };
+    case UPDATE_FOURNISSEUR_SUCCESS:
+      return {
+        ...state,
+        errors: null,
+        fournisseur: state.fournisseur.map((el) => {
+          if (el._id === action.payload._id) return action.payload;
+          return el;
+        }),
+      };
+    case UPDATE_FOURNISSEUR_FAILED:
+    case DELETE_FOURNISSEUR_FAILED:
+    case ADD_FOURNISSEUR_FAILED:
+    case GET_FOURNISSEUR_FAILED:
     case GET_CATEGORIE_FAILED:
     case GET_PRODUIT_FAILED:
     case ADD_PRODUIT_FAILED:
@@ -119,6 +169,7 @@ const achatReducer = (state = initState, action) => {
     case GET_FACTURE_FAILED:
     case ADD_FACTURE_FAILED:
     case DELETE_FACTURE_FAILED:
+    case ADD_CATEGORIE_FAILED:
     case GET_COMMANDEACHAT_FAILED:
     case ADD_COMMANDEACHAT_FAILED:
     case UPDATE_COMMANDEACHAT_FAILED:

@@ -37,6 +37,8 @@ import AddCommand from "./pages/GV/AddCommande";
 
 import Produits from "./pages/GA/Produit";
 import Categorie from "./pages/GA/Categorie";
+import AjoutFournisseur from "./pages/GA/AjoutFournisseur";
+import ListeFournisseurPage from "./pages/GA/ListeFournisseurPage";
 
 function App() {
   return (
@@ -162,6 +164,16 @@ function App() {
           exact
           path="/ga-dashboard/categorie"
           component={Categorie}
+        />
+        <AdminPrivateRoute
+          exact
+          path="/ga-dashboard/addFournisseur"
+          component={AjoutFournisseur}
+        />
+        <AdminPrivateRoute
+          exact
+          path="/ga-dashboard/fournisseur"
+          component={ListeFournisseurPage}
         />
       </Switch>
     </Router>
