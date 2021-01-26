@@ -5,6 +5,17 @@ import FormControl from "react-bootstrap/FormControl";
 import { modifyUser } from "../../actions/admin/usersActions";
 import RoleDropDown from "./RoleDropDown";
 import { useDispatch } from "react-redux";
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBCardText,
+  MDBCardTitle,
+  MDBContainer,
+  MDBInput,
+} from "mdbreact";
+import { VscSave } from "react-icons/vsc";
+import { ImCancelCircle } from "react-icons/im";
+import { FiEdit2 } from "react-icons/fi";
 
 const User = ({ user, changeMaid }) => {
   const [enableChanges, setEnableChanges] = useState(false);
@@ -53,66 +64,72 @@ const User = ({ user, changeMaid }) => {
   };
   return (
     <Form>
-      <h5>{`ID : ${user._id}`}</h5>
-      <h5>{`Nom & Prenom : ${user.personnelId.nom} ${user.personnelId.prenom}`}</h5>
-      <label>Login:</label>
-      <FormControl
-        className="form-control"
-        type="text"
-        id="txtLogin"
-        name="login"
-        value={info.login}
-        disabled={!enableChanges}
-        onChange={handleInfoChange}
-      ></FormControl>
-      <label>Password:</label>
-      <FormControl
-        className="form-control"
-        type="password"
-        id="txtPassword"
-        name="password"
-        value={info.password}
-        disabled={!enableChanges}
-        onChange={handleInfoChange}
-        onFocus={() => {
-          setInfo({ ...info, password: "" });
-        }}
-        onBlur={handlePasswordFocusOut}
-      ></FormControl>
-      <Form.Group>
-        <RoleDropDown
-          info={info}
-          dropDownMsg={roleTitle ? roleTitle : "aucun"}
-          setRoleTitle={setRoleTitle}
-          setInfo={setInfo}
-          disableChange={!enableChanges}
-        />
-      </Form.Group>
+      <MDBContainer>
+        <MDBCard className="w-75 mb-4">
+          <MDBCardBody>
+            <MDBCardTitle>
+              {" "}
+              {`Nom & Prenom : ${user.personnelId.nom} ${user.personnelId.prenom}`}
+            </MDBCardTitle>
+            <MDBCardText>{`ID : ${user._id}`}</MDBCardText>
+            <MDBInput
+              id="txtLogin"
+              name="login"
+              value={info.login}
+              disabled={!enableChanges}
+              onChange={handleInfoChange}
+            />
+            <MDBInput
+              type="password"
+              id="txtPassword"
+              name="password"
+              value={info.password}
+              disabled={!enableChanges}
+              onChange={handleInfoChange}
+              onFocus={() => {
+                setInfo({ ...info, password: "" });
+              }}
+              onBlur={handlePasswordFocusOut}
+            />
+            <Form.Group>
+              <RoleDropDown
+                info={info}
+                dropDownMsg={roleTitle ? roleTitle : "aucun"}
+                setRoleTitle={setRoleTitle}
+                setInfo={setInfo}
+                disableChange={!enableChanges}
+              />
+            </Form.Group>
+            <Button
+              name="changeButton"
+              hidden={enableChanges}
+              variant="primary"
+              onClick={() => setEnableChanges(true)}
+            >
+              <FiEdit2 />
+            </Button>
+            <div style={{ display: "flex", alignItems: "flex-end" }}>
+              <Button
+                name="saveButton"
+                variant="primary"
+                hidden={!enableChanges}
+                onClick={handleSave}
+              >
+                <VscSave />
+              </Button>
+              <Button
+                variant="danger"
+                onClick={handleCancelChanges}
+                name="cancelButton"
+                hidden={!enableChanges}
+              >
+                <ImCancelCircle />
+              </Button>
+            </div>
+          </MDBCardBody>
+        </MDBCard>
+      </MDBContainer>
 
-      <Button
-        name="changeButton"
-        hidden={enableChanges}
-        variant="primary"
-        onClick={() => setEnableChanges(true)}
-      >
-        Change
-      </Button>
-      <Button
-        name="saveButton"
-        variant="primary"
-        hidden={!enableChanges}
-        onClick={handleSave}
-      >
-        Sauvegarder
-      </Button>
-      <Button
-        onClick={handleCancelChanges}
-        name="cancelButton"
-        variant="primary"
-        hidden={!enableChanges}
-      >
-        Annuler
-      </Button>
       <h5 className="errorTitle">{errorCheck ? errorCheck : null}</h5>
     </Form>
   );

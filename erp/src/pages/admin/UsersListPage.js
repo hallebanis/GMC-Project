@@ -9,6 +9,8 @@ import UserList from "../../components/admin/UserList";
 import MainNavBar from "../../components/admin/MainNavBar";
 import { Col, Container, FormControl, Row } from "react-bootstrap";
 import SideNav from "../../components/admin/SideNav";
+import { GrPowerReset } from "react-icons/gr";
+import { MDBInput } from "mdbreact";
 
 const UsersListPage = ({ history }) => {
   const auth = useSelector((state) => state.auth);
@@ -41,16 +43,20 @@ const UsersListPage = ({ history }) => {
         <Col md={9} sm={6}>
           <Container fluid>
             <Form>
-              <h5>Filter</h5>
-              <Form inline>
-                <label>Nom :</label>
-                <FormControl
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  alignContent: "space-between",
+                }}
+              >
+                <MDBInput
                   type="text"
                   name="nameFilter"
                   onChange={(e) => setNameFilter(e.target.value)}
                   value={nameFilter}
+                  label="filter"
                 />
-                <lable>Role</lable>
                 <RoleDropDown
                   setRoleTitle={setRoleFilter}
                   dropDownMsg={
@@ -58,9 +64,9 @@ const UsersListPage = ({ history }) => {
                   }
                 />
                 <Button style={{ marginLeft: "25px" }} onClick={handleReset}>
-                  Reset
+                  <GrPowerReset />
                 </Button>
-              </Form>
+              </div>
             </Form>
             <Container>
               <UserList

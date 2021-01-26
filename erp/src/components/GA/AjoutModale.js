@@ -17,6 +17,7 @@ const AjoutModale = () => {
 
   const achat = useSelector((state) => state.achat);
   const [modal8, setModal8] = useState(false);
+  const [checked, setChecked] = useState(true);
   const [info, setInfo] = useState({
     reference: "",
     designation: "",
@@ -24,9 +25,18 @@ const AjoutModale = () => {
     prixAchatHT: 0,
     prixVenteHT: 0,
     qteStock: 0,
-    idCategorie: "6000a7515585314d50c66fc1",
+    idCategorie: "",
     tva: 0,
+    idFournisseur: "",
   });
+  const handleCheckClick = (e) => {
+    setChecked(true);
+    setInfo({ ...info, etat: e.target.id });
+  };
+  const handleCheckedClick2 = (e) => {
+    setChecked(false);
+    setInfo({ ...info, etat: e.target.id });
+  };
   const toggle = () => {
     setInfo({
       reference: "",
@@ -35,8 +45,9 @@ const AjoutModale = () => {
       prixAchatHT: 0,
       prixVenteHT: 0,
       qteStock: 0,
-      idCategorie: "6000a7515585314d50c66fc1",
+      idCategorie: "",
       tva: 0,
+      idFournisseur: "",
     });
     setModal8(!modal8);
   };
@@ -77,20 +88,23 @@ const AjoutModale = () => {
             onChange={handleStringChange}
           ></MDBInput>
           <Form.Group>
-            <Form.Control as="select" size="lg">
-              <option
-                name="etat"
-                onClick={(e) => setInfo({ ...info, etat: e.target.text })}
-              >
-                en stock
-              </option>
-              <option
-                name="etat"
-                onClick={(e) => setInfo({ ...info, etat: e.target.text })}
-              >
-                hors stock
-              </option>
-            </Form.Control>
+            <div key={`default-radio`} className="mb-3">
+              <Form.Check
+                type="radio"
+                id={`en stock`}
+                label={`en stock`}
+                onClick={handleCheckClick}
+                checked={checked}
+              />
+
+              <Form.Check
+                checked={!checked}
+                type="radio"
+                label={`hors stock`}
+                id={`hors stock`}
+                onClick={handleCheckedClick2}
+              />
+            </div>
           </Form.Group>
           <MDBInput
             value={info.prixAchatHT}
@@ -98,6 +112,15 @@ const AjoutModale = () => {
             label="PrixAchatHT"
             onChange={handleNumericChange}
           ></MDBInput>
+          <div>
+            {" "}
+            <select search={true} className="browser-default custom-select">
+              <option>Choose your option</option>
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option>
+            </select>
+          </div>
           <MDBInput
             value={info.prixVenteHT}
             name="prixVenteHT"

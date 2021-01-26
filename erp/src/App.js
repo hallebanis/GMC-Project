@@ -39,6 +39,8 @@ import Produits from "./pages/GA/Produit";
 import Categorie from "./pages/GA/Categorie";
 import AjoutFournisseur from "./pages/GA/AjoutFournisseur";
 import ListeFournisseurPage from "./pages/GA/ListeFournisseurPage";
+import AjoutAchatPage from "./pages/GA/AjoutAchatPage";
+import AjoutProduitPage from "./pages/GA/AjoutProduitPage";
 
 function App() {
   return (
@@ -174,6 +176,16 @@ function App() {
           exact
           path="/ga-dashboard/fournisseur"
           component={ListeFournisseurPage}
+        />
+        <AdminPrivateRoute
+          exact
+          path="/ga-dashboard/achat"
+          component={AjoutAchatPage}
+        />
+        <AdminPrivateRoute
+          exact
+          path="/ga-dashboard/addProduit"
+          component={AjoutProduitPage}
         />
       </Switch>
     </Router>
