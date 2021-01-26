@@ -24,5 +24,6 @@ const ProduitAchatSchema = new schema({
   tva: {
     type: Number,
   },
+  idFournisseur: { type: mongoose.Types.ObjectId, ref: "fournisseur" },
 });
 module.exports = mongoose.model("produit", ProduitAchatSchema);

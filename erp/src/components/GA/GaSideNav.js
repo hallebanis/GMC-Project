@@ -40,6 +40,9 @@ const GaSideNav = () => {
             <MenuItem>
               <Link to={`/ga-dashboard/produits`}>Product List</Link>
             </MenuItem>
+            <MenuItem>
+              <Link to={`/ga-dashboard/addProduit`}>Add Product</Link>
+            </MenuItem>
           </SubMenu>
           <SubMenu title="Categorie" icon={<FaSellcast />}>
             <MenuItem>
@@ -56,6 +59,11 @@ const GaSideNav = () => {
               <Link to={`/ga-dashboard/fournisseur`}>
                 Liste des Fournisseurs
               </Link>
+            </MenuItem>
+          </SubMenu>
+          <SubMenu title="Achat" icon={<FaSellcast />}>
+            <MenuItem>
+              <Link to={`/ga-dashboard/achat`}>Nouveau Achat</Link>
             </MenuItem>
           </SubMenu>
         </Menu>

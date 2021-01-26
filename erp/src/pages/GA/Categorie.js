@@ -26,6 +26,7 @@ const Categorie = ({ history }) => {
         <Col sm={0} md={3} style={{ height: "90vh" }}>
           <GaSideNav />
         </Col>
+        <Col md={1}></Col>
         <Col md={9}>
           <MDBInput
             label="Filter"

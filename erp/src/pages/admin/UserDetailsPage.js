@@ -16,7 +16,7 @@ const UserDetailsPage = ({ match, history }) => {
   const user = users.users.filter((elm) => elm._id === match.params.id);
   useEffect(() => {
     if (changeMaid === true) history.push("/admin-dashboard/users");
-  }, [changeMaid]);
+  }, [changeMaid, history]);
   return (
     <Container fluid>
       <Row>

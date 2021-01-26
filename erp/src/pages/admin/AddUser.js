@@ -24,6 +24,7 @@ const AddUser = ({ history }) => {
         <Col md={3} style={{ height: "90vh" }}>
           <SideNav />
         </Col>
+        <Col md={1}></Col>
         <Col md={6}>
           <AddUserForm history={history} />;
         </Col>

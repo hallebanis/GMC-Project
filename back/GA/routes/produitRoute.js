@@ -15,8 +15,10 @@ router.post("/addProduit", authMiddleware, (req, res) => {
     qteStock,
     idCategorie,
     tva,
+    idFournisseur,
   } = req.body;
   const produitModel = new newProduit({
+    idFournisseur,
     reference,
     designation,
     etat,
@@ -35,7 +37,9 @@ router.post("/addProduit", authMiddleware, (req, res) => {
 // Path : http://localhost:5000/api/allProduit
 router.get("/allProduit", authMiddleware, (req, res) => {
   newProduit
-    .find().populate('idCategorie')
+    .find()
+    .populate("idCategorie")
+    .populate("idFournisseur")
     .then((produits) => res.status(200).json(produits))
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });

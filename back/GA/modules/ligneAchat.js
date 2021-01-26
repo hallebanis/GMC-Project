@@ -7,7 +7,6 @@ const LigneAchatSchema = new schema({
     default: 0,
   },
   sousTotal: { type: Number },
-  description: { type: String },
   idCommande: {
     type: mongoose.Types.ObjectId,
     ref: "commandeAchat",
