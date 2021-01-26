@@ -4,7 +4,6 @@ const schema = mongoose.Schema;
 const LigneAchatSchema = new schema({
   quantite: {
     type: Number,
-    default: 0,
   },
   sousTotal: { type: Number },
   idCommande: {

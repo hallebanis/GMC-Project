@@ -7,7 +7,7 @@ import { loadUsers } from "../../actions/admin/usersActions";
 import RoleDropDown from "../../components/admin/RoleDropDown";
 import UserList from "../../components/admin/UserList";
 import MainNavBar from "../../components/admin/MainNavBar";
-import { Col, Container, FormControl, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import SideNav from "../../components/admin/SideNav";
 import { GrPowerReset } from "react-icons/gr";
 import { MDBInput } from "mdbreact";
@@ -20,7 +20,7 @@ const UsersListPage = ({ history }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUsers());
-  }, []);
+  }, [dispatch]);
   const users = useSelector((state) => state.users);
   const [nameFilter, setNameFilter] = useState("");
   const [roleFilter, setRoleFilter] = useState("");

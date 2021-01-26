@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import AdminDashboardSidebar from "../../components/admin/AdminDashboardSidebar";
 import MainNavBar from "../../components/admin/MainNavBar";
 import SideNav from "../../components/admin/SideNav";
 import User from "../../components/admin/User";

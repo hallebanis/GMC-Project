@@ -20,10 +20,7 @@ import AddClient from "./pages/GV/AddClient";
 import AdminPrivateRoute from "./routes/authentification/AdminPrivateRoute";
 import { AddServicePage } from "./pages/GRH/AddServicePage";
 import { ListServicePage } from "./pages/GRH/ListService";
-import FullPageIntroWithFixedTransparentNavbar, {
-  ServiceDetailsPage,
-} from "./pages/GRH/ServiceDetailsPage";
-import DemandeCongePage from "./pages/user/DemandeCongePage";
+import { ServiceDetailsPage } from "./pages/GRH/ServiceDetailsPage";
 import Demande from "./pages/user/DemandeCongePage";
 import { AvancePage } from "./pages/GRH/AvancePage";
 
