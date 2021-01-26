@@ -1,7 +1,6 @@
 import {
   ADD_DEMANDE_FAILED,
   ADD_DEMANDE_SUCCESS,
-  ADD_ROLE_SUCCESS,
   LOAD_PERSONNEL_ID_FAILED,
   LOAD_PERSONNEL_ID_SUCCESS,
 } from "../../actions/admin/types";

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const newLigneVente = require("../modules/LigneVente");
 const authMiddleware = require("../../helpers/authMiddleware");
+const Produit = require("../../GA/modules/produit");
 
 //Route Create Ligne Vente
 //path: http://localhost:5000/api/AddLigneVente
@@ -14,7 +15,18 @@ router.post("/AddLigneVente", authMiddleware, (req, res) => {
     commandeId,
   });
   LVenteModel.save()
-    .then((LVente) => res.status(200).json(LVente))
+    .then((LVente) => {
+      Produit.findByIdAndUpdate(
+        produitId,
+        {
+          qteStock: qteStock - LVente.quantité,
+        },
+        (err, data) => {
+          if (err) res.status(400).json({ errors: [{ msg: err }] });
+        }
+      );
+      res.status(200).json(LVente);
+    })
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 

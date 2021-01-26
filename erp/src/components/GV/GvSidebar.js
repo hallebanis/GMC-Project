@@ -52,7 +52,7 @@ const GvSidebar = () => {
             </MenuItem>
             <MenuItem>
               <Link to="/gv-dashboard/commande/addCommande">
-                Liste des Commandes
+                Nouvelle Commande
               </Link>
             </MenuItem>
           </SubMenu>

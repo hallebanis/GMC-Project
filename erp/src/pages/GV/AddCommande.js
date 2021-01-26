@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { MDBContainer, MDBInput } from "mdbreact";
+import { MDBInput } from "mdbreact";
 import ListeProduitDropDown from "../../components/GV/ListProduitDropDown";
 import nextId from "react-id-generator";
 import { useDispatch, useSelector } from "react-redux";
+import { verifyNumber } from "../../helpers/verifyNumber";
 import {
   AddCommandeVente,
   addLigneVente,
@@ -10,6 +11,7 @@ import {
   getCommandeVente,
   getProduitsVente,
 } from "../../actions/GV/venteActions";
+import { MdAddCircleOutline } from "react-icons/md";
 import MainNavBar from "../../components/admin/MainNavBar";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import ListeClientDropDown from "../../components/GV/ListeClientDropDown";
@@ -26,6 +28,7 @@ const AddCommand = ({ history }) => {
     dispatch(getProduitsVente());
     dispatch(getCommandeVente());
   }, [dispatch]);
+  const [changeEnable, setChangeEnable] = useState(false);
   const vente = useSelector((state) => state.vente);
   const [ProductFilter, setProductFilter] = useState("");
   const [clientFilter, setClientFilter] = useState("");
@@ -37,7 +40,7 @@ const AddCommand = ({ history }) => {
 
   const [info, setInfo] = useState({
     _id: mongoose.Types.ObjectId().toString(),
-    numero: setNumFacture(),
+    numero: 0,
     total: 0,
     isValidate: false,
     clientId: "",
@@ -51,10 +54,12 @@ const AddCommand = ({ history }) => {
       produitId: "",
       commandeId: info._id,
       pu: 0,
+      enableChange: false,
     },
   ]);
 
   const setClientId = (val) => {
+    setChangeEnable(true);
     setInfo({ ...info, clientId: val, numero: setNumFacture() });
   };
 
@@ -67,11 +72,14 @@ const AddCommand = ({ history }) => {
         sousTotal: 0,
         produitId: "",
         commandeId: info._id,
+        pu: 0,
+        enableChange: false,
       },
     ]);
   };
 
   const handleQteChange = (e) => {
+    e.target.value = verifyNumber(e.target.value);
     setlisteLigneVente(
       listeLigneVente.map((el) => {
         if (el.id === e.target.id)
@@ -85,7 +93,8 @@ const AddCommand = ({ history }) => {
     );
   };
   const handleDeleteLigne = (e) => {
-    setlisteLigneVente(listeLigneVente.filter((el) => el.id !== e.target.id));
+    if (listeLigneVente.length > 1)
+      setlisteLigneVente(listeLigneVente.filter((el) => el.id !== e.target.id));
   };
   const handleCancel = () => {
     setlisteLigneVente([]);
@@ -118,11 +127,8 @@ const AddCommand = ({ history }) => {
           <GvSidebar />
         </Col>
         <Col>
-          <MDBInput
-            label="CLient Filter"
-            onChange={(e) => setClientFilter(e.target.value)}
-          />
           <ListeClientDropDown
+            setClientFilter={setClientFilter}
             listeClient={vente.client.filter(
               (el) =>
                 el.nom
@@ -136,19 +142,29 @@ const AddCommand = ({ history }) => {
             )}
             setClientId={setClientId}
           />
-          <h2>commande Num : {info.numero}</h2>
+          <h2>commande Num : {info.numero || "#"}</h2>
           <Table>
             <thead>
+              <th></th>
               <th>Produit</th>
               <th>Qte</th>
               <th>P.U</th>
               <th>S.TOTAL</th>
             </thead>
             <tbody>
-              {listeLigneVente.map((el) => (
+              {listeLigneVente.map((el, i) => (
                 <tr>
                   <td>
+                    {i === listeLigneVente.length - 1 && (
+                      <Button variant="primary" onClick={addLigne}>
+                        <MdAddCircleOutline />
+                      </Button>
+                    )}
+                  </td>
+                  <td>
                     <ListeProduitDropDown
+                      setProductFilter={setProductFilter}
+                      disabled={!changeEnable}
                       id={el.id}
                       listeProduit={vente.produit.filter((el) =>
                         el.designation
@@ -162,6 +178,7 @@ const AddCommand = ({ history }) => {
                   </td>
                   <td>
                     <MDBInput
+                      disabled={!el.enableChange}
                       id={el.id}
                       name="quantité"
                       value={el.quantité}
@@ -212,13 +229,6 @@ const AddCommand = ({ history }) => {
                 </td>
               </tr>
             </tbody>
-            <MDBInput
-              label="Product Filter"
-              onChange={(e) => setProductFilter(e.target.value)}
-            />
-            <Button variant="primary" onClick={addLigne}>
-              Add
-            </Button>
           </Table>
         </Col>
       </Row>
