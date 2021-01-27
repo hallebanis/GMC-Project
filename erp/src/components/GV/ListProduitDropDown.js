@@ -36,7 +36,7 @@ const ListProduitDropDown = ({
   return (
     <MDBDropdown disabled={disabled}>
       <MDBDropdownToggle caret color="primary">
-        {disabled ? "Choisit Un Client" : selectedItem}
+        {disabled ? " Choisit Un Produit" : selectedItem}
       </MDBDropdownToggle>
 
       <MDBDropdownMenu basic>

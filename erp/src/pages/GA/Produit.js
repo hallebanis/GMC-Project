@@ -31,7 +31,7 @@ const Produits = ({ history }) => {
           <GaSideNav />
         </Col>
         <Col md={1}></Col>
-        <Col md={6}>
+        <Col md={6} className="dataCol">
           <MDBInput
             label="Filter"
             onChange={(e) => setFilter(e.target.value)}
