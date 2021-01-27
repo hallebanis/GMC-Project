@@ -7,19 +7,18 @@ import {
   loadPersonnel,
 } from "../../actions/GRH/personnelActions";
 import { Paper, Typography } from "@material-ui/core";
-import { ListService } from "../../components/GRH/ListService";
 import MainNavBar from "../admin/MainNavBar";
 import { Select } from "./DatePicker";
 import { NavSide } from "./NavSide";
 import PersonnelDropDown from "./PersonnelDropDown";
 import useStyles from "./styles";
 
-export const ContratForm = () => {
+export const ContratForm = ({ history }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadContrat());
-  }, []);
+  }, [dispatch]);
 
   const [info, setInfo] = useState({
     dateDebut: "",

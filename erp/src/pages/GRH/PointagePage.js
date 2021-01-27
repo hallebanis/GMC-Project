@@ -6,6 +6,7 @@ import { loadPersonnel } from "../../actions/GRH/personnelActions";
 import MainNavBar from "../../components/admin/MainNavBar";
 import ListePointage from "../../components/GRH/ListePointage";
 import { NavSide } from "../../components/GRH/NavSide";
+import { dateCompare } from "../../helpers/dateCompare";
 
 const PointagePage = ({ history }) => {
   const auth = useSelector((state) => state.auth);
@@ -41,10 +42,9 @@ const PointagePage = ({ history }) => {
             setModified={setModified}
             personnelList={personnel.personnel.filter(
               (el) =>
-                (el.nom.toLowerCase().includes(filter.toLowerCase()) ||
-                  el.prenom.toLowerCase().includes(filter.toLowerCase()) ||
-                  el.matricule.toLowerCase().includes(filter.toLowerCase())) /* &&
-                !el.absence.some((elm) => elm.dateDepart !== Date.now()) */
+                el.nom.toLowerCase().includes(filter.toLowerCase()) ||
+                el.prenom.toLowerCase().includes(filter.toLowerCase()) ||
+                el.matricule.toLowerCase().includes(filter.toLowerCase())
             )}
           />
         </Col>
