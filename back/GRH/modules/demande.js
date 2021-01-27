@@ -7,6 +7,7 @@ const demandeSchema = new mongoose.Schema({
   dateEnvoie: { type: Date, required: true },
   dateReception: { type: Date },
   dateDecision: { type: Date },
+  decision: { type: String, enum: ["accepté", "refusé"] },
   personnelId: { type: mongoose.Types.ObjectId, ref: "personnel" },
 });
 

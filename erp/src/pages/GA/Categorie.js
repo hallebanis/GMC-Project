@@ -27,7 +27,7 @@ const Categorie = ({ history }) => {
           <GaSideNav />
         </Col>
         <Col md={1}></Col>
-        <Col md={9}>
+        <Col md={8}>
           <MDBInput
             label="Filter"
             value={filter}

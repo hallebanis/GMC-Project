@@ -37,7 +37,7 @@ const AddCommand = ({ history }) => {
       return vente.commandeVente[vente.commandeVente.length - 1].numero + 1;
     else return 1;
   };
-
+  let date = new Date(Date.now());
   const [info, setInfo] = useState({
     _id: mongoose.Types.ObjectId().toString(),
     numero: 0,
@@ -57,10 +57,12 @@ const AddCommand = ({ history }) => {
       enableChange: false,
     },
   ]);
+  const [clientSelected, setClientSelected] = useState(false);
 
   const setClientId = (val) => {
     setChangeEnable(true);
     setInfo({ ...info, clientId: val, numero: setNumFacture() });
+    setClientSelected(true);
   };
 
   const addLigne = () => {
@@ -102,9 +104,18 @@ const AddCommand = ({ history }) => {
   };
   const handelSave = () => {
     setInfo({ ...info, numero: setNumFacture(), total: totalCalc() });
-    dispatch(AddCommandeVente(info));
-    listeLigneVente.map((el) => dispatch(addLigneVente(el)));
-    history.goBack();
+    if (info.total > 0) {
+      dispatch(AddCommandeVente(info));
+      listeLigneVente.map((el) => {
+        if (el.quantité > 0) dispatch(addLigneVente(el));
+        return el;
+      });
+      history.goBack();
+    } else
+      alert(
+        `La Commande ne contient aucune ligne achat 
+              elle ne sera pas sauvegarder`
+      );
   };
 
   const totalCalc = () => {
@@ -126,23 +137,36 @@ const AddCommand = ({ history }) => {
           {" "}
           <GvSidebar />
         </Col>
-        <Col>
-          <ListeClientDropDown
-            setClientFilter={setClientFilter}
-            listeClient={vente.client.filter(
-              (el) =>
-                el.nom
-                  .toUpperCase()
-                  .trim()
-                  .includes(clientFilter.toUpperCase().trim()) ||
-                el.prenom
-                  .toUpperCase()
-                  .trim()
-                  .includes(clientFilter.toUpperCase().trim())
-            )}
-            setClientId={setClientId}
-          />
-          <h2>commande Num : {info.numero || "#"}</h2>
+        <Col style={{ overflow: "scroll", height: "90vh" }}>
+          <h3>{`Date: ${date.toDateString()}`}</h3>
+          {!clientSelected && (
+            <ListeClientDropDown
+              setClientFilter={setClientFilter}
+              listeClient={vente.client.filter(
+                (el) =>
+                  el.nom
+                    .toUpperCase()
+                    .trim()
+                    .includes(clientFilter.toUpperCase().trim()) ||
+                  el.prenom
+                    .toUpperCase()
+                    .trim()
+                    .includes(clientFilter.toUpperCase().trim())
+              )}
+              setClientId={setClientId}
+            />
+          )}
+          <h3>
+            {clientSelected &&
+              `Client : ${
+                vente.client.filter((el) => el._id === info.clientId)[0].nom
+              } ${
+                vente.client.filter((el) => el._id === info.clientId)[0].prenom
+              }`}
+          </h3>
+          <div className="factureTitle">
+            Commande Num : {info.numero || "#"}
+          </div>
           <Table>
             <thead>
               <th></th>
