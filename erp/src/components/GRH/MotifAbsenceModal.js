@@ -28,10 +28,9 @@ const MotifAbsenceModal = ({ modified, setModified, personnel }) => {
 
   const handleSave = () => {
     dispatch(addAbsence(info));
-    dispatch(loadPersonnel());
     setModified(!modified);
-
     toggle();
+    dispatch(loadPersonnel());
   };
   const handleMotifChange = (e) => {
     setInfo({ ...info, motif: e.target.value });
