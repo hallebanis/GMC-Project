@@ -19,7 +19,7 @@ router.post("/addLigne", authMiddleware, (req, res) => {
     .then((ligne) => {
       Produit.findByIdAndUpdate(
         idProduit,
-        { qteStock: qteStock + quantite },
+        { $inc: { qteStock: quantite } },
         (err, data) => {
           if (err) res.status(400).json({ errors: [{ msg: err }] });
         }

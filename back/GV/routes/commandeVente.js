@@ -5,10 +5,10 @@ const authMiddleware = require("../../helpers/authMiddleware");
 //Route Create Commande Vente
 //path: http://localhost:5000/api/AddCommandeVente
 router.post("/AddCommandeVente", authMiddleware, (req, res) => {
-  const { _id, total, isValidate, numero, clientId } = req.body;
+  const { _id, isValidate, numero, clientId } = req.body;
   let CommandeVenteModel = new newCommVente({
     _id,
-    total,
+    total: 0,
     isValidate,
     numero,
     clientId,

@@ -30,7 +30,7 @@ const ListeClients = ({ history }) => {
         <Col md={3} style={{ height: "90vh" }}>
           <GvSidebar />
         </Col>
-        <Col>
+        <Col className="dataCol">
           <MDBInput
             label="Filter"
             onChange={(e) => setFilter(e.target.value)}

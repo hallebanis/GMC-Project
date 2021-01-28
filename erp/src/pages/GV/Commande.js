@@ -34,7 +34,7 @@ const Commande = ({ history }) => {
         <Col md={3} style={{ height: "90vh" }}>
           <GvSidebar />
         </Col>
-        <Col>
+        <Col className="dataCol">
           <ListeCommandes commandList={vente.commandeVente} />
 
           <Button
