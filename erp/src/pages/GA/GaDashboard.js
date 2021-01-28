@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { getCategorie } from "../../actions/GA/achatActions";
 import MainNavBar from "../../components/admin/MainNavBar";
 import GaSideNav from "../../components/GA/GaSideNav";
@@ -12,7 +11,7 @@ const GaDashboard = ({ history }) => {
     if (!auth.isAuth) history.push("/login");
   }, [auth, history]);
   const dispatch = useDispatch();
-  useEffect(() => dispatch(getCategorie()), []);
+  useEffect(() => dispatch(getCategorie()), [dispatch]);
   return (
     <Container fluid>
       <Row>

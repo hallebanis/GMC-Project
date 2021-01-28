@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import {
   MDBContainer,
   MDBBtn,
@@ -13,23 +13,23 @@ import { useDispatch } from "react-redux";
 
 import { updateClient } from "../../actions/GV/venteActions";
 
-const EditClientModal = ({client}) => {
+const EditClientModal = ({ client }) => {
   const dispatch = useDispatch();
   const [modal8, setModal8] = useState(false);
-  const [info, setInfo] = useState(client)
+  const [info, setInfo] = useState(client);
   const toggle = () => {
     setModal8(!modal8);
-    setInfo(client)
-  }
+    setInfo(client);
+  };
 
-  const handleChange= (e) =>{
-      e.preventDefault()
-      setInfo({...info,[e.target.name]:e.target.value})
-  }
-const handleSave=() =>{
+  const handleChange = (e) => {
+    e.preventDefault();
+    setInfo({ ...info, [e.target.name]: e.target.value });
+  };
+  const handleSave = () => {
     dispatch(updateClient(info));
     toggle();
-}
+  };
   return (
     <MDBContainer>
       <MDBBtn color="info" onClick={toggle}>
@@ -38,31 +38,42 @@ const handleSave=() =>{
       <MDBModal isOpen={modal8} toggle={toggle} fullHeight position="right">
         <MDBModalHeader toggle={toggle}>Modify Service</MDBModalHeader>
         <MDBModalBody>
-          <MDBInput value={info.nom}
+          <MDBInput
+            value={info.nom}
             name="nom"
-            label="Nom" onChange={handleChange}
+            label="Nom"
+            onChange={handleChange}
           ></MDBInput>
-          <MDBInput value={info.prenom}
+          <MDBInput
+            value={info.prenom}
             name="prenom"
-            label="Prenom" onChange={handleChange}
+            label="Prenom"
+            onChange={handleChange}
           ></MDBInput>
-          <MDBInput value={info.adresse}
+          <MDBInput
+            value={info.adresse}
             name="adresse"
-            label="Adresse" onChange={handleChange}
+            label="Adresse"
+            onChange={handleChange}
           ></MDBInput>
-          <MDBInput value={info.civilite}
+          <MDBInput
+            value={info.civilite}
             name="civilite"
-            label="Civilite" onChange={handleChange}
+            label="Civilite"
+            onChange={handleChange}
           ></MDBInput>
-          <MDBInput value={info.email}
+          <MDBInput
+            value={info.email}
             name="email"
-            label="Email" onChange={handleChange}
+            label="Email"
+            onChange={handleChange}
           ></MDBInput>
-          <MDBInput value={info.tel}
+          <MDBInput
+            value={info.tel}
             name="tel"
-            label="Teléphone" onChange={handleChange}
+            label="Teléphone"
+            onChange={handleChange}
           ></MDBInput>
-
         </MDBModalBody>
         <MDBModalFooter>
           <MDBBtn color="secondary" onClick={toggle}>

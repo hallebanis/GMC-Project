@@ -2,18 +2,11 @@ import {
   MDBCard,
   MDBCardBody,
   MDBCardHeader,
-  MDBCardText,
   MDBCardTitle,
   MDBContainer,
 } from "mdbreact";
 import React, { useState } from "react";
-import {
-  Button,
-  Form,
-  InputGroup,
-  FormControl,
-  Container,
-} from "react-bootstrap";
+import { Button, Form, InputGroup, FormControl } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addUser, loadUsers } from "../../actions/admin/usersActions";
 import PersonnelDropDown from "../GRH/PersonnelDropDown";

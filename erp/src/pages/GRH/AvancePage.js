@@ -23,7 +23,7 @@ export const AvancePage = ({ history }) => {
         </Col>
         <Col>
           {" "}
-          <AvanceForm />
+          <AvanceForm history={history} />
         </Col>
       </Row>{" "}
     </Container>

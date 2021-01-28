@@ -8,7 +8,7 @@ const PersonnelDropDown = ({ onPersonnelChange }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadPersonnel());
-  }, []);
+  }, [dispatch]);
 
   const [selectedItem, setSelectedItem] = useState("choisit Personnel");
 

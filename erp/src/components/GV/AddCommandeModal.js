@@ -20,12 +20,8 @@ const AddCommandeModal = () => {
   useEffect(() => {
     dispatch(getClient());
     dispatch(getProduitsVente());
-  }, []);
+  }, [dispatch]);
   const vente = useSelector((state) => state.vente);
-  const setNumFacture = () => {
-    if (vente.commandeVente.length > 0)
-      return vente.commandeVente[vente.commandeVente.length - 1].numero + 1;
-  };
 
   const [info, setInfo] = useState({
     numero: 1,

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 import { addClient, getClient } from "../../actions/GV/venteActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const AddClientForm = ({ history }) => {
-  const vente = useSelector((state) => state.vente);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getClient());
-  }, []);
-  const dispatch = useDispatch();
+  }, [dispatch]);
+
   const [info, setInfo] = useState({
     nom: "",
     prenom: "",

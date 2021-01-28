@@ -17,7 +17,7 @@ export const ServiceForm = ({ history }) => {
   });
   useEffect(() => {
     dispatch(loadService());
-  }, []);
+  }, [dispatch]);
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
   };

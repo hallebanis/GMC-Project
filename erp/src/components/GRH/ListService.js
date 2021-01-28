@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Button, Container, Navbar, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+
 import { deleteService, loadService } from "../../actions/GRH/personnelActions";
 import ServiceModal from "./ServiceModal";
 
@@ -9,7 +9,7 @@ export const ListService = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadService());
-  }, []);
+  }, [dispatch]);
 
   const personnel = useSelector((state) => state.personnel);
   const { service } = personnel;

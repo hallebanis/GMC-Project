@@ -4,7 +4,6 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategorie } from "../../actions/GA/achatActions";
 import MainNavBar from "../../components/admin/MainNavBar";
-import AjoutCategorieModal from "../../components/GA/AjoutCategorieModal";
 import CategorieList from "../../components/GA/CategorieList";
 import GaSideNav from "../../components/GA/GaSideNav";
 

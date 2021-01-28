@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, FormControl, Modal, Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { deleteRole } from "../../actions/admin/usersActions";
 import { useDispatch } from "react-redux";
 import EditRoleModal from "./EditRoleModal";

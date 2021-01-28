@@ -15,7 +15,7 @@ const RoleDropDown = ({
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadRoles());
-  }, []);
+  }, [dispatch]);
 
   const [selectedItem, setSelectedItem] = useState(dropDownMsg);
 

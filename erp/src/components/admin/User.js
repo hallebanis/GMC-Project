@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
 import { modifyUser } from "../../actions/admin/usersActions";
 import RoleDropDown from "./RoleDropDown";
 import { useDispatch } from "react-redux";
