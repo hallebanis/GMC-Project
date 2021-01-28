@@ -43,14 +43,16 @@ const UserList = ({ userList, history }) => {
               <td id={`${elm.role.titre}${i}`}>
                 <Link to={`/user/${elm._id}`}>{elm.role.titre}</Link>
               </td>
-              <Button
-                variant="danger"
-                onClick={() => {
-                  handleDelete(elm._id);
-                }}
-              >
-                Delete
-              </Button>
+              {elm.role.titre !== "admin" && (
+                <Button
+                  variant="danger"
+                  onClick={() => {
+                    handleDelete(elm._id);
+                  }}
+                >
+                  Delete
+                </Button>
+              )}
             </tr>
           ))}
       </tbody>

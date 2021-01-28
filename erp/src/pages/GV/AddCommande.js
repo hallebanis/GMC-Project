@@ -55,6 +55,7 @@ const AddCommand = ({ history }) => {
       commandeId: info._id,
       pu: 0,
       enableChange: false,
+      designation: "",
     },
   ]);
   const [clientSelected, setClientSelected] = useState(false);
@@ -95,6 +96,7 @@ const AddCommand = ({ history }) => {
     );
   };
   const handleDeleteLigne = (e) => {
+    console.log(e.target.id);
     if (listeLigneVente.length > 1)
       setlisteLigneVente(listeLigneVente.filter((el) => el.id !== e.target.id));
   };
@@ -104,7 +106,7 @@ const AddCommand = ({ history }) => {
   };
   const handelSave = () => {
     setInfo({ ...info, numero: setNumFacture(), total: totalCalc() });
-    if (info.total > 0) {
+    if (totalCalc() > 0) {
       dispatch(AddCommandeVente(info));
       listeLigneVente.map((el) => {
         if (el.quantité > 0) dispatch(addLigneVente(el));
@@ -180,21 +182,26 @@ const AddCommand = ({ history }) => {
                 <tr>
                   <td>
                     {i === listeLigneVente.length - 1 && (
-                      <Button variant="primary" onClick={addLigne}>
+                      <Button id={i} variant="primary" onClick={addLigne}>
                         <MdAddCircleOutline />
                       </Button>
                     )}
                   </td>
                   <td>
                     <ListeProduitDropDown
+                      value={el.designation}
                       setProductFilter={setProductFilter}
                       disabled={!changeEnable}
                       id={el.id}
-                      listeProduit={vente.produit.filter((el) =>
-                        el.designation
-                          .toUpperCase()
-                          .trim()
-                          .includes(ProductFilter.toUpperCase().trim())
+                      listeProduit={vente.produit.filter(
+                        (el) =>
+                          el.designation
+                            .toUpperCase()
+                            .trim()
+                            .includes(ProductFilter.toUpperCase().trim()) &&
+                          !listeLigneVente.some(
+                            (elm) => elm.produitId === el._id
+                          )
                       )}
                       setlisteLigneVente={setlisteLigneVente}
                       listeLigneVente={listeLigneVente}

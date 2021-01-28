@@ -8,6 +8,7 @@ import {
 import React, { useState } from "react";
 
 const ListProduitDropDown = ({
+  value,
   listeProduit,
   setlisteLigneVente,
   listeLigneVente,
@@ -15,9 +16,7 @@ const ListProduitDropDown = ({
   disabled,
   setProductFilter,
 }) => {
-  const [selectedItem, setSelectedItem] = useState("Product List");
   const handleItemChange = (e) => {
-    setSelectedItem(e.target.value);
     setlisteLigneVente(
       listeLigneVente.map((el) => {
         if (el.id === id)
@@ -27,6 +26,7 @@ const ListProduitDropDown = ({
             sousTotal: +e.target.name * el.quantité,
             produitId: e.target.id,
             pu: +e.target.name,
+            designation: e.target.value,
           };
         return el;
       })
@@ -36,7 +36,7 @@ const ListProduitDropDown = ({
   return (
     <MDBDropdown disabled={disabled}>
       <MDBDropdownToggle caret color="primary">
-        {disabled ? " Choisit Un Produit" : selectedItem}
+        {value === "" ? " Choisit Un Produit" : value}
       </MDBDropdownToggle>
 
       <MDBDropdownMenu basic>
