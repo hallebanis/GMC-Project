@@ -14,7 +14,7 @@ export const AddServicePage = ({ history }) => {
     <Container fluid>
       <Row>
         <Col>
-          <MainNavBar color="#343A40" />
+          <MainNavBar />
         </Col>
       </Row>
       <Row>
@@ -22,7 +22,7 @@ export const AddServicePage = ({ history }) => {
           <NavSide />
         </Col>
         <Col>
-          <ServiceForm />
+          <ServiceForm history={history} />
         </Col>
       </Row>
     </Container>

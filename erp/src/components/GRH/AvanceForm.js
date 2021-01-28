@@ -6,9 +6,8 @@ import { Select } from "./DatePicker";
 import { useDispatch } from "react-redux";
 import PersonnelDropDown from "./PersonnelDropDown";
 import { addAvance, loadPersonnel } from "../../actions/GRH/personnelActions";
-import { instance } from "./NavSide";
 
-export const AvanceForm = () => {
+export const AvanceForm = ({ history }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [info, setInfo] = useState({
@@ -25,6 +24,7 @@ export const AvanceForm = () => {
   const handleSave = () => {
     dispatch(addAvance(info));
     dispatch(loadPersonnel());
+    history.push("/grh-dashboard");
   };
   const handleSelect = (id) => {
     setInfo({ ...info, idPersonnel: id });

@@ -1,22 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  Form,
-  Button,
-  Col,
-  Dropdown,
-  DropdownButton,
-  Container,
-} from "react-bootstrap";
+import { Form, Button, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import { Select } from "./DatePicker";
 import { addPersonnel } from "../../actions/GRH/personnelActions";
-import { Link } from "react-router-dom";
 import useStyles from "./styles";
 import { Paper, TextField, Typography } from "@material-ui/core";
 
-export const AddPersonnelForm = () => {
+export const AddPersonnelForm = ({ history }) => {
   const classes = useStyles();
-  const [disableSave, setDisableSave] = useState(true);
   const [selectedItem, setSelectedItem] = useState("choisit une categorie");
   const [info, setInfo] = useState({
     nom: "",
@@ -41,6 +32,7 @@ export const AddPersonnelForm = () => {
   };
   const handleSave = () => {
     dispatch(addPersonnel(info));
+    history.goBack();
   };
   const handleDateChange = (d) => {
     setInfo({ ...info, dateDeNaissance: d });

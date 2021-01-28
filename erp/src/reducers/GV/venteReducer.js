@@ -55,6 +55,7 @@ import {
   GET_RESERVATION_SUCCESS,
   GET_TVA_FAILED,
   GET_TVA_SUCCESS,
+  TOGGLE,
   UPDATE_CLIENT_FAILED,
   UPDATE_CLIENT_SUCCESS,
   UPDATE_COMMANDEVENTE_FAILED,
@@ -73,6 +74,8 @@ import {
   UPDATE_RESERVATION_SUCCESS,
   UPDATE_TVA_FAILED,
   UPDATE_TVA_SUCCESS,
+  VALIDATE_COMMANDVENTE_FAILED,
+  VALIDATE_COMMANDVENTE_SUCCESS,
 } from "../../actions/GV/types";
 
 const initState = {
@@ -87,9 +90,15 @@ const initState = {
   tva: [],
   produit: [],
   errors: null,
+  toggle: false,
 };
 const venteReducer = (state = initState, action) => {
   switch (action.type) {
+    case TOGGLE:
+      return {
+        ...state,
+        toggle: !state.toggle,
+      };
     //CRUD SUCCESS:
     //CRUD Client SUCCESS:
     case ADD_CLIENT_SUCCESS:
@@ -368,6 +377,15 @@ const venteReducer = (state = initState, action) => {
         errors: null,
         produit: action.payload,
       };
+    case VALIDATE_COMMANDVENTE_SUCCESS:
+      return {
+        ...state,
+        errors: null,
+        commandeVente: state.commandeVente.map((el) => {
+          if (el._id === action.payload._id) return action.payload;
+          return el;
+        }),
+      };
 
     // CRUD FAILED
     case ADD_CLIENT_FAILED:
@@ -407,6 +425,7 @@ const venteReducer = (state = initState, action) => {
     case UPDATE_TVA_FAILED:
     case DELETE_TVA_FAILED:
     case GET_PRODUIT_VENTE_FAILED:
+    case VALIDATE_COMMANDVENTE_FAILED:
       return {
         ...state,
         errors: action.payload,

@@ -26,7 +26,7 @@ const SideNav = () => {
         }}
       >
         {auth.isAuth &&
-          `${auth.user.personnelId.nom} ${auth.user.personnelId.prenom}`}
+          `${auth.user.personnelId.nom} ${auth.user.personnelId.prenom} : ${auth.user.role.titre}`}
       </SidebarHeader>
       <SidebarHeader style={{ padding: "10px", fontSize: "1.5em" }}>
         Enterprise resource planning

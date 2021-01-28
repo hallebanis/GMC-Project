@@ -14,7 +14,7 @@ export const ListServicePage = ({ history }) => {
     <Container fluid>
       <Row>
         <Col>
-          <MainNavBar color="#343A40"></MainNavBar>
+          <MainNavBar></MainNavBar>
         </Col>
       </Row>
       <Row>

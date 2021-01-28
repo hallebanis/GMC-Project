@@ -7,7 +7,7 @@ import { addService, loadService } from "../../actions/GRH/personnelActions";
 import PersonnelDropDown from "./PersonnelDropDown";
 import useStyles from "./styles";
 
-export const ServiceForm = () => {
+export const ServiceForm = ({ history }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -26,6 +26,7 @@ export const ServiceForm = () => {
   };
   const handleSave = () => {
     dispatch(addService(info));
+    history.push("/grh-dashboard");
   };
   return (
     <Paper className={classes.paper} style={{ margin: "50px" }}>

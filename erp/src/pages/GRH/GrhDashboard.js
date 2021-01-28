@@ -15,7 +15,7 @@ export const GrhDashboard = ({ history }) => {
     <Container fluid>
       <Row>
         <Col>
-          <MainNavBar color="#343A40"></MainNavBar>
+          <MainNavBar />
         </Col>
       </Row>
       <Row height="80vh">

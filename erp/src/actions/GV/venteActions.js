@@ -75,6 +75,9 @@ import {
   DELETE_FACTUREVENTE_FAILED,
   GET_PRODUIT_VENTE_FAILED,
   GET_PRODUIT_VENTE_SUCCESS,
+  VALIDATE_COMMANDVENTE_SUCCESS,
+  VALIDATE_COMMANDVENTE_FAILED,
+  TOGGLE,
 } from "./types";
 
 //Actions of Client
@@ -759,4 +762,23 @@ export const getProduitsVente = () => (dispatch) => {
         payload: err.response.data.errors,
       })
     );
+};
+export const validateCommandeVente = (id) => (dispatch) => {
+  tokenSet();
+  axios
+    .put("/api/validateCommand", { id })
+    .then((res) =>
+      dispatch({ type: VALIDATE_COMMANDVENTE_SUCCESS, payload: res.data })
+    )
+    .catch((err) =>
+      dispatch({
+        type: VALIDATE_COMMANDVENTE_FAILED,
+        payload: err.response.data.errors,
+      })
+    );
+};
+export const toggleView = () => (dispatch) => {
+  dispatch({
+    type: TOGGLE,
+  });
 };
