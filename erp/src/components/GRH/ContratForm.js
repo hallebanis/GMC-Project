@@ -41,13 +41,14 @@ export const ContratForm = ({ history }) => {
   };
   const handleSave = () => {
     dispatch(addContrat(info));
+    history.goBack();
     dispatch(loadPersonnel());
   };
   return (
     <Container fluid>
       <Row>
         <Col>
-          <MainNavBar></MainNavBar>
+          <MainNavBar />
         </Col>
       </Row>
       <Row>
