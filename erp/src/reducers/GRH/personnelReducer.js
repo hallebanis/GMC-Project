@@ -262,18 +262,14 @@ const personnelReducer = (state = initState, action) => {
         avance: action.payload,
         errors: null,
       };
-    case LOAD_AVANCE_FAILED:
-      return {
-        ...state,
-        avance: state.avance,
-        errors: action.payload,
-      };
+
     case ADD_ABSENCE_SUCCESS:
       return {
         ...state,
         errors: null,
         absence: [...state.absence, action.payload],
       };
+    case LOAD_AVANCE_FAILED:
     case ADD_ABSENCE_FAILED:
       return {
         ...state,

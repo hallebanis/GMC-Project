@@ -10,6 +10,7 @@ import {
 } from "mdbreact";
 import { useDispatch } from "react-redux";
 import { addAbsence, loadPersonnel } from "../../actions/GRH/personnelActions";
+import { sleep } from "../../helpers/verifyNumber";
 
 const MotifAbsenceModal = ({ modified, setModified, personnel }) => {
   const dispatch = useDispatch();
@@ -29,8 +30,10 @@ const MotifAbsenceModal = ({ modified, setModified, personnel }) => {
   const handleSave = () => {
     dispatch(addAbsence(info));
     setModified(!modified);
-    toggle();
-    dispatch(loadPersonnel());
+    sleep(2000).then(() => {
+      dispatch(loadPersonnel());
+      toggle();
+    });
   };
   const handleMotifChange = (e) => {
     setInfo({ ...info, motif: e.target.value });
