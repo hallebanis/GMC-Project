@@ -15,7 +15,7 @@ export const MessageExampleAttached = ({ history }) => {
   const auth = useSelector((state) => state.auth);
   useEffect(() => {
     if (auth.isAuth) history.push(`/user-dashboard/${auth.user._id}`);
-  }, [auth.isAuth]);
+  }, [auth.isAuth, history]);
 
   const dispatch = useDispatch();
 

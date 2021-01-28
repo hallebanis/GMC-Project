@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, FormControl, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { modifyRole, modifyUser } from "../../actions/admin/usersActions";
+import { modifyRole } from "../../actions/admin/usersActions";
 
 const EditRoleModal = ({ role, info, setInfo }) => {
   const [show, setShow] = useState(false);

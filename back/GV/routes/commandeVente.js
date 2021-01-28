@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const newCommVente = require("../modules/CommandeVente");
 const authMiddleware = require("../../helpers/authMiddleware");
+const CommandeVente = require("../modules/CommandeVente");
 //Route Create Commande Vente
 //path: http://localhost:5000/api/AddCommandeVente
 router.post("/AddCommandeVente", authMiddleware, (req, res) => {
@@ -52,8 +53,24 @@ router.put("/updateCommVente", authMiddleware, (req, res) => {
 router.delete("/deleteCommVente/:id", authMiddleware, (req, res) => {
   newCommVente
     .findByIdAndDelete(req.params.id)
-    .then(() => res.status(200).json({ msg: "Commande Vente Deleted" }))
+    .then((command) => res.status(200).json(command))
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
+});
+
+router.put("/validateCommand", authMiddleware, (req, res) => {
+  const { id } = req.body;
+  CommandeVente.findByIdAndUpdate(id, { isValidate: true })
+    .then(() => {
+      CommandeVente.findById(id)
+        .populate("clientId")
+        .then((commande) => res.status(200).json(commande))
+        .catch((err) => {
+          res.status(400).json({ errors: [{ msg: err }] });
+        });
+    })
+    .catch((err) => {
+      res.status(400).json({ errors: [{ msg: err }] });
+    });
 });
 
 module.exports = router;

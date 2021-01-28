@@ -6,7 +6,6 @@ import { loadPersonnel } from "../../actions/GRH/personnelActions";
 import MainNavBar from "../../components/admin/MainNavBar";
 import ListePointage from "../../components/GRH/ListePointage";
 import { NavSide } from "../../components/GRH/NavSide";
-import { dateCompare } from "../../helpers/dateCompare";
 
 const PointagePage = ({ history }) => {
   const auth = useSelector((state) => state.auth);
@@ -24,7 +23,7 @@ const PointagePage = ({ history }) => {
     <Container fluid>
       <Row>
         <Col>
-          <MainNavBar color="#343A40"></MainNavBar>
+          <MainNavBar></MainNavBar>
         </Col>
       </Row>
       <Row>

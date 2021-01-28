@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import FormControl from "react-bootstrap/FormControl";
 import { useSelector, useDispatch } from "react-redux";
-import { addRole, loadRoles } from "../../actions/admin/usersActions";
+import { addRole } from "../../actions/admin/usersActions";
 const AddRoleModal = () => {
   const users = useSelector((state) => state.users);
   const [disableSave, setDisableSave] = useState(true);

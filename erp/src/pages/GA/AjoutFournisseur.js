@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import {
   MDBCard,
   MDBCardBody,
-  MDBCardText,
   MDBCardTitle,
   MDBContainer,
   MDBInput,

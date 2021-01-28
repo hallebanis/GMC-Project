@@ -14,7 +14,7 @@ export const AvancePage = ({ history }) => {
     <Container fluid>
       <Row>
         <Col>
-          <MainNavBar color="#343A40"></MainNavBar>
+          <MainNavBar></MainNavBar>
         </Col>
       </Row>
       <Row>
@@ -23,7 +23,7 @@ export const AvancePage = ({ history }) => {
         </Col>
         <Col>
           {" "}
-          <AvanceForm />
+          <AvanceForm history={history} />
         </Col>
       </Row>{" "}
     </Container>

@@ -5,7 +5,7 @@ import {
   MDBDropdownToggle,
   MDBInput,
 } from "mdbreact";
-import React, { useState } from "react";
+import React from "react";
 
 const ListProduitDropDown = ({
   value,
@@ -27,6 +27,8 @@ const ListProduitDropDown = ({
             produitId: e.target.id,
             pu: +e.target.name,
             designation: e.target.value,
+            qteStock: listeProduit.filter((elm) => elm._id === e.target.id)[0]
+              .qteStock,
           };
         return el;
       })

@@ -56,6 +56,7 @@ const AddCommand = ({ history }) => {
       pu: 0,
       enableChange: false,
       designation: "",
+      qteStock: 0,
     },
   ]);
   const [clientSelected, setClientSelected] = useState(false);
@@ -77,6 +78,7 @@ const AddCommand = ({ history }) => {
         commandeId: info._id,
         pu: 0,
         enableChange: false,
+        qteStock: 0,
       },
     ]);
   };
@@ -86,11 +88,15 @@ const AddCommand = ({ history }) => {
     setlisteLigneVente(
       listeLigneVente.map((el) => {
         if (el.id === e.target.id)
-          return {
-            ...el,
-            quantité: +e.target.value,
-            sousTotal: +e.target.value * el.pu,
-          };
+          if (el.qteStock < +e.target.value) {
+            e.target.value = "0";
+            alert("quantité stock insuffisante stock= " + el.qteStock);
+          } else
+            return {
+              ...el,
+              quantité: +e.target.value,
+              sousTotal: +e.target.value * el.pu,
+            };
         return el;
       })
     );
