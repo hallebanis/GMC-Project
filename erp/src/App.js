@@ -38,6 +38,7 @@ import AjoutFournisseur from "./pages/GA/AjoutFournisseur";
 import ListeFournisseurPage from "./pages/GA/ListeFournisseurPage";
 import AjoutAchatPage from "./pages/GA/AjoutAchatPage";
 import AjoutProduitPage from "./pages/GA/AjoutProduitPage";
+import Demandes from "./pages/GRH/Demandes.js";
 
 function App() {
   return (
@@ -183,6 +184,11 @@ function App() {
           exact
           path="/ga-dashboard/addProduit"
           component={AjoutProduitPage}
+        />
+        <AdminPrivateRoute
+          exact
+          path="/ga-dashboard/demande"
+          component={Demandes}
         />
       </Switch>
     </Router>

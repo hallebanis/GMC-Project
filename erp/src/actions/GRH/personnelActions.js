@@ -37,6 +37,10 @@ import {
   ADD_AVANCE_SUCCESS,
   ADD_ABSENCE_SUCCESS,
   ADD_ABSENCE_FAILED,
+  GET_DEMANDE_SUCCESS,
+  GET_DEMANDE_FAILED,
+  UPDATE_DEMANDE_SUCCESS,
+  UPDATE_DEMANDE_FAILED,
 } from "./types";
 
 export const loadPersonnel = () => (dispatch) => {
@@ -358,6 +362,34 @@ export const addAbsence = (info) => (dispatch) => {
       dispatch({
         type: ADD_ABSENCE_FAILED,
         payload: err.response.data.errors,
+      })
+    );
+};
+
+export const getDemande = () => (dispatch) => {
+  tokenSet();
+  axios
+    .get("/user/demande")
+    .then((res) => dispatch({ type: GET_DEMANDE_SUCCESS, payload: res.data }))
+    .catch((err) =>
+      dispatch({
+        type: GET_DEMANDE_FAILED,
+        payload: err.response.data,
+      })
+    );
+};
+
+export const updateDemande = (info) => (dispatch) => {
+  tokenSet();
+  axios
+    .put("/user/demande", info)
+    .then((res) =>
+      dispatch({ type: UPDATE_DEMANDE_SUCCESS, payload: res.data })
+    )
+    .catch((err) =>
+      dispatch({
+        type: UPDATE_DEMANDE_FAILED,
+        payload: err.response.data,
       })
     );
 };

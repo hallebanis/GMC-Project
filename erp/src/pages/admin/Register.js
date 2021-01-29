@@ -4,7 +4,7 @@ import { MessageExampleAttached } from "../../components/GRH/Register";
 
 const Register = ({ history }) => {
   return (
-    <Container>
+    <Container style={{ marginTop: "8vh" }}>
       <MessageExampleAttached history={history} />
     </Container>
   );

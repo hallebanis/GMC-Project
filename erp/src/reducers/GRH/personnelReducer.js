@@ -35,6 +35,10 @@ import {
   ADD_AVANCE_SUCCESS,
   ADD_ABSENCE_SUCCESS,
   ADD_ABSENCE_FAILED,
+  GET_DEMANDE_SUCCESS,
+  GET_DEMANDE_FAILED,
+  UPDATE_DEMANDE_SUCCESS,
+  UPDATE_DEMANDE_FAILED,
 } from "../../actions/GRH/types";
 
 const initState = {
@@ -43,6 +47,7 @@ const initState = {
   personnel: [],
   avance: [],
   absence: [],
+  demande: [],
   errors: null,
 };
 
@@ -269,6 +274,25 @@ const personnelReducer = (state = initState, action) => {
         errors: null,
         absence: [...state.absence, action.payload],
       };
+    case GET_DEMANDE_SUCCESS:
+      return {
+        ...state,
+        errors: null,
+        demande: action.payload,
+      };
+    case UPDATE_DEMANDE_SUCCESS:
+      return {
+        ...state,
+        demande: state.demande.map((el) => {
+          if (el._id === action.payload._id) {
+            return action.payload;
+          }
+          return el;
+        }),
+        errros: null,
+      };
+    case UPDATE_DEMANDE_FAILED:
+    case GET_DEMANDE_FAILED:
     case LOAD_AVANCE_FAILED:
     case ADD_ABSENCE_FAILED:
       return {
