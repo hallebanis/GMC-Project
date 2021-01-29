@@ -92,8 +92,10 @@ export const Login = ({ history }) => {
                 Sign in
               </MDBBtn>
               {auth.errors
-                ? auth.errors.map((el) => (
-                    <h3 className="errorTitle">{el.msg}</h3>
+                ? auth.errors.map((el, i) => (
+                    <h3 id={i} className="errorTitle">
+                      {el.msg}
+                    </h3>
                   ))
                 : null}
             </div>
