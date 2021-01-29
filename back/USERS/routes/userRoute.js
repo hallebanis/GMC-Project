@@ -19,6 +19,24 @@ router.get("/", authMiddleware, (req, res) => {
     });
 });
 
+router.get("/demande", authMiddleware, (req, res) => {
+  Demande.find()
+    .populate("personnelId")
+    .then((demandes) => res.status(200).json(demandes))
+    .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
+});
+
+router.put("/demande", authMiddleware, (req, res) => {
+  const { id, dateReception } = req.body;
+  Demande.findByIdAndUpdate(id, { dateReception, etat: "lu" })
+    .then(() => {})
+    .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
+  Demande.findById(id)
+    .populate("personnelId")
+    .then((demande) => res.status(200).json(demande))
+    .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
+});
+
 router.post("/demande", authMiddleware, (req, res) => {
   const { sujet, description, personnelId } = req.body;
   const dateEnvoie = Date.now();

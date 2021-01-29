@@ -27,7 +27,7 @@ const UserDashboard = ({ history }) => {
         <Col md={3} style={{ height: "90vh" }}>
           <UserSideNav />
         </Col>
-        <Col>
+        <Col className="dataCol">
           <PersonnelInfo />
         </Col>
       </Row>

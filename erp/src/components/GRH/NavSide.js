@@ -77,6 +77,13 @@ export const NavSide = () => {
             </MenuItem>
           </SubMenu>
         </Menu>
+        <Menu iconShape="square">
+          <SubMenu title="Demandes" icon={<FcVoicePresentation />}>
+            <MenuItem>
+              <Link to="/ga-dashboard/demande">Consulter Demandes</Link>
+            </MenuItem>
+          </SubMenu>
+        </Menu>
       </SidebarContent>
       <SidebarFooter></SidebarFooter>
     </ProSidebar>
