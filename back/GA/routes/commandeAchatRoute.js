@@ -6,9 +6,10 @@ const authMiddleware = require("../../helpers/authMiddleware");
 // Route Create New commande
 // Path : http://localhost:5000/api/addCommande
 router.post("/addCommande", authMiddleware, (req, res) => {
-  const { total, isValidate, numero, idFournisseur } = req.body;
+  const { _id, total, isValidate, numero, idFournisseur } = req.body;
   const commandeModel = new newCommande({
     total,
+    _id,
     isValidate,
     numero,
     idFournisseur,

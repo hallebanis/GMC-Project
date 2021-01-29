@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const newProduit = require("../modules/produit");
+const Produit = require("../modules/produit");
 const authMiddleware = require("../../helpers/authMiddleware");
 
 // Route Create New produit
@@ -17,7 +17,7 @@ router.post("/addProduit", authMiddleware, (req, res) => {
     tva,
     idFournisseur,
   } = req.body;
-  const produitModel = new newProduit({
+  const produitModel = new Produit({
     idFournisseur,
     reference,
     designation,
@@ -36,8 +36,7 @@ router.post("/addProduit", authMiddleware, (req, res) => {
 // Route Read All produit
 // Path : http://localhost:5000/api/allProduit
 router.get("/allProduit", authMiddleware, (req, res) => {
-  newProduit
-    .find()
+  Produit.find()
     .populate("idCategorie")
     .populate("idFournisseur")
     .then((produits) => res.status(200).json(produits))
@@ -47,31 +46,22 @@ router.get("/allProduit", authMiddleware, (req, res) => {
 //Route Delete produit
 // Path : http://localhost:5000/api/deleteproduit/:id
 router.delete("/deleteproduit/:id", authMiddleware, (req, res) => {
-  newProduit
-    .findByIdAndDelete(req.params.id)
+  Produit.findByIdAndDelete(req.params.id)
     .then((produit) => res.status(200).json(produit))
     .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
 });
 //Route  Update  produit
 // Path : http://localhost:5000/api/updateProduit
 router.put("/updateProduit", authMiddleware, (req, res) => {
-  const {
-    reference,
-    designation,
-    etat,
-    prixAchatHT,
-    prixVenteHT,
-    qteStock,
-  } = req.body;
-  newProduit.findByIdAndUpdate(
-    id,
-    { reference, designation, etat, prixAchatHT, prixVenteHT, qteStock },
+  const { _id, prixAchatHT, prixVenteHT, qteStock } = req.body;
+  Produit.findByIdAndUpdate(
+    _id,
+    { prixAchatHT, prixVenteHT, qteStock },
     (err, data) => {
       if (err) {
         res.status(400).json({ errors: [{ msg: err }] });
       }
-      newProduit
-        .findById(req.params.id)
+      Produit.findById(_id)
         .then((produit) => res.status(200).json(produit))
         .catch((err) => res.status(400).json({ errors: [{ msg: err }] }));
     }
