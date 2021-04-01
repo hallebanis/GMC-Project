@@ -51,6 +51,9 @@ export const Login = ({ history }) => {
       }
     }
   }, [auth.user, history]);
+  const handleCancel =()=>{
+    history.push('/')
+  }
   return (
     <MDBRow>
       <MDBCol md="9" lg="7" xl="5" className="mx-auto mt-3">
@@ -90,6 +93,15 @@ export const Login = ({ history }) => {
                 className="btn-block z-depth-1a"
               >
                 Sign in
+              </MDBBtn>
+              <MDBBtn
+                type="button"
+                onClick={handleCancel}
+                gradient="green"
+                rounded
+                className="btn-block z-depth-1a"
+              >
+                Back
               </MDBBtn>
               {auth.errors
                 ? auth.errors.map((el, i) => (

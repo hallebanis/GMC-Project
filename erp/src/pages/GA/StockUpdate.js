@@ -1,6 +1,6 @@
 import { MDBCard, MDBCardBody, MDBCardTitle } from "mdbreact";
-import React, { useEffect, useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduit } from "../../actions/GA/achatActions";
 import UpdateProduitModal from "../../components/GA/UpdateProduitModal";
@@ -11,12 +11,12 @@ const StockUpdate = () => {
     dispatch(getProduit());
   }, [dispatch]);
   const achat = useSelector((state) => state.achat);
-  const [info, setInfo] = useState({
+  /* const [info, setInfo] = useState({
     id: "",
     prixAchatHT: 0,
     prixVenteHT: 0,
     qteStock: 0,
-  });
+  }); */
   return (
     <MDBCard>
       <MDBCardTitle>Liste des produits</MDBCardTitle>

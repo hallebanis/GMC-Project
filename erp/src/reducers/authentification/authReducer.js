@@ -59,7 +59,7 @@ const authReducer = (state = inState, action) => {
         errors: null,
         user: {
           ...state.user,
-          personnelId: action.payload,
+          personnelId: {...state.user.personnelId,demande:[...state.user.personnelId.demande,action.payload]},
         },
       };
     case LOAD_PERSONNEL_ID_SUCCESS:

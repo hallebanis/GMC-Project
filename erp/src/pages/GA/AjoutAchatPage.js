@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import MainNavBar from "../../components/admin/MainNavBar";
 import GaSideNav from "../../components/GA/GaSideNav";
-import ListeFournisseurDropDown from "../../components/GA/ListeFournisseurDropDown";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getCommandeAchat,
   getFournisseur,
 } from "../../actions/GA/achatActions";
-import mongoose from "mongoose";
+//import mongoose from "mongoose";
 import StockUpdate from "./StockUpdate";
-const AjoutAchatPage = ({ history }) => {
+const AjoutAchatPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getFournisseur());
     dispatch(getCommandeAchat());
   }, [dispatch]);
-  const achat = useSelector((state) => state.achat);
-  const [commandeAchat, setCommandeAchat] = useState({
+  //const achat = useSelector((state) => state.achat);
+ /*  const [commandeAchat, setCommandeAchat] = useState({
     _id: mongoose.Types.ObjectId().toString(),
     isValidate: false,
     idFournisseur: "",
@@ -27,7 +26,7 @@ const AjoutAchatPage = ({ history }) => {
     if (achat.commandeAchat.length > 0)
       return achat.commandeAchat[achat.commandeAchat.length - 1].numero + 1;
     else return 1;
-  };
+  }; */
   return (
     <Container fluid>
       <Row>

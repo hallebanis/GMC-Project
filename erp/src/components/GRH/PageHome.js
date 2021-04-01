@@ -48,13 +48,15 @@ const HomepageHeading = ({ mobile }) => (
         marginTop: mobile ? "0.5em" : "1.5em",
       }}
     />
+      <Link to="/login" style={{ color: "white" }}>
+
     <Button primary size="huge">
       {" "}
-      <Link to="/login" style={{ color: "white" }}>
         Login
-      </Link>
       <Icon name="right arrow" />
     </Button>
+    </Link>
+
   </Container>
 );
 
@@ -104,16 +106,18 @@ class DesktopContainer extends Component {
                       Log in
                     </Link>
                   </Button>
+                  <Link to="/register" style={{ color: "white" }}>
                   <Button
                     as="a"
                     inverted={!fixed}
                     primary={fixed}
                     style={{ marginLeft: "0.5em" }}
                   >
-                    <Link to="/register" style={{ color: "white" }}>
+                   
                       Sign Up
-                    </Link>
                   </Button>
+                  </Link>
+
                 </Menu.Item>
               </Container>
             </Menu>
@@ -243,12 +247,13 @@ const HomepageLayout = () => (
           </Grid.Column >
           <Grid.Column width={6}>
             <iframe
+            title="main-iframe"
               width="560"
               height="315"
               src="https://www.youtube.com/embed/c9HfNg4a_Og"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </Grid.Column>
         </Grid.Row>
@@ -305,7 +310,7 @@ const HomepageLayout = () => (
           horizontal
           style={{ margin: "3em 0em", textTransform: "uppercase" }}
         >
-          <a href="#">Case Studies</a>
+          <a href="/">Case Studies</a>
         </Divider>
 
         <Header as="h3" style={{ fontSize: "2em" }}>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Form, Table } from "react-bootstrap";
+import { Button, Container,  Table } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { deleteFournisseur } from "../../actions/GA/achatActions";
 import EditFournisseurModal from "./EditFournisseurModal";

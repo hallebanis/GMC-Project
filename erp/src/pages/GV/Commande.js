@@ -76,6 +76,12 @@ const Commande = ({ history, location }) => {
               Non Validé
             </Dropdown.Item>
           </DropdownButton>
+          <Button
+            variant="primary"
+            onClick={() => history.push("/gv-dashboard/commande/addCommande")}
+          >
+            New Command
+          </Button>
           <ListeCommandes
             commandList={list}
             history={history}
